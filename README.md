@@ -8,7 +8,7 @@
 
 Table of Contents |-
 ------------------|----
-[Pitch](teamdocs/pitch.md) | -
+[Pitch](team-docs/pitch.md) | -
 [Software Requirements]() | -
 [Setup]() | -
 
