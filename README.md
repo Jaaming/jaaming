@@ -10,7 +10,7 @@
 
 Table of Contents |-
 ------------------|----
-[Pitch](./team-docs/pitch.md) | -
+[Pitch](./team-docs/project-pitch.md) | -
 [Software Requirements]() | -
 [Setup]() | -
 
