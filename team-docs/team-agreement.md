@@ -47,4 +47,5 @@ Table of Contents |-
 - How will you communicate that it’s time to merge? Communicate intent to merge, allowing everyone to save and commit their work prior to.
 
 [Miro Board](https://miro.com/app/board/o9J_lDkn6pk=/)
+
 [Milanote Board](https://app.milanote.com/1LIMAK1SjEud7Y/artistree)
