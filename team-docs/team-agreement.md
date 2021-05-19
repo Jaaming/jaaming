@@ -22,8 +22,7 @@ Work Plan
 **How will you identify tasks, assign tasks, know when they are complete, and manage work in general?**
 
 **What project management tool will be used?**
-
-Trello! Try to make big picture goals as a team on Monday, and set smaller daily goals each morning before we work.
+Milanote, Trello and Miro. Try to make big picture goals as a team on Monday, and set smaller daily goals each morning before we work.
 Git Process
 **What components of your project will live on GitHub?**
 Our repository and our project details in the README.md
