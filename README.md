@@ -11,8 +11,8 @@
 Table of Contents |-
 ------------------|----
 [Pitch](./team-docs/project-pitch.md) | -
-[Software Requirements]() | -
-[Setup]() | -
+[Insert new Filename here]() | -
+[Insert another new filename here]() | -
 
 
 
