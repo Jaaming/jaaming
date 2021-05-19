@@ -8,7 +8,7 @@
 
 Table of Contents |-
 ------------------|----
-[User Stories](User-Stories.md) | -
+[Pitch](teamdocs/pitch.md) | -
 [Software Requirements]() | -
 [Setup]() | -
 
