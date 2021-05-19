@@ -1,9 +1,11 @@
 # Team-Agreement
 
-**Team Ja-Forest**
 [Andy Agulue](https://github.com/AndyAgulue)
+
 [Matthew Simms](https://github.com/mparkersimms)
+
 [Leaundrae Mckinney](https://github.com/UreaLaden)
+
 [Victor Sullivan](https://github.com/VictorSully79)
 
 Table of Contents |-
