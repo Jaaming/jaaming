@@ -51,3 +51,6 @@ Table of Contents |-
 [Miro Board](https://miro.com/app/board/o9J_lDkn6pk=/)
 
 [Milanote Board](https://app.milanote.com/1LIMAK1SjEud7Y/artistree)
+
+[Trello Board](https://trello.com/b/sY82TkVt/jaamin)
+
