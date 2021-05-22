@@ -52,5 +52,6 @@ Table of Contents |-
 
 [Milanote Board](https://app.milanote.com/1LIMAK1SjEud7Y/artistree)
 
-[Trello Board](https://trello.com/b/sY82TkVt/jaamin)
+[Trello Board] (https://trello.com/b/sY82TkVt/jaamin)
+
 
