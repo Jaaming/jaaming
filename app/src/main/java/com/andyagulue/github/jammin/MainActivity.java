@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.tempbandProfileButton).setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), MyBandPage.class);
+            Intent intent = new Intent(getApplicationContext(), BandCreationPage.class);
             startActivity(intent);
         });
 
