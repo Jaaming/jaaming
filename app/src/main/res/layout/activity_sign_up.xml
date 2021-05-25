@@ -40,20 +40,20 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/signupProfileImageView"
+                    android:id="@+id/createBandImageView"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_centerHorizontal="true"
                     app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
                 <ImageButton
-                    android:id="@+id/signupAddProfilePicButton"
+                    android:id="@+id/createBandAddProfilePicButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="0dp"
                     android:layout_marginBottom="2dp"
-                    android:layout_toEndOf="@+id/signupProfileImageView"
+                    android:layout_toEndOf="@+id/createBandImageView"
                     app:srcCompat="@drawable/ic_baseline_add_24" />
             </RelativeLayout>
 
@@ -69,7 +69,7 @@
                 android:inputType="textEmailAddress" />
 
             <EditText
-                android:id="@+id/addUsernameEditText"
+                android:id="@+id/createBandNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -145,14 +145,14 @@
                 android:textSize="16sp" />
 
             <Switch
-                android:id="@+id/addSingSwitch"
+                android:id="@+id/createBandAddVocalist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="Vocalist?" />
 
             <EditText
-                android:id="@+id/myprofileBioTextView"
+                android:id="@+id/createBandBioTextView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="8dp"
@@ -162,7 +162,7 @@
                 android:inputType="textMultiLine" />
 
             <Button
-                android:id="@+id/signUpButton"
+                android:id="@+id/submitCreateBandButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
