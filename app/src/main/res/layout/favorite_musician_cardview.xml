@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp">
+
+        <ImageView
+            android:id="@+id/favoriteInstrumentIcon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+
+        <RelativeLayout
+            android:layout_width="288dp"
+            android:layout_height="80dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="0dp"
+            android:layout_toEndOf="@+id/favoriteInstrumentIcon"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/favMusicianProfileImage"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_centerVertical="true"
+                tools:srcCompat="@drawable/ic_launcher_foreground" />
+
+            <TextView
+                android:id="@+id/favMusicianUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/favMusicianProfileImage"
+                android:text="Username"
+                android:textColor="#040303"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/favMusicianLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/favMusicianUsername"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/favMusicianProfileImage"
+                android:text="City, State"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/favMusicianViewProfileButton"
+                android:layout_width="60dp"
+                android:layout_height="31dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="8dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:text="View"
+                android:textSize="10sp"
+                app:iconPadding="0dp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
