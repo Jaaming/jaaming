@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.tempbandProfileButton).setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), MyBandPage.class);
+            Intent intent = new Intent(getApplicationContext(), BandCreationPage.class);
             startActivity(intent);
         });
 
@@ -44,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.tempDiscoverButton).setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), DiscoverPage.class);
+            startActivity(intent);
+        });
+
+        findViewById(R.id.mPublicProfilePage).setOnClickListener(v ->{
+            Intent intent = new Intent(getApplicationContext(),PublicMusicianProfilePage.class);
             startActivity(intent);
         });
         //========================End temp buttons to be deleted=================================
