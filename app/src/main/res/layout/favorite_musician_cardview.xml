@@ -61,9 +61,10 @@
             <Button
                 android:id="@+id/favMusicianViewProfileButton"
                 android:layout_width="60dp"
-                android:layout_height="31dp"
+                android:layout_height="24dp"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="8dp"
                 android:insetLeft="0dp"
                 android:insetTop="0dp"
@@ -72,6 +73,22 @@
                 android:text="View"
                 android:textSize="10sp"
                 app:iconPadding="0dp" />
+
+            <Button
+                android:id="@+id/favMusicianConnectButton"
+                android:layout_width="60dp"
+                android:layout_height="24dp"
+                android:layout_below="@+id/favMusicianViewProfileButton"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                android:text="Connect"
+                android:textSize="10sp" />
 
         </RelativeLayout>
 
