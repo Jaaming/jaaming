@@ -46,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), DiscoverPage.class);
             startActivity(intent);
         });
+
+        findViewById(R.id.mPublicProfilePage).setOnClickListener(v ->{
+            Intent intent = new Intent(getApplicationContext(),PublicMusicianProfilePage.class);
+            startActivity(intent);
+        });
         //========================End temp buttons to be deleted=================================
     }
 
