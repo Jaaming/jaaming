@@ -1,4 +1,4 @@
-package com.andyagulue.github.jammin;
+package com.andyagulue.github.jammin.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,6 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.Toast;
+
+import com.andyagulue.github.jammin.FavoriteMusician;
+import com.andyagulue.github.jammin.R;
+import com.andyagulue.github.jammin.adapters.FavoritesAdapter;
 
 import java.util.ArrayList;
 

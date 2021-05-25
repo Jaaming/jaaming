@@ -1,8 +1,10 @@
-package com.andyagulue.github.jammin;
+package com.andyagulue.github.jammin.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.andyagulue.github.jammin.R;
 
 public class ConfirmationPage extends AppCompatActivity {
 

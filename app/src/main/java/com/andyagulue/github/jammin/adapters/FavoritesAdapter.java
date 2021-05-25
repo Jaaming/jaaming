@@ -1,4 +1,4 @@
-package com.andyagulue.github.jammin;
+package com.andyagulue.github.jammin.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
+import com.andyagulue.github.jammin.FavoriteMusician;
+import com.andyagulue.github.jammin.R;
 
 import java.util.ArrayList;
 

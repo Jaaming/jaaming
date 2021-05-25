@@ -1,14 +1,16 @@
-package com.andyagulue.github.jammin;
+package com.andyagulue.github.jammin.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class BandCreationPage extends AppCompatActivity {
+import com.andyagulue.github.jammin.R;
+
+public class LogInPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_band_creation_page);
+        setContentView(R.layout.activity_log_in_page);
     }
 }
