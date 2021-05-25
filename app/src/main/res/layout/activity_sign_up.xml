@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="right"
+    android:background="#DDDCDC"
     tools:context=".SignUpPage">
 
     <ImageView
@@ -34,28 +35,27 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/signUpImageView"
-                    android:layout_width="100dp"
+                    android:id="@+id/signupProfileImageView"
+                    android:layout_width="200dp"
                     android:layout_height="200dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="3"
-                    tools:srcCompat="@android:drawable/ic_menu_gallery" />
+                    android:layout_centerHorizontal="true"
+                    app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/floatingActionButton2"
-                    android:layout_width="match_parent"
+                <ImageButton
+                    android:id="@+id/signupAddProfilePicButton"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|right"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    app:srcCompat="@android:drawable/ic_menu_add" />
-            </LinearLayout>
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_toEndOf="@+id/signupProfileImageView"
+                    app:srcCompat="@drawable/ic_baseline_add_24" />
+            </RelativeLayout>
 
             <EditText
                 android:id="@+id/addEmailEditText"
@@ -63,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_marginRight="16dp"
+                android:autoText="true"
                 android:ems="10"
                 android:hint="EMAIL"
                 android:inputType="textEmailAddress" />
@@ -121,17 +122,27 @@
                 android:hint="mm/dd/yyyy"
                 android:inputType="date" />
 
-            <Spinner
-                android:id="@+id/addInstrumentSpinner"
+            <TextView
+                android:id="@+id/addInstrumentTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:layout_margin="8dp"
+                android:background="@android:drawable/editbox_background"
+                android:drawableEnd="@android:drawable/arrow_down_float"
+                android:hint="Select Intrument(s)"
+                android:textAlignment="center"
+                android:textSize="16sp" />
 
-            <Spinner
-                android:id="@+id/addgenreSpinner"
+            <TextView
+                android:id="@+id/addgenreTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:layout_margin="8dp"
+                android:background="@android:drawable/editbox_background"
+                android:drawableEnd="@android:drawable/arrow_down_float"
+                android:hint="Select Genre(s)"
+                android:textAlignment="center"
+                android:textSize="16sp" />
 
             <Switch
                 android:id="@+id/addSingSwitch"
@@ -141,7 +152,7 @@
                 android:text="Vocalist?" />
 
             <EditText
-                android:id="@+id/addBioEditText"
+                android:id="@+id/myprofileBioTextView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="8dp"

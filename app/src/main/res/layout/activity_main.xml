@@ -11,6 +11,7 @@
         android:layout_width="333dp"
         android:layout_height="350dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/logInNavButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,11 +21,11 @@
         android:id="@+id/logInNavButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
         android:background="#F44336"
         android:text="LOGIN"
+        app:layout_constraintBottom_toTopOf="@+id/signUpNavButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -32,51 +33,89 @@
         android:id="@+id/signUpNavButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="8dp"
         android:text="SIGN UP"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="@+id/logInNavButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/logInNavButton"
         app:layout_constraintTop_toBottomOf="@+id/logInNavButton" />
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="62dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="121dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logInNavButton">
+        app:layout_constraintEnd_toEndOf="@+id/logInNavButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/logInNavButton"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <Button
             android:id="@+id/tempConfrimButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_weight="1"
             android:text="Confirm"
+            android:textSize="8sp"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/tempProfilePageButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
             android:layout_weight="1"
-            android:text="mProfile" />
+            android:text="mProfile"
+            android:textSize="8sp" />
 
         <Button
             android:id="@+id/tempbandProfileButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
             android:layout_weight="1"
-            android:text="bProfile" />
+            android:text="bProfile"
+            android:textSize="8sp" />
 
         <Button
             android:id="@+id/tempFavesButton"
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="faves"
+            android:textSize="8sp" />
+
+        <Button
+            android:id="@+id/tempDiscoverButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:text="discover"
+            android:textSize="8sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/mPublicProfilePage"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="faves" />
+            android:text="mPubProfile"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
