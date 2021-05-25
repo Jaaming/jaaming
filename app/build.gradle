@@ -39,9 +39,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+
     //============= swipe-enabled dependency==============
     implementation 'com.google.android.material:material:1.2.0-alpha04'
-
-}
 
 

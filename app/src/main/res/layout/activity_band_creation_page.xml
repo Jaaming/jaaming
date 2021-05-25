@@ -22,10 +22,12 @@
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <ScrollView
+
         android:layout_width="411dp"
         android:layout_height="598dp"
         android:layout_margin="8dp"
         android:layout_marginTop="8dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpPageBanner"
         tools:layout_editor_absoluteX="0dp">
@@ -118,7 +120,9 @@
                 android:layout_marginBottom="30dp"
                 android:text="Create" />
 
+
         </LinearLayout>
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
