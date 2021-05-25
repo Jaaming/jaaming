@@ -69,9 +69,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="183dp"
-                    android:layout_marginTop="6dp"
-                    android:text="TextView" />
+                    android:layout_marginStart="190dp"
+                    android:layout_marginTop="7dp"
+                    android:text="username" />
 
                 <TextView
                     android:id="@+id/myprofileLastnameTextView"
@@ -81,7 +81,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginEnd="49dp"
                     android:layout_marginBottom="22dp"
-                    android:text="TextView" />
+                    android:text="Last Name" />
 
                 <TextView
                     android:id="@+id/myprofileFirstNameTextView"
@@ -91,7 +91,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="163dp"
                     android:layout_marginBottom="22dp"
-                    android:text="TextView" />
+                    android:text="First Name" />
             </RelativeLayout>
 
             <com.google.android.material.chip.Chip
