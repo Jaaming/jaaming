@@ -21,7 +21,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
 
     private ArrayList<Musician> musicianList;
 
-    public static class ViewPagerViewHolder extends RecyclerView.ViewHolder implements com.andyagulue.github.jammin.ViewPagerViewHolder {
+    public static class ViewPagerViewHolder extends RecyclerView.ViewHolder {
         public ImageView profileImageView;
         public TextView musicianUsername;
         public TextView musicianInstruments;
