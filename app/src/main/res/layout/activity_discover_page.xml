@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".DiscoverPage">
 
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <ImageView
         android:id="@+id/discoverBanner"
         android:layout_width="match_parent"
@@ -88,5 +93,7 @@
                 android:text="View Profile" />
         </LinearLayout>
     </ScrollView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
