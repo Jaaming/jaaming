@@ -1,9 +1,13 @@
-package com.andyagulue.github.jammin;
+package com.andyagulue.github.jammin.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+
+import com.andyagulue.github.jammin.Musician;
+import com.andyagulue.github.jammin.R;
+import com.andyagulue.github.jammin.adapters.ViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;

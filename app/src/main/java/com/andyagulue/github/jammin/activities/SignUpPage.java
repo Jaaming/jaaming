@@ -1,4 +1,4 @@
-package com.andyagulue.github.jammin;
+package com.andyagulue.github.jammin.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.andyagulue.github.jammin.R;
 
 import java.util.ArrayList;
 import java.util.Collections;

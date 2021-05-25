@@ -1,6 +1,5 @@
-package com.andyagulue.github.jammin;
+package com.andyagulue.github.jammin.adapters;
 
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.andyagulue.github.jammin.Musician;
+import com.andyagulue.github.jammin.R;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DiscoverPage">
+    tools:context=".activities.DiscoverPage">
 
 
     <androidx.viewpager2.widget.ViewPager2

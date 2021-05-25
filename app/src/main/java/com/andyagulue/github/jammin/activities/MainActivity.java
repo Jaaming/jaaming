@@ -1,9 +1,11 @@
-package com.andyagulue.github.jammin;
+package com.andyagulue.github.jammin.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.andyagulue.github.jammin.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.mPublicProfilePage).setOnClickListener(v ->{
-            Intent intent = new Intent(getApplicationContext(),PublicMusicianProfilePage.class);
+            Intent intent = new Intent(getApplicationContext(), PublicMusicianProfilePage.class);
             startActivity(intent);
         });
         //========================End temp buttons to be deleted=================================
