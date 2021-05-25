@@ -15,6 +15,14 @@ import java.util.ArrayList;
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.FavoritesViewHolder> {
     private ArrayList<FavoriteMusician> favoriteMusiciansList;
+    private OnMusicianClickListener musicianListener;
+
+    public interface OnMusicianClickListener{
+        void onMusicianClick(int position);
+    }
+    public void setOnMusicianClickListener(OnMusicianClickListener listener){
+        musicianListener = listener;
+    }
 
     public static class FavoritesViewHolder extends RecyclerView.ViewHolder{
         public ImageView instrumentImageView;
@@ -22,12 +30,21 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         public TextView favMusicianUsernameTextView;
         public TextView favMusicianLocationTextView;
 
-        public FavoritesViewHolder(@NonNull @org.jetbrains.annotations.NotNull View itemView) {
+        public FavoritesViewHolder(@NonNull @org.jetbrains.annotations.NotNull View itemView, OnMusicianClickListener listener) {
             super(itemView);
             instrumentImageView = itemView.findViewById(R.id.favoriteInstrumentIcon);
             favMusicianProfileImageView = itemView.findViewById(R.id.favMusicianProfileImage);
             favMusicianUsernameTextView = itemView.findViewById(R.id.favMusicianUsername);
             favMusicianLocationTextView = itemView.findViewById(R.id.favMusicianLocation);
+
+            itemView.setOnClickListener(v -> {
+                if(listener != null){
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        listener.onMusicianClick(position);
+                    }
+                }
+            });
         }
     }
 
@@ -40,7 +57,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     @Override
     public FavoritesViewHolder onCreateViewHolder(@NonNull @org.jetbrains.annotations.NotNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.favorite_musician_cardview, parent, false);
-        FavoritesViewHolder fvh = new FavoritesViewHolder(v);
+        FavoritesViewHolder fvh = new FavoritesViewHolder(v, musicianListener);
         return fvh;
     }
 
