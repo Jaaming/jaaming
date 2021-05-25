@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), MyFavoritesPage.class);
             startActivity(intent);
         });
+
+        findViewById(R.id.tempDiscoverButton).setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), DiscoverPage.class);
+            startActivity(intent);
+        });
         //========================End temp buttons to be deleted=================================
     }
 
