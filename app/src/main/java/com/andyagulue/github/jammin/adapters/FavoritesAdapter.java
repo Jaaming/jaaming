@@ -3,6 +3,7 @@ package com.andyagulue.github.jammin.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +21,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
     public interface OnMusicianClickListener{
         void onMusicianClick(int position);
+        void onViewClick(int position);
+        void onConnectClick(int position);
     }
     public void setOnMusicianClickListener(OnMusicianClickListener listener){
         musicianListener = listener;
@@ -30,6 +33,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         public ImageView favMusicianProfileImageView;
         public TextView favMusicianUsernameTextView;
         public TextView favMusicianLocationTextView;
+        public Button viewFavProfileButton;
+        public Button connectFavMusicianButton;
 
         public FavoritesViewHolder(@NonNull @org.jetbrains.annotations.NotNull View itemView, OnMusicianClickListener listener) {
             super(itemView);
@@ -37,12 +42,30 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
             favMusicianProfileImageView = itemView.findViewById(R.id.favMusicianProfileImage);
             favMusicianUsernameTextView = itemView.findViewById(R.id.favMusicianUsername);
             favMusicianLocationTextView = itemView.findViewById(R.id.favMusicianLocation);
+            viewFavProfileButton = itemView.findViewById(R.id.favMusicianViewProfileButton);
+            connectFavMusicianButton = itemView.findViewById(R.id.favMusicianConnectButton);
 
             itemView.setOnClickListener(v -> {
                 if(listener != null){
                     int position = getAdapterPosition();
                     if(position != RecyclerView.NO_POSITION){
                         listener.onMusicianClick(position);
+                    }
+                }
+            });
+            viewFavProfileButton.setOnClickListener(v -> {
+                if(listener != null){
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        listener.onViewClick(position);
+                    }
+                }
+            });
+            connectFavMusicianButton.setOnClickListener(v -> {
+                if(listener != null){
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        listener.onConnectClick(position);
                     }
                 }
             });

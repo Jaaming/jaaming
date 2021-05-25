@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.andyagulue.github.jammin.Musician;
 import com.andyagulue.github.jammin.R;
@@ -23,6 +24,8 @@ public class DiscoverPage extends AppCompatActivity {
         setContentView(R.layout.activity_discover_page);
         createMusicianList();
         buildViewPager();
+
+
     }
 
     public void createMusicianList(){
@@ -46,6 +49,13 @@ public class DiscoverPage extends AppCompatActivity {
         viewpager2 = findViewById(R.id.viewPager);
         adapter = new ViewPagerAdapter(musicianArrayList);
         viewpager2.setAdapter(adapter);
+
+        adapter.setOnProfileClickListener(new ViewPagerAdapter.OnProfileClickListener() {
+            @Override
+            public void onViewClick(int position) {
+                Toast.makeText(DiscoverPage.this, "You want to view this profile " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

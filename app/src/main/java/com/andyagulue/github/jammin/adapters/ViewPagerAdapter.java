@@ -20,19 +20,36 @@ import java.util.ArrayList;
 public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolder>  {
 
     private ArrayList<Musician> musicianList;
+    private ViewPagerAdapter.OnProfileClickListener profileClickListener;
 
-    public static class ViewPagerViewHolder extends RecyclerView.ViewHolder implements com.andyagulue.github.jammin.ViewPagerViewHolder {
+    public interface OnProfileClickListener{
+        void onViewClick(int position);
+    }
+    public void setOnProfileClickListener(OnProfileClickListener listener){
+        profileClickListener = listener;
+    }
+
+    public static class ViewPagerViewHolder extends RecyclerView.ViewHolder {
         public ImageView profileImageView;
         public TextView musicianUsername;
         public TextView musicianInstruments;
         public TextView musicianGenres;
         public Button viewProfileButton;
 
-        public ViewPagerViewHolder(@NonNull @NotNull View itemView) {
+        public ViewPagerViewHolder(@NonNull @NotNull View itemView, OnProfileClickListener listener) {
             super(itemView);
             profileImageView = itemView.findViewById(R.id.discoverPageImageView);
             musicianUsername = itemView.findViewById(R.id.discoverPageUsernameTextView);
             viewProfileButton = itemView.findViewById(R.id.discoverPageViewProfileButton);
+
+            viewProfileButton.setOnClickListener(v -> {
+                if(listener != null){
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        listener.onViewClick(position);
+                    }
+                }
+            });
         }
     }
 
@@ -45,7 +62,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
     @Override
     public ViewPagerViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.musician_profile_page_viewpager, parent, false);
-        ViewPagerViewHolder vpvh = new ViewPagerViewHolder(v);
+        ViewPagerViewHolder vpvh = new ViewPagerViewHolder(v, profileClickListener);
         return vpvh;
     }
 

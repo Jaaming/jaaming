@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.andyagulue.github.jammin.FavoriteMusician;
@@ -14,6 +15,7 @@ import com.andyagulue.github.jammin.adapters.FavoritesAdapter;
 import java.util.ArrayList;
 
 public class MyFavoritesPage extends AppCompatActivity {
+    String TAG = "myFavoritesPage";
 
     private RecyclerView favRecyclerView;
     private FavoritesAdapter rvAdapter;
@@ -67,7 +69,22 @@ public class MyFavoritesPage extends AppCompatActivity {
         rvAdapter.setOnMusicianClickListener(new FavoritesAdapter.OnMusicianClickListener() {
             @Override
             public void onMusicianClick(int position) {
-                Toast.makeText(MyFavoritesPage.this, "You clicked on a musician" + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyFavoritesPage.this, "You clicked on a musician " + position, Toast.LENGTH_SHORT).show();
+                Log.i(TAG, "onMusicianClick: " + favoriteMusicians.get(position).getFavMusicianUsername());
+
+
+            }
+
+            @Override
+            public void onViewClick(int position) {
+                Toast.makeText(MyFavoritesPage.this, "You want to view this profile " + position, Toast.LENGTH_SHORT).show();
+                Log.i(TAG, "onMusicianClick: " + favoriteMusicians.get(position).getFavMusicianUsername());
+            }
+
+            @Override
+            public void onConnectClick(int position) {
+                Toast.makeText(MyFavoritesPage.this, "You want to connect with this user " + position, Toast.LENGTH_SHORT).show();
+                Log.i(TAG, "onMusicianClick: " + favoriteMusicians.get(position).getFavMusicianUsername());
             }
         });
     }

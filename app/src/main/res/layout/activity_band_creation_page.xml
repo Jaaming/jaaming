@@ -2,114 +2,123 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/bandCreationPage"
+    android:id="@+id/ContraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="2dp"
-    android:layout_marginRight="2dp"
-    tools:context=".activities.BandCreationPage">
+    android:layout_height="wrap_content"
+    android:layout_gravity="right"
+    android:background="#DDDCDC"
+    tools:context=".activities.SignUpPage">
 
     <ImageView
-        android:id="@+id/createBandBanner"
-        android:layout_width="wrap_content"
+        android:id="@+id/signUpPageBanner"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/bottom_bar" />
+        app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <ScrollView
-        android:id="@+id/createBandScrollView"
-        android:layout_width="401dp"
-        android:layout_height="1500dp"
+        android:layout_width="411dp"
+        android:layout_height="598dp"
+        android:layout_margin="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createBandBanner"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/signUpPageBanner"
+        tools:layout_editor_absoluteX="0dp">
 
-        <RelativeLayout
-            android:id="@+id/createBandRelativelayoutTop"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1500dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/chooseInstrumentTextView"
-                android:layout_width="250dp"
-                android:layout_height="25dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="75dp"
-                android:layout_marginTop="555dp"
-                android:background="#03A9F4"
-                android:text="Choose Your Desired Instrument(s)"
-                android:textAlignment="center" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/myBandTextView2"
-                android:layout_width="125dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/addBandNameTextView"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="360dp"
-                android:background="#F44336"
-                android:text="Import Band Name Here" />
+                <ImageView
+                    android:id="@+id/createBandImageView"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true"
+                    app:srcCompat="@drawable/ic_baseline_account_circle_24" />
+
+                <ImageButton
+                    android:id="@+id/createBandAddProfilePicButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_toEndOf="@+id/createBandImageView"
+                    app:srcCompat="@drawable/ic_baseline_add_24" />
+            </RelativeLayout>
 
             <EditText
-                android:id="@+id/addBandNameTextView"
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="false"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="38dp"
-                android:hint="Add Band Name" />
+                android:id="@+id/createBandNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:ems="10"
+                android:hint="Choose a Band Name"
+                android:inputType="textPersonName" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"/>
+
+            <TextView
+                android:id="@+id/createBandAddInstrumentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@android:drawable/editbox_background"
+                android:drawableEnd="@android:drawable/arrow_down_float"
+                android:hint="Select Intrument(s)"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/createBandAddGenreTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@android:drawable/editbox_background"
+                android:drawableEnd="@android:drawable/arrow_down_float"
+                android:hint="Select Genre(s)"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+
+            <Switch
+                android:id="@+id/createBandAddVocalist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Vocalist?" />
+
+            <EditText
+                android:id="@+id/createBandBioTextView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="8dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Add a short bio about your band"
+                android:inputType="textMultiLine" />
 
             <Button
-                android:id="@+id/generateBandNameButton"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/addBandNameTextView"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="80dp"
-                android:text="Generate Name"
-                android:textSize="10sp" />
+                android:id="@+id/submitCreateBandButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="30dp"
+                android:text="Create" />
 
-            <ImageView
-                android:id="@+id/bandPhotoImageView"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_below="@+id/addBandNameTextView"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="110dp"
-                android:background="#3F51B5"
-                app:srcCompat="@drawable/ic_launcher_foreground" />
-
-            <Button
-                android:id="@+id/addBandPhotoButton"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/addBandNameTextView"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="280dp"
-                android:layout_marginEnd="80dp"
-                android:text="Upload Photo"
-                android:textSize="12sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/addInstrumentsRecyclerView"
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/addBandNameTextView"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="150dp"
-                android:layout_marginTop="360dp"
-                android:background="#F44336" />
-        </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
