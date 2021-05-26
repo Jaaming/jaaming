@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.amplifyframework.auth.AuthUserAttributeKey;
@@ -20,25 +21,26 @@ public class SignUpPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_page);
 
-        String newUsername = ((TextView)findViewById(R.id.newUsername)).getText().toString();
-        String newUserEmail = ((TextView)findViewById(R.id.newUserEmail)).getText().toString();
-        String newUserPassword = ((TextView)findViewById(R.id.newUserPassword)).getText().toString();
+        Button signUpButton = findViewById(R.id.newUserSignUpButton);
+        signUpButton.setOnClickListener(v -> {
+            String newUsername = ((TextView)findViewById(R.id.newUsername)).getText().toString();
+            String newUserEmail = ((TextView)findViewById(R.id.newUserEmail)).getText().toString();
+            String newUserPassword = ((TextView)findViewById(R.id.newUserPassword)).getText().toString();
+
+            AuthSignUpOptions options = AuthSignUpOptions.builder()
+                    .userAttribute(AuthUserAttributeKey.email(), newUserEmail)
+                    .build();
+            Amplify.Auth.signUp(newUsername, newUserPassword, options,
+                    result -> {
+                        Log.i("AuthQuickStart", "Result: " + result.toString());
+                        Intent intent = new Intent(SignUpPage.this, ConfirmationPage.class);
+                        intent.putExtra("username", newUsername);
+                        startActivity(intent);
+                    },
+                    error -> Log.e("AuthQuickStart", "Sign up failed", error)
+            );
+        });
 
 
-        Amplify.Auth.signUp(
-                newUserEmail,
-                newUserPassword,
-                AuthSignUpOptions.builder().userAttribute(AuthUserAttributeKey.email(),newUserEmail)
-            .build(),
-                response -> {
-                    Intent intent = new Intent(SignUpPage.this, ConfirmationPage.class);
-                    intent.putExtra("username", newUsername);
-                    startActivity(intent);
-                    Log.i(TAG, "onCreate: created new user" + response);
-                },
-                error -> {
-                    Log.i(TAG, "onCreate: did not create new user" + error);
-                }
-        );
     }
 }
