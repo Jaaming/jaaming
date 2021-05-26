@@ -1,0 +1,169 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateMusician {
+  onCreateMusician {
+    id
+    bandId
+    firstName
+    lastName
+    email
+    vocalist
+    instruments
+    genres
+    band {
+      id
+      name
+      instruments
+      genres
+      musicians {
+        nextToken
+      }
+      bio
+      vocalist
+      createdAt
+      updatedAt
+    }
+    bio
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateMusician {
+  onUpdateMusician {
+    id
+    bandId
+    firstName
+    lastName
+    email
+    vocalist
+    instruments
+    genres
+    band {
+      id
+      name
+      instruments
+      genres
+      musicians {
+        nextToken
+      }
+      bio
+      vocalist
+      createdAt
+      updatedAt
+    }
+    bio
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteMusician {
+  onDeleteMusician {
+    id
+    bandId
+    firstName
+    lastName
+    email
+    vocalist
+    instruments
+    genres
+    band {
+      id
+      name
+      instruments
+      genres
+      musicians {
+        nextToken
+      }
+      bio
+      vocalist
+      createdAt
+      updatedAt
+    }
+    bio
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateBand {
+  onCreateBand {
+    id
+    name
+    instruments
+    genres
+    musicians {
+      items {
+        id
+        bandId
+        firstName
+        lastName
+        email
+        vocalist
+        instruments
+        genres
+        bio
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    bio
+    vocalist
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateBand {
+  onUpdateBand {
+    id
+    name
+    instruments
+    genres
+    musicians {
+      items {
+        id
+        bandId
+        firstName
+        lastName
+        email
+        vocalist
+        instruments
+        genres
+        bio
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    bio
+    vocalist
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteBand {
+  onDeleteBand {
+    id
+    name
+    instruments
+    genres
+    musicians {
+      items {
+        id
+        bandId
+        firstName
+        lastName
+        email
+        vocalist
+        instruments
+        genres
+        bio
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    bio
+    vocalist
+    createdAt
+    updatedAt
+  }
+}

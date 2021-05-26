@@ -1,0 +1,26 @@
+type Musician
+@model
+@key(name:"band", fields:["bandId"])
+{
+  id: ID!
+  bandId: ID
+  firstName: String!
+  lastName: String!
+  email: String!
+  vocalist: Boolean!
+  instruments: String!
+  genres: String!
+  band: Band @connection(fields:["bandId"])
+  bio: String!
+}
+type Band
+@model
+{
+  id: ID!
+  name: String!
+  instruments: String!
+  genres: String!
+  musicians: [Musician] @connection(keyName: "band",fields:["id"])
+  bio: String!
+  vocalist: Boolean!
+}

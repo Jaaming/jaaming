@@ -26,9 +26,11 @@
         android:layout_height="598dp"
         android:layout_margin="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpPageBanner"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpPageBanner">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -145,14 +147,15 @@
                 android:textSize="16sp" />
 
             <Switch
-                android:id="@+id/createBandAddVocalist"
+                android:id="@+id/signupAddVocalist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:checked="false"
                 android:text="Vocalist?" />
 
             <EditText
-                android:id="@+id/createBandBioTextView"
+                android:id="@+id/signupBioTextView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="8dp"
@@ -162,7 +165,7 @@
                 android:inputType="textMultiLine" />
 
             <Button
-                android:id="@+id/submitCreateBandButton"
+                android:id="@+id/signupSubmitButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
