@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
@@ -37,7 +39,11 @@ public class SignUpPage extends AppCompatActivity {
                         intent.putExtra("username", newUsername);
                         startActivity(intent);
                     },
-                    error -> Log.e("AuthQuickStart", "Sign up failed", error)
+                    error -> {
+                        Log.e("AuthQuickStart", "Sign up failed", error);
+//                        Toast.makeText(this, "There was an error signing you in", Toast.LENGTH_SHORT).show();
+                    }
+
             );
         });
 

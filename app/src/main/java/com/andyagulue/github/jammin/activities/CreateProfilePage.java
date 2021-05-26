@@ -12,6 +12,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Band;
 import com.amplifyframework.datastore.generated.model.Musician;
@@ -46,6 +47,13 @@ public class CreateProfilePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_profile_page);
         Log.i(TAG, "onCreate: Made it to the signup page");
+
+        AuthUser authUser = Amplify.Auth.getCurrentUser();
+        if(authUser != null) {
+            ((TextView) findViewById(R.id.profileUserNameEditText)).setText(authUser.getUsername());
+            Log.i(TAG, "user is authenticated!");
+
+        }
 //      Amplify
         //Create instruments
 
@@ -193,9 +201,9 @@ public class CreateProfilePage extends AppCompatActivity {
 
         Button submitCreateMusician = findViewById(R.id.signupSubmitButton);
         submitCreateMusician.setOnClickListener(v ->{
+            String userName = ((TextView)findViewById(R.id.profileUserNameEditText)).getText().toString();
             String firstName = ((TextView)findViewById(R.id.addfirstNameEditText)).getText().toString();
             String lastName = ((TextView)findViewById(R.id.addLastNameEditText)).getText().toString();
-            String email = ((TextView)findViewById(R.id.addEmailEditText)).getText().toString();
             String bio = ((TextView)findViewById(R.id.signupBioTextView)).getText().toString();
             String genres = ((TextView)tvGenres).getText().toString();
             String instruments = ((TextView)tvInstruments).getText().toString();
@@ -206,11 +214,11 @@ public class CreateProfilePage extends AppCompatActivity {
             Musician newMusician = Musician.builder()
                     .firstName(firstName)
                     .lastName(lastName)
-                    .email(email)
                     .vocalist(isVocalist)
                     .instruments(instruments)
                     .genres(genres)
                     .bio(bio)
+                    .username(userName)
                     .band(defaultBand) //TODO: Musician may not be a part of a band.
                     .build();
 

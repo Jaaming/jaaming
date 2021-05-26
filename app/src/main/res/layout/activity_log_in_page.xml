@@ -7,7 +7,7 @@
     tools:context=".activities.LogInPage">
 
     <EditText
-        android:id="@+id/confirmCodeEditText"
+        android:id="@+id/loginPasswordEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="320dp"
@@ -15,24 +15,26 @@
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/confirmPageUsernaNameTextView"
-        app:layout_constraintStart_toStartOf="@+id/confirmPageUsernaNameTextView"
-        app:layout_constraintTop_toBottomOf="@+id/confirmPageUsernaNameTextView" />
+        app:layout_constraintEnd_toEndOf="@+id/loginUserNameTextView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/loginUserNameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/loginUserNameTextView"
+        app:layout_constraintVertical_bias="0.494" />
 
     <Button
-        android:id="@+id/confirmButton"
+        android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
         android:layout_marginEnd="8dp"
         android:text="LOGIN"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/confirmCodeEditText"
-        app:layout_constraintTop_toBottomOf="@+id/confirmCodeEditText"
+        app:layout_constraintEnd_toEndOf="@+id/loginPasswordEditText"
+        app:layout_constraintTop_toBottomOf="@+id/loginPasswordEditText"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/confirmPageUsernaNameTextView"
+        android:id="@+id/loginUserNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="232dp"
