@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 error -> Log.e("AmplifyQuickStart", "Failure" + error.toString())
         );
 
-        signupCognito();
+//        signupCognito();
 
 
 //        Todo todo = Todo.builder()
@@ -102,16 +103,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void signupCognito() {
-        Amplify.Auth.signUp(
-                "m.parker.simms@gmail.com",
-                "password",
-                AuthSignUpOptions.builder().build(),
-                r -> {
-                    Log.i(TAG, "signupCognito: signup successfull" + r.toString());
-                },
-                r -> {
-                    Log.i(TAG, "signupCognito: signup unsuccessfull" + r.toString());
-                }
+        AuthSignUpOptions options = AuthSignUpOptions.builder()
+                .userAttribute(AuthUserAttributeKey.email(), "m.parker.simms@gmail.com")
+                .build();
+        Amplify.Auth.signUp("username", "Password123", options,
+                result -> Log.i("AuthQuickStart", "Result: " + result.toString()),
+                error -> Log.e("AuthQuickStart", "Sign up failed", error)
         );
     }
 
