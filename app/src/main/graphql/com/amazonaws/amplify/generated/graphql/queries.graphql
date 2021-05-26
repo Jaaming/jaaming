@@ -5,26 +5,26 @@ query GetMusician($id: ID!) {
     bandId
     firstName
     lastName
-    email
     vocalist
     instruments
     genres
+    bio
+    username
+    createdAt
+    updatedAt
     band {
       id
       name
       instruments
       genres
-      musicians {
-        nextToken
-      }
       bio
       vocalist
       createdAt
       updatedAt
+      musicians {
+        nextToken
+      }
     }
-    bio
-    createdAt
-    updatedAt
   }
 }
 query ListMusicians(
@@ -38,10 +38,13 @@ query ListMusicians(
       bandId
       firstName
       lastName
-      email
       vocalist
       instruments
       genres
+      bio
+      username
+      createdAt
+      updatedAt
       band {
         id
         name
@@ -52,39 +55,8 @@ query ListMusicians(
         createdAt
         updatedAt
       }
-      bio
-      createdAt
-      updatedAt
     }
     nextToken
-  }
-}
-query GetBand($id: ID!) {
-  getBand(id: $id) {
-    id
-    name
-    instruments
-    genres
-    musicians {
-      items {
-        id
-        bandId
-        firstName
-        lastName
-        email
-        vocalist
-        instruments
-        genres
-        bio
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    bio
-    vocalist
-    createdAt
-    updatedAt
   }
 }
 query ListBands(
@@ -98,14 +70,42 @@ query ListBands(
       name
       instruments
       genres
-      musicians {
-        nextToken
-      }
       bio
       vocalist
       createdAt
       updatedAt
+      musicians {
+        nextToken
+      }
     }
     nextToken
+  }
+}
+query GetBand($id: ID!) {
+  getBand(id: $id) {
+    id
+    name
+    instruments
+    genres
+    bio
+    vocalist
+    createdAt
+    updatedAt
+    musicians {
+      items {
+        id
+        bandId
+        firstName
+        lastName
+        vocalist
+        instruments
+        genres
+        bio
+        username
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
   }
 }
