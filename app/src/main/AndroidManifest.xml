@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.andyagulue.github.jammin">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,29 +11,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Jammin">
-        <activity android:name=".activities.MyFavoritesPage"
-            android:parentActivityName=".activities.MainActivity" />
-        <activity android:name=".activities.PublicBandProfilePage"
-            android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.PublicMusicianProfilePage"
-            android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.DiscoverPage"
-            android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.MyBandPage"
-            android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.BandCreationPage"
-            android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.MyMusicianProfilePage"
-            android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.LogInPage"
-            android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.ConfirmationPage"
-            android:parentActivityName=".activities.MainActivity"/>
         <activity android:name=".activities.SignUpPage"
             android:parentActivityName=".activities.MainActivity"/>
+        <activity
+            android:name=".activities.MyFavoritesPage"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.PublicBandProfilePage"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.PublicMusicianProfilePage"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.DiscoverPage"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.MyBandPage"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.BandCreationPage"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.MyMusicianProfilePage"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.LogInPage"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.ConfirmationPage"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.CreateProfilePage"
+            android:parentActivityName=".activities.MainActivity" />
         <activity android:name=".activities.SplashPage" />
         <activity android:name=".activities.MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

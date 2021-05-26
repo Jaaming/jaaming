@@ -8,13 +8,13 @@ import android.util.Log;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
-import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.generated.model.Todo;
 import com.andyagulue.github.jammin.R;
 
 public class MainActivity extends AppCompatActivity {
+    String TAG = "mainActivity";
 
 
 
@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
 
         try{
@@ -34,9 +35,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Amplify.Auth.fetchAuthSession(
-                result -> Log.i("AmplifyQuickStart", result.toString()),
-                error -> Log.e("AmplifyQuickStart", error.toString())
+                result -> Log.i("AmplifyQuickStart", "Success" + result.toString()),
+                error -> Log.e("AmplifyQuickStart", "Failure" + error.toString())
         );
+
+        signupCognito();
+
 
 //        Todo todo = Todo.builder()
 //                .name("My fire todo")
@@ -87,8 +91,28 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.mPublicProfilePage).setOnClickListener(v ->{
             Intent intent = new Intent(getApplicationContext(), PublicMusicianProfilePage.class);
             startActivity(intent);
+
+
+        });
+        findViewById(R.id.createProfilePageButton).setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), CreateProfilePage.class);
+            startActivity(intent);
         });
         //========================End temp buttons to be deleted=================================
+    }
+
+    void signupCognito() {
+        Amplify.Auth.signUp(
+                "m.parker.simms@gmail.com",
+                "password",
+                AuthSignUpOptions.builder().build(),
+                r -> {
+                    Log.i(TAG, "signupCognito: signup successfull" + r.toString());
+                },
+                r -> {
+                    Log.i(TAG, "signupCognito: signup unsuccessfull" + r.toString());
+                }
+        );
     }
 
 

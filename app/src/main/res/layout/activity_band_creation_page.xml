@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="right"
     android:background="#DDDCDC"
-    tools:context=".activities.SignUpPage">
+    tools:context=".activities.CreateProfilePage">
 
     <ImageView
         android:id="@+id/signUpPageBanner"
