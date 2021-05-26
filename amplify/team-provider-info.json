@@ -10,6 +10,11 @@
       "StackName": "amplify-jammin-dev-182824",
       "StackId": "arn:aws:cloudformation:us-east-1:674309489852:stack/amplify-jammin-dev-182824/861e2510-bda8-11eb-bb01-120346a4bf23",
       "AmplifyAppId": "d2ghz6wxw02b01"
+    },
+    "categories": {
+      "auth": {
+        "jamminaca3f6e7": {}
+      }
     }
   }
 }
