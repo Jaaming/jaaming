@@ -5,26 +5,26 @@ subscription OnCreateMusician {
     bandId
     firstName
     lastName
-    email
     vocalist
     instruments
     genres
+    bio
+    username
+    createdAt
+    updatedAt
     band {
       id
       name
       instruments
       genres
-      musicians {
-        nextToken
-      }
       bio
       vocalist
       createdAt
       updatedAt
+      musicians {
+        nextToken
+      }
     }
-    bio
-    createdAt
-    updatedAt
   }
 }
 subscription OnUpdateMusician {
@@ -33,26 +33,26 @@ subscription OnUpdateMusician {
     bandId
     firstName
     lastName
-    email
     vocalist
     instruments
     genres
+    bio
+    username
+    createdAt
+    updatedAt
     band {
       id
       name
       instruments
       genres
-      musicians {
-        nextToken
-      }
       bio
       vocalist
       createdAt
       updatedAt
+      musicians {
+        nextToken
+      }
     }
-    bio
-    createdAt
-    updatedAt
   }
 }
 subscription OnDeleteMusician {
@@ -61,26 +61,26 @@ subscription OnDeleteMusician {
     bandId
     firstName
     lastName
-    email
     vocalist
     instruments
     genres
+    bio
+    username
+    createdAt
+    updatedAt
     band {
       id
       name
       instruments
       genres
-      musicians {
-        nextToken
-      }
       bio
       vocalist
       createdAt
       updatedAt
+      musicians {
+        nextToken
+      }
     }
-    bio
-    createdAt
-    updatedAt
   }
 }
 subscription OnCreateBand {
@@ -89,26 +89,26 @@ subscription OnCreateBand {
     name
     instruments
     genres
+    bio
+    vocalist
+    createdAt
+    updatedAt
     musicians {
       items {
         id
         bandId
         firstName
         lastName
-        email
         vocalist
         instruments
         genres
         bio
+        username
         createdAt
         updatedAt
       }
       nextToken
     }
-    bio
-    vocalist
-    createdAt
-    updatedAt
   }
 }
 subscription OnUpdateBand {
@@ -117,26 +117,26 @@ subscription OnUpdateBand {
     name
     instruments
     genres
+    bio
+    vocalist
+    createdAt
+    updatedAt
     musicians {
       items {
         id
         bandId
         firstName
         lastName
-        email
         vocalist
         instruments
         genres
         bio
+        username
         createdAt
         updatedAt
       }
       nextToken
     }
-    bio
-    vocalist
-    createdAt
-    updatedAt
   }
 }
 subscription OnDeleteBand {
@@ -145,25 +145,25 @@ subscription OnDeleteBand {
     name
     instruments
     genres
+    bio
+    vocalist
+    createdAt
+    updatedAt
     musicians {
       items {
         id
         bandId
         firstName
         lastName
-        email
         vocalist
         instruments
         genres
         bio
+        username
         createdAt
         updatedAt
       }
       nextToken
     }
-    bio
-    vocalist
-    createdAt
-    updatedAt
   }
 }

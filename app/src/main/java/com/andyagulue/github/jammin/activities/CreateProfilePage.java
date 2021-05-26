@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Band;
@@ -20,6 +22,8 @@ import com.andyagulue.github.jammin.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import javax.security.auth.login.LoginException;
 
 public class CreateProfilePage extends AppCompatActivity {
 
@@ -54,34 +58,6 @@ public class CreateProfilePage extends AppCompatActivity {
             Log.i(TAG, "user is authenticated!");
 
         }
-//      Amplify
-        //Create instruments
-
-
-
-//        Musician musician = Musician.builder()
-//                .firstName("Bob")
-//                .lastName("Evans")
-//                .email("be@gmail.com")
-//                .vocalist(true)
-//                .bio("I like screaming until your ears bleed")
-//                .band(band) //TODO: Musician may not be a part of a band.
-//                .build();
-//
-//        Amplify.API.mutate(
-//                    ModelMutation.create(musician),
-//                    response -> {
-//                        Log.i(TAG, "onCreate: Created Musician " + musician.getFirstName());
-//                   },
-//                    error -> {
-//                        Log.e(TAG, "onCreate: Could not create Musician named " + musician.getFirstName(),error );
-//                    }
-//            );
-
-
-        //Create genres
-
-//
 
 
         tvInstruments = findViewById(R.id.addInstrumentTextView);
@@ -223,15 +199,64 @@ public class CreateProfilePage extends AppCompatActivity {
                     .build();
 
             Log.i(TAG, "onCreate: Made it to 220");
-            Amplify.API.mutate(
-                    ModelMutation.create(newMusician),
-                    response ->{
-                        Log.i(TAG, "onCreate: Created a new musician" );
+            Amplify.API.query(
+                    ModelQuery.list(Musician.class, Musician.USERNAME.eq(userName)),
+                    response-> {
+                        if(!response.getData().getItems().iterator().hasNext()){
+                            Amplify.API.mutate(
+                                    ModelMutation.create(newMusician),
+                                    respons ->{
+                                        Log.i(TAG, "onCreate: Created a new musician" );
+                                        Intent intent = new Intent(CreateProfilePage.this, DiscoverPage.class);
+                                        startActivity(intent);
+                                    },
+                                    err ->{
+                                        Log.e(TAG, "onCreate: Unable to create musician -->",err );
+                                    }
+                            );
+                            return;
+                        }
+                        Musician existingMusician = response.getData().getItems().iterator().next();
+                        Log.i(TAG, "musician" + existingMusician);
+                        existingMusician.firstName = "meeeee";
+                        if(!lastName.isEmpty())existingMusician.lastName = lastName;
+                        existingMusician.vocalist = isVocalist;
+                        existingMusician.instruments = instruments;
+                        existingMusician.genres = genres;
+                        existingMusician.bio = bio;
+                        existingMusician.band = defaultBand;
+
+                        Log.i(TAG, "onCreate: existing musician: " + existingMusician.firstName);
+
+                        Amplify.API.mutate(
+                                ModelMutation.update(existingMusician),
+                                res-> {
+                                    Log.i(TAG, "updated musician" + res);
+                                    Intent intent = new Intent(CreateProfilePage.this, DiscoverPage.class);
+                                    startActivity(intent);
+                                },
+                                err -> {
+                                    Log.i(TAG, "did not update musician" + err);
+                                }
+                        );
                     },
+
                     error ->{
-                        Log.e(TAG, "onCreate: Unable to create musician -->",error );
+                        Log.i(TAG, "musician is not in the database");
+                        Amplify.API.mutate(
+                                ModelMutation.create(newMusician),
+                                response ->{
+                                    Log.i(TAG, "onCreate: Created a new musician" );
+                                    Intent intent = new Intent(CreateProfilePage.this, DiscoverPage.class);
+                                    startActivity(intent);
+                                },
+                                err ->{
+                                    Log.e(TAG, "onCreate: Unable to create musician -->",error );
+                                }
+                        );
                     }
             );
+
         });
 
     }
