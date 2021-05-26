@@ -36,13 +36,13 @@ public final class Musician implements Model {
   public static final QueryField BIO = field("Musician", "bio");
   public static final QueryField USERNAME = field("Musician", "username");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="String", isRequired = true) String firstName;
-  private final @ModelField(targetType="String", isRequired = true) String lastName;
-  private final @ModelField(targetType="Boolean", isRequired = true) Boolean vocalist;
-  private final @ModelField(targetType="String", isRequired = true) String instruments;
-  private final @ModelField(targetType="String", isRequired = true) String genres;
-  private final @ModelField(targetType="Band") @BelongsTo(targetName = "bandId", type = Band.class) Band band;
-  private final @ModelField(targetType="String", isRequired = true) String bio;
+  public @ModelField(targetType="String", isRequired = true) String firstName;
+  public @ModelField(targetType="String", isRequired = true) String lastName;
+  public @ModelField(targetType="Boolean", isRequired = true) Boolean vocalist;
+  public @ModelField(targetType="String", isRequired = true) String instruments;
+  public @ModelField(targetType="String", isRequired = true) String genres;
+  public @ModelField(targetType="Band") @BelongsTo(targetName = "bandId", type = Band.class) Band band;
+  public @ModelField(targetType="String", isRequired = true) String bio;
   private final @ModelField(targetType="String", isRequired = true) String username;
   public String getId() {
       return id;

@@ -3,16 +3,21 @@ package com.andyagulue.github.jammin.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Musician;
 import com.andyagulue.github.jammin.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
 
 
@@ -41,8 +47,23 @@ public class MainActivity extends AppCompatActivity {
                 result -> Log.i("AmplifyQuickStart", "Success" + result.toString()),
                 error -> Log.e("AmplifyQuickStart", "Failure" + error.toString())
         );
-
+        AuthUser authUser = Amplify.Auth.getCurrentUser();
+        Log.i(TAG, "onCreate: authUsername" + authUser.getUsername());
 //        signupCognito();
+//        Amplify.API.query(
+//                ModelQuery.list(Musician.class, Musician.USERNAME.eq(authUser.getUsername())),
+//                response-> {
+//                    Log.i(TAG, "queryResponse" + response.getData().toString());
+//                    Musician thisMusician = response.getData().getItems().iterator().next();
+//                    Log.i(TAG, "musician" + thisMusician);
+//
+//                },
+//                error ->{
+//                    Log.i(TAG, "queryerror");
+//                }
+//        );
+
+//        Amplify.API.mutate(ModelMutation.update(thisMusician))
 
 
 //        Todo todo = Todo.builder()
