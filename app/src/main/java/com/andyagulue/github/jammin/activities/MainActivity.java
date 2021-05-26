@@ -9,6 +9,7 @@ import android.util.Log;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Todo;
 import com.andyagulue.github.jammin.R;
@@ -25,11 +26,17 @@ public class MainActivity extends AppCompatActivity {
 
         try{
             Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.configure(getApplicationContext());
             Log.i("JammingApp","Initialized Amplify");
         }catch(AmplifyException error){
             Log.e("JammingApp", "onCreate: Could not create");
         }
+
+        Amplify.Auth.fetchAuthSession(
+                result -> Log.i("AmplifyQuickStart", result.toString()),
+                error -> Log.e("AmplifyQuickStart", error.toString())
+        );
 
 //        Todo todo = Todo.builder()
 //                .name("My fire todo")
