@@ -1,0 +1,111 @@
+# this is an auto generated file. This will be overwritten
+query GetMusician($id: ID!) {
+  getMusician(id: $id) {
+    id
+    bandId
+    firstName
+    lastName
+    email
+    vocalist
+    instruments
+    genres
+    band {
+      id
+      name
+      instruments
+      genres
+      musicians {
+        nextToken
+      }
+      bio
+      vocalist
+      createdAt
+      updatedAt
+    }
+    bio
+    createdAt
+    updatedAt
+  }
+}
+query ListMusicians(
+  $filter: ModelMusicianFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMusicians(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      bandId
+      firstName
+      lastName
+      email
+      vocalist
+      instruments
+      genres
+      band {
+        id
+        name
+        instruments
+        genres
+        bio
+        vocalist
+        createdAt
+        updatedAt
+      }
+      bio
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetBand($id: ID!) {
+  getBand(id: $id) {
+    id
+    name
+    instruments
+    genres
+    musicians {
+      items {
+        id
+        bandId
+        firstName
+        lastName
+        email
+        vocalist
+        instruments
+        genres
+        bio
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    bio
+    vocalist
+    createdAt
+    updatedAt
+  }
+}
+query ListBands(
+  $filter: ModelBandFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listBands(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      instruments
+      genres
+      musicians {
+        nextToken
+      }
+      bio
+      vocalist
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}

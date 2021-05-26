@@ -4,15 +4,43 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Todo;
 import com.andyagulue.github.jammin.R;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        try{
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.configure(getApplicationContext());
+            Log.i("JammingApp","Initialized Amplify");
+        }catch(AmplifyException error){
+            Log.e("JammingApp", "onCreate: Could not create");
+        }
+
+//        Todo todo = Todo.builder()
+//                .name("My fire todo")
+//                .description("todo description")
+//                .build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(todo),
+//                response -> Log.i("JammingAPP", "onCreate: Added Todo with id: " + response.getData()),
+//                error -> Log.e("JammingApp", "onCreate: Create failed",error )
+//        );
+
 
         findViewById(R.id.logInNavButton).setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), LogInPage.class);

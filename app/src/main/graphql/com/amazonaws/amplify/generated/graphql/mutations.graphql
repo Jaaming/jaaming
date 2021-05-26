@@ -1,0 +1,187 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateMusician(
+  $input: CreateMusicianInput!
+  $condition: ModelMusicianConditionInput
+) {
+  createMusician(input: $input, condition: $condition) {
+    id
+    bandId
+    firstName
+    lastName
+    email
+    vocalist
+    instruments
+    genres
+    band {
+      id
+      name
+      instruments
+      genres
+      musicians {
+        nextToken
+      }
+      bio
+      vocalist
+      createdAt
+      updatedAt
+    }
+    bio
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateMusician(
+  $input: UpdateMusicianInput!
+  $condition: ModelMusicianConditionInput
+) {
+  updateMusician(input: $input, condition: $condition) {
+    id
+    bandId
+    firstName
+    lastName
+    email
+    vocalist
+    instruments
+    genres
+    band {
+      id
+      name
+      instruments
+      genres
+      musicians {
+        nextToken
+      }
+      bio
+      vocalist
+      createdAt
+      updatedAt
+    }
+    bio
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteMusician(
+  $input: DeleteMusicianInput!
+  $condition: ModelMusicianConditionInput
+) {
+  deleteMusician(input: $input, condition: $condition) {
+    id
+    bandId
+    firstName
+    lastName
+    email
+    vocalist
+    instruments
+    genres
+    band {
+      id
+      name
+      instruments
+      genres
+      musicians {
+        nextToken
+      }
+      bio
+      vocalist
+      createdAt
+      updatedAt
+    }
+    bio
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateBand(
+  $input: CreateBandInput!
+  $condition: ModelBandConditionInput
+) {
+  createBand(input: $input, condition: $condition) {
+    id
+    name
+    instruments
+    genres
+    musicians {
+      items {
+        id
+        bandId
+        firstName
+        lastName
+        email
+        vocalist
+        instruments
+        genres
+        bio
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    bio
+    vocalist
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateBand(
+  $input: UpdateBandInput!
+  $condition: ModelBandConditionInput
+) {
+  updateBand(input: $input, condition: $condition) {
+    id
+    name
+    instruments
+    genres
+    musicians {
+      items {
+        id
+        bandId
+        firstName
+        lastName
+        email
+        vocalist
+        instruments
+        genres
+        bio
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    bio
+    vocalist
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteBand(
+  $input: DeleteBandInput!
+  $condition: ModelBandConditionInput
+) {
+  deleteBand(input: $input, condition: $condition) {
+    id
+    name
+    instruments
+    genres
+    musicians {
+      items {
+        id
+        bandId
+        firstName
+        lastName
+        email
+        vocalist
+        instruments
+        genres
+        bio
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    bio
+    vocalist
+    createdAt
+    updatedAt
+  }
+}
