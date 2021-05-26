@@ -15,9 +15,9 @@
         android:hint="Confirmation Code"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/confirmPageUsernaNameTextView"
-        app:layout_constraintStart_toStartOf="@+id/confirmPageUsernaNameTextView"
-        app:layout_constraintTop_toBottomOf="@+id/confirmPageUsernaNameTextView" />
+        app:layout_constraintEnd_toEndOf="@+id/confirmPageUserNameTextView"
+        app:layout_constraintStart_toStartOf="@+id/confirmPageUserNameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/confirmPageUserNameTextView" />
 
     <Button
         android:id="@+id/confirmButton"
@@ -32,20 +32,20 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/confirmPageUsernaNameTextView"
+        android:id="@+id/confirmPageUserNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="160dp"
-        android:ems="10"
         android:hint="Username"
         android:inputType="textPersonName"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myFavoritesBanner" />
+        app:layout_constraintTop_toBottomOf="@+id/confirmationPageBanner" />
 
     <ImageView
-        android:id="@+id/myFavoritesBanner"
+        android:id="@+id/confirmationPageBanner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
