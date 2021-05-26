@@ -116,6 +116,13 @@
             android:layout_weight="1"
             android:text="mPubProfile"
             app:layout_constraintBottom_toBottomOf="parent" />
+
+        <Button
+            android:id="@+id/createProfilePageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="create Profile" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
