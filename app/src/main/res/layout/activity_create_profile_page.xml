@@ -49,7 +49,7 @@
                     app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
                 <ImageButton
-                    android:id="@+id/createBandAddProfilePicButton"
+                    android:id="@+id/createProfileAddProfilePicButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -59,34 +59,16 @@
                     app:srcCompat="@drawable/ic_baseline_add_24" />
             </RelativeLayout>
 
-            <EditText
-                android:id="@+id/addEmailEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginRight="16dp"
-                android:autoText="true"
-                android:ems="10"
-                android:hint="EMAIL"
-                android:inputType="textEmailAddress" />
-
-            <EditText
-                android:id="@+id/createBandNameEditText"
+            <TextView
+                android:id="@+id/profileUserNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:ems="10"
                 android:hint="Username"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/addPasswordEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:ems="10"
-                android:hint="Password"
-                android:inputType="textPassword" />
+                android:inputType="textPersonName"
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -115,15 +97,6 @@
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/addBirthDateEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:ems="10"
-                android:hint="mm/dd/yyyy"
-                android:inputType="date" />
-
             <TextView
                 android:id="@+id/addInstrumentTextView"
                 android:layout_width="match_parent"
@@ -148,11 +121,13 @@
 
             <Switch
                 android:id="@+id/signupAddVocalist"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="8dp"
                 android:checked="false"
-                android:text="Vocalist?" />
+                android:text="Vocalist?              "
+                android:textAlignment="center" />
 
             <EditText
                 android:id="@+id/signupBioTextView"
@@ -170,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_marginBottom="30dp"
-                android:text="SIGN UP" />
+                android:text="Finish" />
 
         </LinearLayout>
     </ScrollView>

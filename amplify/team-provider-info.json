@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "jamminaca3f6e7": {}
+        "jamminaca3f6e7": {},
+        "userPoolGroups": {}
       }
     }
   }

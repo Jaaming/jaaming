@@ -1,26 +1,23 @@
-type Musician
-@model
-@key(name:"band", fields:["bandId"])
-{
+type Musician @model @key(name: "band", fields: ["bandId"]) @auth(rules: [{allow: public}]) {
   id: ID!
   bandId: ID
   firstName: String!
   lastName: String!
-  email: String!
   vocalist: Boolean!
   instruments: String!
   genres: String!
-  band: Band @connection(fields:["bandId"])
+  band: Band @connection(fields: ["bandId"])
   bio: String!
+  username: String!
 }
-type Band
-@model
-{
+
+type Band @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
   instruments: String!
   genres: String!
-  musicians: [Musician] @connection(keyName: "band",fields:["id"])
+  musicians: [Musician] @connection(keyName: "band", fields: ["id"])
   bio: String!
   vocalist: Boolean!
 }
+ 

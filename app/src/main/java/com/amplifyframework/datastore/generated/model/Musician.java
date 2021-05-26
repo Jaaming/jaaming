@@ -8,7 +8,10 @@ import java.util.Objects;
 
 import androidx.core.util.ObjectsCompat;
 
+import com.amplifyframework.core.model.AuthStrategy;
 import com.amplifyframework.core.model.Model;
+import com.amplifyframework.core.model.ModelOperation;
+import com.amplifyframework.core.model.annotations.AuthRule;
 import com.amplifyframework.core.model.annotations.Index;
 import com.amplifyframework.core.model.annotations.ModelConfig;
 import com.amplifyframework.core.model.annotations.ModelField;
@@ -18,27 +21,29 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
 /** This is an auto generated class representing the Musician type in your schema. */
 @SuppressWarnings("all")
-@ModelConfig(pluralName = "Musicians")
+@ModelConfig(pluralName = "Musicians", authRules = {
+  @AuthRule(allow = AuthStrategy.PUBLIC, operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ })
+})
 @Index(name = "band", fields = {"bandId"})
 public final class Musician implements Model {
   public static final QueryField ID = field("Musician", "id");
   public static final QueryField FIRST_NAME = field("Musician", "firstName");
   public static final QueryField LAST_NAME = field("Musician", "lastName");
-  public static final QueryField EMAIL = field("Musician", "email");
   public static final QueryField VOCALIST = field("Musician", "vocalist");
   public static final QueryField INSTRUMENTS = field("Musician", "instruments");
   public static final QueryField GENRES = field("Musician", "genres");
   public static final QueryField BAND = field("Musician", "bandId");
   public static final QueryField BIO = field("Musician", "bio");
+  public static final QueryField USERNAME = field("Musician", "username");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String firstName;
   private final @ModelField(targetType="String", isRequired = true) String lastName;
-  private final @ModelField(targetType="String", isRequired = true) String email;
   private final @ModelField(targetType="Boolean", isRequired = true) Boolean vocalist;
   private final @ModelField(targetType="String", isRequired = true) String instruments;
   private final @ModelField(targetType="String", isRequired = true) String genres;
   private final @ModelField(targetType="Band") @BelongsTo(targetName = "bandId", type = Band.class) Band band;
   private final @ModelField(targetType="String", isRequired = true) String bio;
+  private final @ModelField(targetType="String", isRequired = true) String username;
   public String getId() {
       return id;
   }
@@ -49,10 +54,6 @@ public final class Musician implements Model {
   
   public String getLastName() {
       return lastName;
-  }
-  
-  public String getEmail() {
-      return email;
   }
   
   public Boolean getVocalist() {
@@ -75,16 +76,20 @@ public final class Musician implements Model {
       return bio;
   }
   
-  private Musician(String id, String firstName, String lastName, String email, Boolean vocalist, String instruments, String genres, Band band, String bio) {
+  public String getUsername() {
+      return username;
+  }
+  
+  private Musician(String id, String firstName, String lastName, Boolean vocalist, String instruments, String genres, Band band, String bio, String username) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.email = email;
     this.vocalist = vocalist;
     this.instruments = instruments;
     this.genres = genres;
     this.band = band;
     this.bio = bio;
+    this.username = username;
   }
   
   @Override
@@ -98,12 +103,12 @@ public final class Musician implements Model {
       return ObjectsCompat.equals(getId(), musician.getId()) &&
               ObjectsCompat.equals(getFirstName(), musician.getFirstName()) &&
               ObjectsCompat.equals(getLastName(), musician.getLastName()) &&
-              ObjectsCompat.equals(getEmail(), musician.getEmail()) &&
               ObjectsCompat.equals(getVocalist(), musician.getVocalist()) &&
               ObjectsCompat.equals(getInstruments(), musician.getInstruments()) &&
               ObjectsCompat.equals(getGenres(), musician.getGenres()) &&
               ObjectsCompat.equals(getBand(), musician.getBand()) &&
-              ObjectsCompat.equals(getBio(), musician.getBio());
+              ObjectsCompat.equals(getBio(), musician.getBio()) &&
+              ObjectsCompat.equals(getUsername(), musician.getUsername());
       }
   }
   
@@ -113,12 +118,12 @@ public final class Musician implements Model {
       .append(getId())
       .append(getFirstName())
       .append(getLastName())
-      .append(getEmail())
       .append(getVocalist())
       .append(getInstruments())
       .append(getGenres())
       .append(getBand())
       .append(getBio())
+      .append(getUsername())
       .toString()
       .hashCode();
   }
@@ -130,12 +135,12 @@ public final class Musician implements Model {
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("firstName=" + String.valueOf(getFirstName()) + ", ")
       .append("lastName=" + String.valueOf(getLastName()) + ", ")
-      .append("email=" + String.valueOf(getEmail()) + ", ")
       .append("vocalist=" + String.valueOf(getVocalist()) + ", ")
       .append("instruments=" + String.valueOf(getInstruments()) + ", ")
       .append("genres=" + String.valueOf(getGenres()) + ", ")
       .append("band=" + String.valueOf(getBand()) + ", ")
-      .append("bio=" + String.valueOf(getBio()))
+      .append("bio=" + String.valueOf(getBio()) + ", ")
+      .append("username=" + String.valueOf(getUsername()))
       .append("}")
       .toString();
   }
@@ -180,12 +185,12 @@ public final class Musician implements Model {
     return new CopyOfBuilder(id,
       firstName,
       lastName,
-      email,
       vocalist,
       instruments,
       genres,
       band,
-      bio);
+      bio,
+      username);
   }
   public interface FirstNameStep {
     LastNameStep firstName(String firstName);
@@ -193,12 +198,7 @@ public final class Musician implements Model {
   
 
   public interface LastNameStep {
-    EmailStep lastName(String lastName);
-  }
-  
-
-  public interface EmailStep {
-    VocalistStep email(String email);
+    VocalistStep lastName(String lastName);
   }
   
 
@@ -218,7 +218,12 @@ public final class Musician implements Model {
   
 
   public interface BioStep {
-    BuildStep bio(String bio);
+    UsernameStep bio(String bio);
+  }
+  
+
+  public interface UsernameStep {
+    BuildStep username(String username);
   }
   
 
@@ -229,15 +234,15 @@ public final class Musician implements Model {
   }
   
 
-  public static class Builder implements FirstNameStep, LastNameStep, EmailStep, VocalistStep, InstrumentsStep, GenresStep, BioStep, BuildStep {
+  public static class Builder implements FirstNameStep, LastNameStep, VocalistStep, InstrumentsStep, GenresStep, BioStep, UsernameStep, BuildStep {
     private String id;
     private String firstName;
     private String lastName;
-    private String email;
     private Boolean vocalist;
     private String instruments;
     private String genres;
     private String bio;
+    private String username;
     private Band band;
     @Override
      public Musician build() {
@@ -247,12 +252,12 @@ public final class Musician implements Model {
           id,
           firstName,
           lastName,
-          email,
           vocalist,
           instruments,
           genres,
           band,
-          bio);
+          bio,
+          username);
     }
     
     @Override
@@ -263,16 +268,9 @@ public final class Musician implements Model {
     }
     
     @Override
-     public EmailStep lastName(String lastName) {
+     public VocalistStep lastName(String lastName) {
         Objects.requireNonNull(lastName);
         this.lastName = lastName;
-        return this;
-    }
-    
-    @Override
-     public VocalistStep email(String email) {
-        Objects.requireNonNull(email);
-        this.email = email;
         return this;
     }
     
@@ -298,9 +296,16 @@ public final class Musician implements Model {
     }
     
     @Override
-     public BuildStep bio(String bio) {
+     public UsernameStep bio(String bio) {
         Objects.requireNonNull(bio);
         this.bio = bio;
+        return this;
+    }
+    
+    @Override
+     public BuildStep username(String username) {
+        Objects.requireNonNull(username);
+        this.username = username;
         return this;
     }
     
@@ -333,15 +338,15 @@ public final class Musician implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String firstName, String lastName, String email, Boolean vocalist, String instruments, String genres, Band band, String bio) {
+    private CopyOfBuilder(String id, String firstName, String lastName, Boolean vocalist, String instruments, String genres, Band band, String bio, String username) {
       super.id(id);
       super.firstName(firstName)
         .lastName(lastName)
-        .email(email)
         .vocalist(vocalist)
         .instruments(instruments)
         .genres(genres)
         .bio(bio)
+        .username(username)
         .band(band);
     }
     
@@ -353,11 +358,6 @@ public final class Musician implements Model {
     @Override
      public CopyOfBuilder lastName(String lastName) {
       return (CopyOfBuilder) super.lastName(lastName);
-    }
-    
-    @Override
-     public CopyOfBuilder email(String email) {
-      return (CopyOfBuilder) super.email(email);
     }
     
     @Override
@@ -378,6 +378,11 @@ public final class Musician implements Model {
     @Override
      public CopyOfBuilder bio(String bio) {
       return (CopyOfBuilder) super.bio(bio);
+    }
+    
+    @Override
+     public CopyOfBuilder username(String username) {
+      return (CopyOfBuilder) super.username(username);
     }
     
     @Override
