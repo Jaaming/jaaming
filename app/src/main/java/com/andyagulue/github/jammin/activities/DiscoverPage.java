@@ -36,6 +36,7 @@ public class DiscoverPage extends AppCompatActivity {
         populateDiscoverMusicians();
         buildViewPager();
 
+
     }
 
 

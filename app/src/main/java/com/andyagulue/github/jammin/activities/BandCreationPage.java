@@ -1,18 +1,45 @@
 package com.andyagulue.github.jammin.activities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Band;
+import com.amplifyframework.datastore.generated.model.Musician;
 import com.andyagulue.github.jammin.R;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class BandCreationPage extends AppCompatActivity {
+    String TAG = "Band Creation Page";
+
+    ImageView bandImage;
+    ImageButton addBandImageButton;
+
+    private static final int IMAG_REQ_CODE = 1989;
+    private static final int PERMISSION_CODE = 1986;
 
     TextView bandInstruments;
     TextView bandGenres;
@@ -22,6 +49,15 @@ public class BandCreationPage extends AppCompatActivity {
     ArrayList<Integer> bandSelectedGenreList = new ArrayList<>();
     String[] bandInstrumentsArray = {"Acoustic Guitar", "Electric Guitar", "Bass Guitar", "Drums", "Keyboard" };
     String[] bandGenresArray = {"Pop", "Rock", "Acoustic", "Jazz", "Reggae", "Folk", "Punk", "Americana", "Indie"};
+
+    Band defaultBand = Band.builder()
+            .name("Default")
+            .instruments("Default")
+            .genres("String")
+            .bio("Default")
+            .vocalist(true)
+            .build();
+
 
 
     @Override
@@ -142,5 +178,144 @@ public class BandCreationPage extends AppCompatActivity {
             genreBuilder.show();
 
         });
+
+        Button submitCreateMusician = findViewById(R.id.submitCreateBandButton);
+        submitCreateMusician.setOnClickListener(v -> {
+            String bandName = ((TextView) findViewById(R.id.createBandNameEditText)).getText().toString();
+            String instruments = bandInstruments.getText().toString();
+            String genres = bandGenres.getText().toString();
+            String bio = ((TextView) findViewById(R.id.createBandBioTextView)).getText().toString();
+            @SuppressLint("UseSwitchCompatOrMaterialCode")
+            Switch switchOn = findViewById(R.id.createBandAddVocalist);
+            boolean isVocalist = switchOn.isChecked();
+
+            Band newBand = Band.builder()
+                    .name(bandName)
+                    .instruments(instruments)
+                    .genres(genres)
+                    .bio(bio)
+                    .vocalist(isVocalist)
+                    .build();
+
+            Log.i(TAG, "onCreate: Made it to 220");
+            Amplify.API.query(
+                    ModelQuery.list(Musician.class, Musician.USERNAME.eq(bandName)),
+                    response-> {
+                        if(!response.getData().getItems().iterator().hasNext()){
+                            Amplify.API.mutate(
+                                    ModelMutation.create(newBand),
+                                    r ->{
+                                        Log.i(TAG, "onCreate: Created a new musician" );
+                                        Intent intent = new Intent(BandCreationPage.this, DiscoverPage.class);
+                                        startActivity(intent);
+                                    },
+                                    err ->{
+                                        Log.e(TAG, "onCreate: Unable to create musician -->",err );
+                                    }
+                            );
+                            return;
+                        }
+                        Musician existingBand = response.getData().getItems().iterator().next();
+                        Log.i(TAG, "band" + existingBand);
+                        Band updatedBand = Band.builder()
+                                .name(bandName)
+                                .instruments(instruments)
+                                .genres(genres)
+                                .bio(bio)
+                                .vocalist(isVocalist)
+                                .id(existingBand.getId())
+                                .build();
+
+                        Log.i(TAG, "onCreate: updated band: " );
+
+                        Amplify.API.mutate(
+                                ModelMutation.create(updatedBand),
+                                res-> {
+                                    Log.i(TAG, "updated band" + res);
+                                    Intent intent = new Intent(BandCreationPage.this, DiscoverPage.class);
+                                    startActivity(intent);
+                                },
+                                err -> {
+                                    Log.i(TAG, "did not update musician" + err);
+                                }
+                        );
+                    },
+
+                    error ->{
+                        Log.i(TAG, "musician is not in the database");
+                        Amplify.API.mutate(
+                                ModelMutation.create(newBand),
+                                response ->{
+                                    Log.i(TAG, "onCreate: Created a new musician" );
+                                    Intent intent = new Intent(BandCreationPage.this, DiscoverPage.class);
+                                    startActivity(intent);
+                                },
+                                err ->{
+                                    Log.e(TAG, "onCreate: Unable to create musician -->",error );
+                                }
+                        );
+                    }
+            );
+
+        });
+
+        //======profile Image
+        bandImage = findViewById(R.id.createBandImageView);
+        addBandImageButton = findViewById(R.id.createBandAddPicButton);
+
+        addBandImageButton.setOnClickListener(v -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        == PackageManager.PERMISSION_DENIED){
+                    String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+                    requestPermissions(permissions, PERMISSION_CODE);
+                }
+                else {
+                    pickImageFromPhotos();
+
+                }
+            }
+            else{
+
+                pickImageFromPhotos();
+
+            }        });
+
+
+
+    }
+
+    private void pickImageFromPhotos() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAG_REQ_CODE);
+    }
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
+
+
+        switch (requestCode){
+            case PERMISSION_CODE:{
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED){
+
+                    pickImageFromPhotos();
+                }
+
+                else {
+                    Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        if (resultCode == RESULT_OK && requestCode == IMAG_REQ_CODE) {
+
+            bandImage.setImageURI(data.getData());
+        }
     }
 }
