@@ -21,6 +21,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
+
+
     <ScrollView
         android:layout_width="411dp"
         android:layout_height="598dp"
@@ -41,21 +43,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/createBandImageView"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_centerHorizontal="true"
-                    app:srcCompat="@drawable/ic_baseline_account_circle_24" />
-
-                <ImageButton
-                    android:id="@+id/createProfileAddProfilePicButton"
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="100dp">
+
+                    <ImageView
+                        android:id="@+id/createProfileImageView"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:adjustViewBounds="false"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@mipmap/ic_launcher_round" />
+                </androidx.cardview.widget.CardView>
+
+                <ImageButton
+                    android:id="@+id/createProfilePicButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginBottom="2dp"
-                    android:layout_toEndOf="@+id/createBandImageView"
+                    android:layout_marginEnd="42dp"
+                    android:layout_marginBottom="0dp"
                     app:srcCompat="@drawable/ic_baseline_add_24" />
             </RelativeLayout>
 

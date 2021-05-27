@@ -18,7 +18,12 @@ import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Musician;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.andyagulue.github.jammin.R;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 public class MainActivity extends AppCompatActivity {
     String TAG = "mainActivity";
@@ -37,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         try{
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.configure(getApplicationContext());
             Log.i("JammingApp","Initialized Amplify");
         }catch(AmplifyException error){
@@ -48,7 +54,11 @@ public class MainActivity extends AppCompatActivity {
                 error -> Log.e("AmplifyQuickStart", "Failure" + error.toString())
         );
         AuthUser authUser = Amplify.Auth.getCurrentUser();
-        Log.i(TAG, "onCreate: authUsername" + authUser.getUsername());
+        if (authUser != null)Log.i(TAG, "onCreate: authUsername" + authUser.getUsername());
+
+        uploadFile();
+
+
 //        signupCognito();
 //        Amplify.API.query(
 //                ModelQuery.list(Musician.class, Musician.USERNAME.eq(authUser.getUsername())),
@@ -134,6 +144,24 @@ public class MainActivity extends AppCompatActivity {
                 error -> Log.e("AuthQuickStart", "Sign up failed", error)
         );
     }
+
+    private void uploadFile() {
+        File exampleFile = new File(getApplicationContext().getFilesDir(), "ExampleKey");
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(exampleFile));
+            writer.append("Example file contents");
+            writer.close();
+        } catch (Exception exception) {
+            Log.e("MyAmplifyApp", "Upload failed", exception);
+        }
+        Amplify.Storage.uploadFile(
+                "ExampleKey",
+                exampleFile,
+                result -> Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey()),
+                storageFailure -> Log.e("MyAmplifyApp", "Upload failed", storageFailure)
+        );
+    }
+
 
 
 }
