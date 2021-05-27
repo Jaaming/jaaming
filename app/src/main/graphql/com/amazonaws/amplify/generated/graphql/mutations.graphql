@@ -11,23 +11,23 @@ mutation CreateMusician(
     vocalist
     instruments
     genres
-    bio
-    username
-    createdAt
-    updatedAt
     band {
       id
       name
       instruments
       genres
+      musicians {
+        nextToken
+      }
       bio
       vocalist
       createdAt
       updatedAt
-      musicians {
-        nextToken
-      }
     }
+    bio
+    username
+    createdAt
+    updatedAt
   }
 }
 mutation UpdateMusician(
@@ -42,23 +42,23 @@ mutation UpdateMusician(
     vocalist
     instruments
     genres
-    bio
-    username
-    createdAt
-    updatedAt
     band {
       id
       name
       instruments
       genres
+      musicians {
+        nextToken
+      }
       bio
       vocalist
       createdAt
       updatedAt
-      musicians {
-        nextToken
-      }
     }
+    bio
+    username
+    createdAt
+    updatedAt
   }
 }
 mutation DeleteMusician(
@@ -73,23 +73,23 @@ mutation DeleteMusician(
     vocalist
     instruments
     genres
-    bio
-    username
-    createdAt
-    updatedAt
     band {
       id
       name
       instruments
       genres
+      musicians {
+        nextToken
+      }
       bio
       vocalist
       createdAt
       updatedAt
-      musicians {
-        nextToken
-      }
     }
+    bio
+    username
+    createdAt
+    updatedAt
   }
 }
 mutation CreateBand(
@@ -101,10 +101,6 @@ mutation CreateBand(
     name
     instruments
     genres
-    bio
-    vocalist
-    createdAt
-    updatedAt
     musicians {
       items {
         id
@@ -121,6 +117,10 @@ mutation CreateBand(
       }
       nextToken
     }
+    bio
+    vocalist
+    createdAt
+    updatedAt
   }
 }
 mutation UpdateBand(
@@ -132,10 +132,6 @@ mutation UpdateBand(
     name
     instruments
     genres
-    bio
-    vocalist
-    createdAt
-    updatedAt
     musicians {
       items {
         id
@@ -152,6 +148,10 @@ mutation UpdateBand(
       }
       nextToken
     }
+    bio
+    vocalist
+    createdAt
+    updatedAt
   }
 }
 mutation DeleteBand(
@@ -163,10 +163,6 @@ mutation DeleteBand(
     name
     instruments
     genres
-    bio
-    vocalist
-    createdAt
-    updatedAt
     musicians {
       items {
         id
@@ -183,5 +179,9 @@ mutation DeleteBand(
       }
       nextToken
     }
+    bio
+    vocalist
+    createdAt
+    updatedAt
   }
 }
