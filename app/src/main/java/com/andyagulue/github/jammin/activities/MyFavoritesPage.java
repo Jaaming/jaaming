@@ -1,11 +1,16 @@
 package com.andyagulue.github.jammin.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.andyagulue.github.jammin.FavoriteMusician;
@@ -87,5 +92,37 @@ public class MyFavoritesPage extends AppCompatActivity {
                 Log.i(TAG, "onMusicianClick: " + favoriteMusicians.get(position).getFavMusicianUsername());
             }
         });
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item1:
+                Toast.makeText(this, "clicked profile", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), PublicMusicianProfilePage.class );
+                startActivity(intent);
+                return true;
+            case R.id.item2:
+                Toast.makeText(this, "clicked home", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(getApplicationContext(), DiscoverPage.class );
+                startActivity(intent2);
+                return true;
+            case R.id.item3:
+                Toast.makeText(this, "clicked favorites", Toast.LENGTH_SHORT).show();
+                Intent intent3 = new Intent(getApplicationContext(), MyFavoritesPage.class );
+                startActivity(intent3);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 }

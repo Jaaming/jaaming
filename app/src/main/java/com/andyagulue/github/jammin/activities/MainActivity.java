@@ -1,5 +1,6 @@
 package com.andyagulue.github.jammin.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,10 @@ import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
@@ -19,6 +24,7 @@ import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Musician;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
+import com.andyagulue.github.jammin.FavoriteMusician;
 import com.andyagulue.github.jammin.R;
 
 import java.io.BufferedWriter;
@@ -34,10 +40,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
-
 
         try{
             Amplify.addPlugin(new AWSApiPlugin());
@@ -164,7 +166,35 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item1:
+                Toast.makeText(this, "clicked profile", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), PublicMusicianProfilePage.class );
+                startActivity(intent);
+                return true;
+            case R.id.item2:
+                Toast.makeText(this, "clicked home", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(getApplicationContext(), DiscoverPage.class );
+                startActivity(intent2);
+                return true;
+            case R.id.item3:
+                Toast.makeText(this, "clicked favorites", Toast.LENGTH_SHORT).show();
+                Intent intent3 = new Intent(getApplicationContext(), MyFavoritesPage.class );
+                startActivity(intent3);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
+    }
 }
 
