@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.andyagulue.github.jammin.Musician;
+import com.amplifyframework.datastore.generated.model.Musician;
 import com.andyagulue.github.jammin.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolder>  {
 
-    private ArrayList<Musician> musicianList;
+    private ArrayList<com.amplifyframework.datastore.generated.model.Musician> musicianList;
     private ViewPagerAdapter.OnProfileClickListener profileClickListener;
 
     public interface OnProfileClickListener{
@@ -42,6 +42,9 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
             profileImageView = itemView.findViewById(R.id.discoverPageImageView);
             musicianUsername = itemView.findViewById(R.id.discoverPageUsernameTextView);
             viewProfileButton = itemView.findViewById(R.id.discoverPageViewProfileButton);
+            musicianInstruments = itemView.findViewById(R.id.discoverPageInstrumentsTextView);
+            musicianGenres = itemView.findViewById(R.id.discoverPageGenreTextView);
+
 
             viewProfileButton.setOnClickListener(v -> {
                 if(listener != null){
@@ -54,7 +57,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
         }
     }
 
-    public ViewPagerAdapter(ArrayList<Musician> musicians){
+    public ViewPagerAdapter(ArrayList<com.amplifyframework.datastore.generated.model.Musician> musicians){
         musicianList = musicians;
     }
 
@@ -70,9 +73,14 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewPagerAdapter.ViewPagerViewHolder holder, int position) {
         Musician current = musicianList.get(position);
+        String firstAndLast = current.getFirstName() + " " + current.getLastName();
 
-        holder.profileImageView.setImageResource(current.getProfileImage());
-        holder.musicianUsername.setText(current.getMusicianUsername());
+// ----------- Todo get image to populate with s3 info -------------------\\
+        holder.profileImageView.setImageResource(R.drawable.ic_baseline_account_circle_24);
+        holder.musicianUsername.setText(firstAndLast);
+        holder.musicianGenres.setText(current.getGenres());
+        holder.musicianInstruments.setText(current.getInstruments());
+
     }
 
     @Override

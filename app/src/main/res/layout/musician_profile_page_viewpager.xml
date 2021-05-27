@@ -26,6 +26,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="42dp"
         android:layout_marginBottom="30dp"
+        android:alpha="0.8"
         app:cardCornerRadius="10dp">
 
         <ScrollView
@@ -34,7 +35,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
@@ -59,46 +60,54 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="8dp"
-                    android:text="Username" />
+                    android:text="Username"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/discoverPageInstrumentsTextview"
+                    android:id="@+id/discoverPageInstrumentsTitleTextview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="8dp"
-                    android:text="Instrument(s)" />
+                    android:text="Instrument(s)"
+                    android:textStyle="bold" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/discoverPageIntrumentsRecyclerView"
+                <TextView
+                    android:id="@+id/discoverPageInstrumentsTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_margin="8dp">
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="Instruments will populate here"
+                    android:textAlignment="center">
 
-                </androidx.recyclerview.widget.RecyclerView>
+                </TextView>
+
+                <TextView
+                    android:id="@+id/discoverPageGenreTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="8dp"
+                    android:text="Genre(s)"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/discoverPageGenreTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="8dp"
-                    android:text="Genre(s)" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/discoverPageGenreRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:layout_margin="8dp">
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="Genres will populate here"
+                    android:textAlignment="center">
 
-                </androidx.recyclerview.widget.RecyclerView>
+                </TextView>
 
                 <Button
                     android:id="@+id/discoverPageViewProfileButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_margin="8dp"
+                    android:layout_marginTop="20dp"
                     android:text="View Profile" />
             </LinearLayout>
         </ScrollView>

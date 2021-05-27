@@ -1,9 +1,16 @@
 package com.andyagulue.github.jammin.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -20,21 +27,20 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class DiscoverPage extends AppCompatActivity {
-    String TAG = "Discover Page";
+    String TAG = "discover Page";
 
     private ViewPager2 viewpager2;
     private ViewPagerAdapter adapter;
-    ArrayList<Musician> musicianArrayList;
+    ArrayList<com.amplifyframework.datastore.generated.model.Musician> musicianArrayList;
     ArrayList<Musician> displayMusiciansArrayList;
-//    ArrayList<String> instruments;
-//    ArrayList<String> genres;
+    Handler discoverPageHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discover_page);
-        createMusicianList();
-//        populateDiscoverMusicians();
+//        createMusicianList();
+        populateDiscoverMusicians();
         buildViewPager();
 
     }
@@ -43,24 +49,53 @@ public class DiscoverPage extends AppCompatActivity {
     public void createMusicianList(){
         musicianArrayList = new ArrayList<>();
 
-        ArrayList<String> instruments = new ArrayList<>(Arrays.asList("Acoustic Guitar"));
-        ArrayList<String> genres = new ArrayList<>(Arrays.asList("POP"));
-        musicianArrayList.add(new Musician(R.drawable.ic_baseline_account_circle_24, "testEmail.com", "username1",
-                "12345", "Matt", "Matty", "12/07/2021", instruments, genres, false, "Was born to shred, I'll shred till my last breath"));
-        musicianArrayList.add(new Musician(R.drawable.ic_baseline_self_improvement_24, "testEmail.com", "username2",
-                "12345", "Matt", "Matty", "12/07/2021", instruments, genres, false, "Was born to shred, I'll shred till my last breath"));
-        musicianArrayList.add(new Musician(R.drawable.electric_guitar, "testEmail.com", "username3",
-                "12345", "Matt", "Matty", "12/07/2021", instruments, genres, false, "Was born to shred, I'll shred till my last breath"));
-        musicianArrayList.add(new Musician(R.drawable.keyboard, "testEmail.com", "username4",
-                "12345", "Matt", "Matty", "12/07/2021", instruments, genres, false, "Was born to shred, I'll shred till my last breath"));
-        musicianArrayList.add(new Musician(R.drawable.ic_baseline_account_circle_24, "testEmail.com", "username5",
-                "12345", "Matt", "Matty", "12/07/2021", instruments, genres, false, "Was born to shred, I'll shred till my last breath"));
+//        musicianArrayList.add(new Musician( "Test Firstname", "Test Last Name", "Acoustic Guitar",
+//                "Folk", false, "I love to rock"));
+//        musicianArrayList.add(new Musician( "Test Firstname2", "Test Last Name2", "Acoustic Guitar",
+//                "Folk", false, "I love to rock"));
+//        musicianArrayList.add(new Musician( "Test Firstname3", "Test Last Name3", "Acoustic Guitar",
+//                "Folk", false, "I love to rock"));
+//        musicianArrayList.add(new Musician( "Test Firstname4", "Test Last Name4", "Acoustic Guitar",
+//                "Folk", false, "I love to rock"));
+//        musicianArrayList.add(new Musician( "Test Firstname5", "Test Last Name5", "Acoustic Guitar",
+//                "Folk", false, "I love to rock"));
+
+    }
+
+    public void populateDiscoverMusicians(){
+        musicianArrayList = new ArrayList<>();
+        Amplify.API.query(
+                ModelQuery.list(com.amplifyframework.datastore.generated.model.Musician.class),
+                r -> {
+                    Log.i(TAG, "populateDiscoverMusicians: ");
+                    for(com.amplifyframework.datastore.generated.model.Musician musician: r.getData()) {
+                        Log.i(TAG, "populateDiscoverMusicians: " + r.getData().getItems() + 1);
+                        musicianArrayList.add(musician);
+                    }
+                    discoverPageHandler.sendEmptyMessage(123);
+                },
+                e -> {
+                    Log.d(TAG, "populateDiscoverMusicians error: " + e);
+//                     createMusicianList();
+                }
+        );
+//
     }
 
     public void buildViewPager(){
         viewpager2 = findViewById(R.id.viewPager);
         adapter = new ViewPagerAdapter(musicianArrayList);
         viewpager2.setAdapter(adapter);
+
+        discoverPageHandler = new Handler(this.getMainLooper()){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                if(msg.what == 123){
+                    viewpager2.getAdapter().notifyDataSetChanged();
+                }
+            }
+        };
 
         adapter.setOnProfileClickListener(new ViewPagerAdapter.OnProfileClickListener() {
             @Override
@@ -70,34 +105,36 @@ public class DiscoverPage extends AppCompatActivity {
         });
     }
 
-//    public void populateDiscoverMusicians(){
-//        musicianArrayList = new ArrayList<>();
-//         Amplify.API.query(
-//                 ModelQuery.list(Musician.class),
-//                 r -> {
-//                     Log.i(TAG, "populateDiscoverMusicians: ");
-//                     for(Musician musician: r.getData()) {
-//                         if(r.getData().getItems().iterator() != null) Log.i(TAG, "populateDiscoverMusicians: " + r.getData().getItems());
-//
-//
-////                         instruments = new ArrayList<>(Collections.singletonList(musician.getInstruments()));
-////                         genres = new ArrayList<>(Collections.singletonList(musician.getGenres()));
-//
-////                         ArrayList<String> instruments = new ArrayList<>(Arrays.asList("Acoustic Guitar"));
-////                         ArrayList<String> genres = new ArrayList<>(Arrays.asList("POP"));
-////
-////                         musicianArrayList.add(new com.andyagulue.github.jammin.Musician(R.drawable.drummer,
-////                                 "", musician.getUsername(), "", musician.getFirstName(),
-////                                 musician.getLastName(), "", instruments,
-////                                 genres, musician.getVocalist(), ""));
-//                     }
-//                 },
-//                 e -> {
-//                     Log.d(TAG, "populateDiscoverMusicians error: " + e);
-//                 }
-//         );
-//
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item1:
+                Toast.makeText(this, "clicked profile", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), PublicMusicianProfilePage.class );
+                startActivity(intent);
+                return true;
+            case R.id.item2:
+                Toast.makeText(this, "clicked home", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(getApplicationContext(), DiscoverPage.class );
+                startActivity(intent2);
+                return true;
+            case R.id.item3:
+                Toast.makeText(this, "clicked favorites", Toast.LENGTH_SHORT).show();
+                Intent intent3 = new Intent(getApplicationContext(), MyFavoritesPage.class );
+                startActivity(intent3);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
 
 
 }
