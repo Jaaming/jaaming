@@ -12,6 +12,7 @@ import com.andyagulue.github.jammin.R;
 
 public class LogInPage extends AppCompatActivity {
     String TAG = "loginPage";
+    TextView username1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,13 +20,15 @@ public class LogInPage extends AppCompatActivity {
         setContentView(R.layout.activity_log_in_page);
 
         String username = getIntent().getStringExtra("username");
-        ((TextView) findViewById(R.id.loginUserNameTextView)).setText(username);
+        username1 = findViewById(R.id.loginUserNameTextView);
+        username1.setText(username);
 
         findViewById(R.id.loginButton).setOnClickListener(v -> {
             String password = ((TextView) findViewById(R.id.loginPasswordEditText)).getText().toString();
+            String username2= username1.getText().toString();
 
             Amplify.Auth.signIn(
-                    username,
+                    username2,
                     password,
                     response -> {
                         Log.i(TAG, "Successful login of user" + response);
