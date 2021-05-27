@@ -1,16 +1,24 @@
 package com.andyagulue.github.jammin.activities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -19,6 +27,8 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Band;
 import com.amplifyframework.datastore.generated.model.Musician;
 import com.andyagulue.github.jammin.R;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,6 +39,14 @@ public class CreateProfilePage extends AppCompatActivity {
 
     String TAG = "signupPage";
 
+    //=========variables to create form=============
+
+    ImageView profileImage;
+    ImageButton addProfileImageButton;
+
+    private static final int IMAG_REQ_CODE = 1989;
+    private static final int PERMISSION_CODE = 1986;
+
     TextView tvInstruments;
     TextView tvGenres;
     boolean[] selectedInstruments;
@@ -38,6 +56,8 @@ public class CreateProfilePage extends AppCompatActivity {
     String[] instrumentsArray = {"Standup Bass","Acoustic Guitar", "Electric Guitar", "Bass Guitar", "Drums","Violen","Fiddle","Chello", "Keyboard","Saxophone","Clarinet","Flute","Oboe","Triangle","Washboard","Harp"};
     String[] genresArray = {"Pop", "Rock", "Acoustic", "Jazz", "Reggae", "Folk", "Punk", "Americana", "Indie","Synth Pop","Trap","New World","Country"};
 
+    //===========end of variable to create form============
+
     Band defaultBand = Band.builder()
             .name("Default")
             .instruments("Default")
@@ -45,6 +65,8 @@ public class CreateProfilePage extends AppCompatActivity {
             .bio("Default")
             .vocalist(true)
             .build();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -262,5 +284,62 @@ public class CreateProfilePage extends AppCompatActivity {
 
         });
 
+        //======profile Image
+        profileImage = findViewById(R.id.createProfileImageView);
+        addProfileImageButton = findViewById(R.id.createProfilePicButton);
+
+        addProfileImageButton.setOnClickListener(v -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_DENIED){
+                    String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+                    requestPermissions(permissions, PERMISSION_CODE);
+                }
+                else {
+                    pickImageFromPhotos();
+
+                }
+            }
+            else{
+
+                pickImageFromPhotos();
+
+            }        });
+
+
+    }
+
+    private void pickImageFromPhotos() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAG_REQ_CODE);
+    }
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
+
+
+        switch (requestCode){
+            case PERMISSION_CODE:{
+                if (grantResults.length > 0 && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED){
+
+                    pickImageFromPhotos();
+                }
+
+                else {
+                    Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+       if (resultCode == RESULT_OK && requestCode == IMAG_REQ_CODE) {
+
+           profileImage.setImageURI(data.getData());
+       }
     }
 }

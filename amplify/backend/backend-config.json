@@ -46,6 +46,7 @@
     }
   },
   "storage": {
+
     "jamstorage": {
       "service": "S3",
       "providerPlugin": "awscloudformation"
