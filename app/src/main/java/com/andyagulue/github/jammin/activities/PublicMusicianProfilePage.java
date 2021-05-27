@@ -18,6 +18,8 @@ public class PublicMusicianProfilePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_public_musician_profile_page);
+
+
     }
 
 
