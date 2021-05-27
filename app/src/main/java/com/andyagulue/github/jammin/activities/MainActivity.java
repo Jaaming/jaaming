@@ -54,9 +54,11 @@ public class MainActivity extends AppCompatActivity {
                 error -> Log.e("AmplifyQuickStart", "Failure" + error.toString())
         );
         AuthUser authUser = Amplify.Auth.getCurrentUser();
+
         if (authUser != null)Log.i(TAG, "onCreate: authUsername" + authUser.getUsername());
 
         uploadFile();
+
 
 
 //        signupCognito();
