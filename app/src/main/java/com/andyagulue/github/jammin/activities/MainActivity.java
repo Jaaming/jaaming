@@ -18,6 +18,7 @@ import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Musician;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.andyagulue.github.jammin.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         try{
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.configure(getApplicationContext());
             Log.i("JammingApp","Initialized Amplify");
         }catch(AmplifyException error){
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 error -> Log.e("AmplifyQuickStart", "Failure" + error.toString())
         );
         AuthUser authUser = Amplify.Auth.getCurrentUser();
-        Log.i(TAG, "onCreate: authUsername" + authUser.getUsername());
+        if(authUser != null)Log.i(TAG, "onCreate: authUsername" + authUser.getUsername());
 //        signupCognito();
 //        Amplify.API.query(
 //                ModelQuery.list(Musician.class, Musician.USERNAME.eq(authUser.getUsername())),
