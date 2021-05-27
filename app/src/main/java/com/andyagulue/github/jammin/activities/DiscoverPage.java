@@ -6,6 +6,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
 import com.andyagulue.github.jammin.Musician;
 import com.andyagulue.github.jammin.R;
 import com.andyagulue.github.jammin.adapters.ViewPagerAdapter;
