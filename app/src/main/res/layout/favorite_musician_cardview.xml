@@ -8,6 +8,14 @@
     app:cardCornerRadius="4dp"
     app:cardElevation="2dp">
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/background"
+        android:src="@drawable/brick_wall"
+        android:scaleType="centerCrop"
+        android:alpha="0.6"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
