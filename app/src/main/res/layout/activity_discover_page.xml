@@ -8,6 +8,13 @@
     android:orientation="vertical"
     tools:context=".activities.DiscoverPage">
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/background"
+        android:src="@drawable/brick_wall"
+        android:scaleType="centerCrop"
+        android:alpha="0.6"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
@@ -17,7 +24,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:alpha="0.9"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

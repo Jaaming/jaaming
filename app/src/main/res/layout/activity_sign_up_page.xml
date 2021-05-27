@@ -7,6 +7,14 @@
     tools:context=".activities.LogInPage">
 
     <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/background"
+        android:src="@drawable/brick_wall"
+        android:scaleType="centerCrop"
+        android:alpha="0.6"/>
+
+    <ImageView
         android:id="@+id/signUpBanner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
