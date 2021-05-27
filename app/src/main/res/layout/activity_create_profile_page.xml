@@ -41,21 +41,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/createBandImageView"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_centerHorizontal="true"
-                    app:srcCompat="@drawable/ic_baseline_account_circle_24" />
-
-                <ImageButton
-                    android:id="@+id/createProfileAddProfilePicButton"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/profileImageCardView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:cardCornerRadius="100dp">
+
+                    <ImageView
+                        android:id="@+id/createProfileImageView"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:cropToPadding="false"
+                        android:rotationY="-3"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_baseline_account_circle_24" />
+                </androidx.cardview.widget.CardView>
+
+                <ImageButton
+                    android:id="@+id/createProfilePicButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginStart="0dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="56dp"
                     android:layout_marginBottom="2dp"
-                    android:layout_toEndOf="@+id/createBandImageView"
+                    android:layout_toEndOf="@+id/null"
                     app:srcCompat="@drawable/ic_baseline_add_24" />
             </RelativeLayout>
 

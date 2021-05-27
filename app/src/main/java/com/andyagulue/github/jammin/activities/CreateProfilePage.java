@@ -181,8 +181,8 @@ public class CreateProfilePage extends AppCompatActivity {
             String firstName = ((TextView)findViewById(R.id.addfirstNameEditText)).getText().toString();
             String lastName = ((TextView)findViewById(R.id.addLastNameEditText)).getText().toString();
             String bio = ((TextView)findViewById(R.id.signupBioTextView)).getText().toString();
-            String genres = ((TextView)tvGenres).getText().toString();
-            String instruments = ((TextView)tvInstruments).getText().toString();
+            String genres = tvGenres.getText().toString();
+            String instruments = tvInstruments.getText().toString();
             @SuppressLint("UseSwitchCompatOrMaterialCode")
             Switch switchOn = findViewById(R.id.signupAddVocalist);
             boolean isVocalist = switchOn.isChecked();
@@ -205,7 +205,7 @@ public class CreateProfilePage extends AppCompatActivity {
                         if(!response.getData().getItems().iterator().hasNext()){
                             Amplify.API.mutate(
                                     ModelMutation.create(newMusician),
-                                    respons ->{
+                                    r ->{
                                         Log.i(TAG, "onCreate: Created a new musician" );
                                         Intent intent = new Intent(CreateProfilePage.this, DiscoverPage.class);
                                         startActivity(intent);
@@ -218,18 +218,21 @@ public class CreateProfilePage extends AppCompatActivity {
                         }
                         Musician existingMusician = response.getData().getItems().iterator().next();
                         Log.i(TAG, "musician" + existingMusician);
-                        existingMusician.firstName = "meeeee";
-                        if(!lastName.isEmpty())existingMusician.lastName = lastName;
-                        existingMusician.vocalist = isVocalist;
-                        existingMusician.instruments = instruments;
-                        existingMusician.genres = genres;
-                        existingMusician.bio = bio;
-                        existingMusician.band = defaultBand;
+                        Musician updatedMusician = Musician.builder()
+                                .firstName(firstName)
+                                .lastName(lastName)
+                                .vocalist(isVocalist)
+                                .instruments(instruments)
+                                .genres(genres)
+                                .bio(bio)
+                                .username(existingMusician.getUsername())
+                                .id(existingMusician.getId())
+                                .build();
 
-                        Log.i(TAG, "onCreate: existing musician: " + existingMusician.firstName);
+                        Log.i(TAG, "onCreate: updated musician: " + updatedMusician.firstName);
 
                         Amplify.API.mutate(
-                                ModelMutation.update(existingMusician),
+                                ModelMutation.create(updatedMusician),
                                 res-> {
                                     Log.i(TAG, "updated musician" + res);
                                     Intent intent = new Intent(CreateProfilePage.this, DiscoverPage.class);

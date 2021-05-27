@@ -1,6 +1,6 @@
 {
     "identityPoolName": "jamminaca3f6e7_identitypool_aca3f6e7",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "jamminaca3f6e7",
     "userPoolName": "jamminaca3f6e7_userpool_aca3f6e7",
     "autoVerifiedAttributes": [
