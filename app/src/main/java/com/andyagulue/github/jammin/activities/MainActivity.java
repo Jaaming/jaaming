@@ -88,14 +88,14 @@ public class MainActivity extends AppCompatActivity {
         );
 
         AuthUser authUser = Amplify.Auth.getCurrentUser();
-        if (authUser == null) {
-            Intent intent = new Intent(getApplicationContext(), LogInPage.class);
 
-        }else {
+
+
+        if (authUser != null){
+            Log.i(TAG, "onCreate: authUsername" + userName);
             userName = authUser.getUsername();
-
         }
-        if (authUser != null)Log.i(TAG, "onCreate: authUsername" + userName);
+
 
 
         uploadFile();

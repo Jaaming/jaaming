@@ -16,104 +16,87 @@
         app:cardElevation="10dp"
         app:contentPadding="20dp">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <LinearLayout
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="36dp"
+                android:alpha="1"
+                app:cardCornerRadius="100dp">
+
+                <ImageView
+                    android:id="@+id/discoverPageImageView"
+                    android:layout_width="149dp"
+                    android:layout_height="146dp"
+                    android:layout_gravity="center"
+                    android:alpha="1"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_foreground" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/discoverPageUsernameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="12dp"
+                android:text="Username"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/discoverPageInstrumentsTitleTextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="8dp"
+                android:text="Instrument(s)"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/discoverPageInstrumentsTextView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Instruments will populate here"
+                android:textAlignment="center">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            </TextView>
 
-                    <ImageView
-                        android:id="@+id/discoverPageImageView"
-                        android:layout_width="149dp"
-                        android:layout_height="146dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="84dp"
-                        android:layout_marginEnd="84dp"
-                        android:layout_marginBottom="0dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_launcher_foreground" />
+            <TextView
+                android:id="@+id/discoverPageGenreTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="8dp"
+                android:text="Genre(s)"
+                android:textStyle="bold" />
 
-                    <ImageView
-                        android:id="@+id/viewPagerVocalistIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="83dp"
-                        android:layout_marginLeft="80dp"
-                        android:layout_marginTop="108dp"
-                        android:visibility="invisible"
-                        app:srcCompat="@drawable/mic" />
-                </RelativeLayout>
+            <TextView
+                android:id="@+id/discoverPageGenreTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="18dp"
+                android:text="Genres will populate here"
+                android:textAlignment="center">
 
-                <TextView
-                    android:id="@+id/discoverPageUsernameTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="8dp"
-                    android:text="Username"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+            </TextView>
 
-                <TextView
-                    android:id="@+id/discoverPageInstrumentsTitleTextview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="8dp"
-                    android:text="Instrument(s)"
-                    android:textStyle="bold" />
+            <Button
+                android:id="@+id/discoverPageViewProfileButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="36dp"
+                android:text="View Profile" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/discoverPageInstrumentsTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:text="Instruments will populate here"
-                    android:textAlignment="center">
-
-                </TextView>
-
-                <TextView
-                    android:id="@+id/discoverPageGenreTitleTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="8dp"
-                    android:text="Genre(s)"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/discoverPageGenreTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:text="Genres will populate here"
-                    android:textAlignment="center">
-
-                </TextView>
-
-                <Button
-                    android:id="@+id/discoverPageViewProfileButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-                    android:text="View Profile" />
-
-            </LinearLayout>
-        </ScrollView>
 
     </androidx.cardview.widget.CardView>
 
