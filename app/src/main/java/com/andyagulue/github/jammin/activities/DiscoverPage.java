@@ -8,13 +8,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
 
 import com.andyagulue.github.jammin.Musician;
@@ -28,6 +31,7 @@ import java.util.Collections;
 
 public class DiscoverPage extends AppCompatActivity {
     String TAG = "discover Page";
+    String userName;
 
     private ViewPager2 viewpager2;
     private ViewPagerAdapter adapter;
@@ -42,6 +46,10 @@ public class DiscoverPage extends AppCompatActivity {
 //        createMusicianList();
         populateDiscoverMusicians();
         buildViewPager();
+        AuthUser authUser = Amplify.Auth.getCurrentUser();
+        userName = authUser.getUsername();
+
+
 
 
     }
@@ -101,7 +109,14 @@ public class DiscoverPage extends AppCompatActivity {
         adapter.setOnProfileClickListener(new ViewPagerAdapter.OnProfileClickListener() {
             @Override
             public void onViewClick(int position) {
-                Toast.makeText(DiscoverPage.this, "You want to view this profile " + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(DiscoverPage.this, "You want to view this profile " + position + musicianArrayList.get(position).getUsername(),
+                        Toast.LENGTH_SHORT).show();
+                String username = musicianArrayList.get(position).getUsername();
+                Intent intent = new Intent(DiscoverPage.this, PublicMusicianProfilePage.class);
+                intent.putExtra("username", username);
+                startActivity(intent);
+
+
             }
         });
     }
@@ -119,6 +134,7 @@ public class DiscoverPage extends AppCompatActivity {
             case R.id.item1:
                 Toast.makeText(this, "clicked profile", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), PublicMusicianProfilePage.class );
+                intent.putExtra("username", userName);
                 startActivity(intent);
                 return true;
             case R.id.item2:

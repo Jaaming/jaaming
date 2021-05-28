@@ -102,12 +102,12 @@
                     android:text="First Name" />
             </RelativeLayout>
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/editprofilePhotoButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="Edit" />
+<!--            <com.google.android.material.chip.Chip-->
+<!--                android:id="@+id/editprofilePhotoButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Edit" />-->
 
             <TextView
                 android:id="@+id/myprofileInstrumentsTextView"
@@ -122,12 +122,12 @@
 
             </androidx.recyclerview.widget.RecyclerView>
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/editInstrumentsButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="300dp"
-                android:text="Edit" />
+<!--            <com.google.android.material.chip.Chip-->
+<!--                android:id="@+id/editInstrumentsButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="300dp"-->
+<!--                android:text="Edit" />-->
 
             <TextView
                 android:id="@+id/myprofilegenreNameTextView"
@@ -141,12 +141,12 @@
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/editGenreButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="300dp"
-                android:text="Edit" />
+<!--            <com.google.android.material.chip.Chip-->
+<!--                android:id="@+id/editGenreButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="300dp"-->
+<!--                android:text="Edit" />-->
 
             <EditText
                 android:id="@+id/createBandBioTextView"
@@ -158,13 +158,13 @@
                 android:hint="Add a short bio about yourself"
                 android:inputType="textMultiLine" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/editBioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="300dp"
-                android:layout_marginBottom="100dp"
-                android:text="Edit" />
+<!--            <com.google.android.material.chip.Chip-->
+<!--                android:id="@+id/editBioButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="300dp"-->
+<!--                android:layout_marginBottom="100dp"-->
+<!--                android:text="Edit" />-->
 
 
         </LinearLayout>

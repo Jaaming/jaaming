@@ -1,160 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:elevation="3dp"
     tools:context=".activities.PublicMusicianProfilePage">
 
     <ImageView
+        android:id="@+id/background"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/background"
-        android:src="@drawable/brick_wall"
+        android:alpha="0.6"
         android:scaleType="centerCrop"
-        android:alpha="0.6"/>
+        android:src="@drawable/brick_wall" />
 
-    <ScrollView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:alpha="0.8"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="2dp"
+        app:contentPadding="20dp">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:paddingTop="20dp">
 
-            <com.google.android.material.bottomappbar.BottomAppBar
-                android:id="@+id/banner"
-                style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/imageView2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="279dp"
-                android:layout_height="157dp"
-                android:layout_gravity="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_baseline_account_circle_24" />
-
-            <TextView
-                android:id="@+id/musicianUsernameTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Username"
-                android:textAlignment="center" />
-
-            <TableLayout
-                android:id="@+id/instrumentIcons"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal">
+                android:orientation="vertical">
 
-                <TableRow
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:textAlignment="center">
+                    android:layout_height="match_parent">
 
-                    <ImageButton
-                        android:id="@+id/imageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/acoustic_guitar" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/drummer" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/bass_guitar" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:textAlignment="center">
-
-                    <ImageButton
-                        android:id="@+id/imageButton6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/electric_guitar" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <ImageView
+                        android:id="@+id/isVocalistIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginBottom="4dp"
+                        android:visibility="invisible"
                         app:srcCompat="@drawable/mic" />
 
-                    <ImageButton
-                        android:id="@+id/imageButton4"
+                    <TextView
+                        android:id="@+id/addToFavoritesClickable"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="0dp"
+                        android:text="Add to Favorites"
+                        android:textAlignment="center"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        app:cardCornerRadius="100dp">
+
+                        <ImageView
+                            android:id="@+id/publicMusicianProfileImage"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:srcCompat="@drawable/ic_baseline_account_circle_24" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="10dp"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:id="@+id/publicProfileFirstLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="First Last"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:id="@+id/musicianIntrumentsTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#AFA4A4"
+                    android:text="Instrument(s)"
+                    android:textAlignment="center"
+                    android:textColor="#151515"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/publicMusicianIntruments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:minHeight="70dp"
+                    android:text="TextView alsdkfnaoidng dfaoinaodsfiua ds"
+                    android:textAlignment="center"
+                    android:textSize="16dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/acousticGuitarIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="left"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/acoustic_guitar" />
+
+                    <ImageView
+                        android:id="@+id/electricGuitarIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="left"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/electric_guitar" />
+
+                    <ImageView
+                        android:id="@+id/bassIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="left"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bass_guitar" />
+
+                    <ImageView
+                        android:id="@+id/keyboardIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="left"
+                        android:visibility="invisible"
                         app:srcCompat="@drawable/keyboard" />
-                </TableRow>
-            </TableLayout>
 
-            <TableLayout
-                android:id="@+id/musicGenre"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                android:textAlignment="viewEnd">
+                    <ImageView
+                        android:id="@+id/drummerIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="left"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/drummer" />
+                </LinearLayout>
 
-                <TableRow
+                <TextView
+                    android:id="@+id/musicianGenreTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#AFA4A4"
+                    android:text="Genre(s)"
+                    android:textAlignment="center"
+                    android:textColor="#191818"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/publicMusicianGenres"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:minHeight="100dp"
+                    android:text="TextView oiasdfn fdoihads fgo;ih a"
+                    android:textAlignment="center"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/musicianBioTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#AFA4A4"
+                    android:text="Bio"
+                    android:textAlignment="center"
+                    android:textColor="#171717"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/publicMusicianBio"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="8dp"
-                    android:gravity="center"
-                    android:outlineProvider="none">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:minHeight="200dp"
+                    android:text="Musician Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis, ex at tincidunt euismod, tortor."
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
 
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
-                        android:text="Pop" />
+            </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:text="Electronica" />
-                </TableRow>
-
-            </TableLayout>
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Musician Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis, ex at tincidunt euismod, tortor."
-                android:textAlignment="center" />
-
-        </LinearLayout>
-    </ScrollView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

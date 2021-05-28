@@ -1,5 +1,6 @@
 package com.andyagulue.github.jammin.adapters;
 
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Musician;
 import com.andyagulue.github.jammin.R;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolder>  {
@@ -76,7 +79,9 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
         String firstAndLast = current.getFirstName() + " " + current.getLastName();
 
 // ----------- Todo get image to populate with s3 info -------------------\\
-        holder.profileImageView.setImageResource(R.drawable.ic_baseline_account_circle_24);
+
+
+        downloadImageFromS3(holder, current.getUsername());
         holder.musicianUsername.setText(firstAndLast);
         holder.musicianGenres.setText(current.getGenres());
         holder.musicianInstruments.setText(current.getInstruments());
@@ -86,6 +91,20 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
     @Override
     public int getItemCount() {
         return musicianList.size();
+    }
+
+    void downloadImageFromS3(ViewPagerAdapter.ViewPagerViewHolder holder, String key){
+        Amplify.Storage.downloadFile(
+                key,
+                new File(holder.itemView.getContext().getFilesDir(), key),
+                r -> {
+                    holder.profileImageView.setImageBitmap(BitmapFactory.decodeFile(r.getFile().getPath()));
+                },
+                e -> {
+                    holder.profileImageView.setImageResource(R.drawable.ic_baseline_account_circle_24);
+                }
+        );
+
     }
 
 

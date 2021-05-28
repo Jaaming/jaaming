@@ -16,6 +16,9 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -26,6 +29,7 @@ import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Band;
 import com.amplifyframework.datastore.generated.model.Musician;
@@ -38,6 +42,8 @@ import java.util.Collections;
 
 public class BandCreationPage extends AppCompatActivity {
     String TAG = "Band Creation Page";
+
+    String userName;
 
     ImageView bandImage;
     ImageButton addBandImageButton;
@@ -68,6 +74,10 @@ public class BandCreationPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_band_creation_page);
+
+
+        AuthUser authUser = Amplify.Auth.getCurrentUser();
+        userName = authUser.getUsername();
 
         bandInstruments = findViewById(R.id.createBandAddInstrumentTextView);
         bandGenres = findViewById(R.id.createBandAddGenreTextView);
@@ -336,6 +346,7 @@ public class BandCreationPage extends AppCompatActivity {
             case R.id.item1:
                 Toast.makeText(this, "clicked profile", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), PublicMusicianProfilePage.class );
+                intent.putExtra("username", userName);
                 startActivity(intent);
                 return true;
             case R.id.item2:

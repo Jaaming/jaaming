@@ -13,6 +13,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.amplifyframework.auth.AuthUser;
+import com.amplifyframework.core.Amplify;
 import com.andyagulue.github.jammin.FavoriteMusician;
 import com.andyagulue.github.jammin.R;
 import com.andyagulue.github.jammin.adapters.FavoritesAdapter;
@@ -21,6 +23,8 @@ import java.util.ArrayList;
 
 public class MyFavoritesPage extends AppCompatActivity {
     String TAG = "myFavoritesPage";
+
+    String userName;
 
     private RecyclerView favRecyclerView;
     private FavoritesAdapter rvAdapter;
@@ -31,6 +35,9 @@ public class MyFavoritesPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_favorites_page);
+
+        AuthUser authUser = Amplify.Auth.getCurrentUser();
+        userName = authUser.getUsername();
 
         createFavoriteMusicianList();
         buildRecyclerView();

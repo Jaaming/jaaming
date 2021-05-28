@@ -34,6 +34,8 @@ import java.io.FileWriter;
 public class MainActivity extends AppCompatActivity {
     String TAG = "mainActivity";
 
+    String userName;
+
 
 
     @Override
@@ -56,8 +58,9 @@ public class MainActivity extends AppCompatActivity {
                 error -> Log.e("AmplifyQuickStart", "Failure" + error.toString())
         );
         AuthUser authUser = Amplify.Auth.getCurrentUser();
+        userName = authUser.getUsername();
 
-        if (authUser != null)Log.i(TAG, "onCreate: authUsername" + authUser.getUsername());
+        if (authUser != null)Log.i(TAG, "onCreate: authUsername" + userName);
 
         uploadFile();
 
@@ -150,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void uploadFile() {
-        File exampleFile = new File(getApplicationContext().getFilesDir(), "ExampleKey");
+        File exampleFile = new File(getApplicationContext().getFilesDir(), "ExampleKey2");
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(exampleFile));
             writer.append("Example file contents");
@@ -159,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
             Log.e("MyAmplifyApp", "Upload failed", exception);
         }
         Amplify.Storage.uploadFile(
-                "ExampleKey",
+                "ExampleKey2",
                 exampleFile,
                 result -> Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey()),
                 storageFailure -> Log.e("MyAmplifyApp", "Upload failed", storageFailure)
@@ -178,7 +181,8 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.item1:
                 Toast.makeText(this, "clicked profile", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), PublicMusicianProfilePage.class );
+                Intent intent = new Intent(getApplicationContext(), PublicMusicianProfilePage.class);
+                intent.putExtra("username", userName);
                 startActivity(intent);
                 return true;
             case R.id.item2:
