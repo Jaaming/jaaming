@@ -58,7 +58,7 @@ public class LogInPage extends AppCompatActivity {
                             ModelQuery.list(Musician.class, Musician.USERNAME.eq(username2)),
                             resp -> {
                                 Log.i(TAG, "handleMessage:" + resp);
-                                if(musician != null) {
+                                if(resp.getData().getItems().iterator().hasNext()) {
                                     Intent intent = new Intent(LogInPage.this, DiscoverPage.class);
                                     intent.putExtra("username", username2);
                                     startActivity(intent);

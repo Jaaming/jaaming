@@ -52,7 +52,7 @@ public class DiscoverPage extends AppCompatActivity {
         AuthUser authUser = Amplify.Auth.getCurrentUser();
         userName = authUser.getUsername();
 
-        vocalistImage = findViewById(R.id.viewPagerVocalistIcon);
+//        vocalistImage = findViewById(R.id.viewPagerVocalistIcon);
 
 
 
