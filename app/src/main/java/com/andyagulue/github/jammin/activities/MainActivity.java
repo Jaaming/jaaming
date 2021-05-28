@@ -57,10 +57,14 @@ public class MainActivity extends AppCompatActivity {
                 result -> Log.i("AmplifyQuickStart", "Success" + result.toString()),
                 error -> Log.e("AmplifyQuickStart", "Failure" + error.toString())
         );
-        AuthUser authUser = Amplify.Auth.getCurrentUser();
-        userName = authUser.getUsername();
 
-        if (authUser != null)Log.i(TAG, "onCreate: authUsername" + userName);
+        AuthUser authUser = Amplify.Auth.getCurrentUser();
+
+
+        if (authUser != null){
+            Log.i(TAG, "onCreate: authUsername" + userName);
+            userName = authUser.getUsername();
+        }
 
         uploadFile();
 

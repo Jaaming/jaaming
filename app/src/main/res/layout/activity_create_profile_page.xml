@@ -9,167 +9,170 @@
     android:background="#DDDCDC"
     tools:context=".activities.CreateProfilePage">
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/background"
-        android:src="@drawable/brick_wall"
-        android:scaleType="centerCrop"
-        android:alpha="0.6"/>
 
-    <ImageView
-        android:id="@+id/signUpPageBanner"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:alpha="0.8"
+        app:layout_constraintBottom_toBottomOf="@+id/background"
+        tools:layout_editor_absoluteX="20dp">
 
-
-    <ScrollView
-        android:layout_width="411dp"
-        android:layout_height="598dp"
-        android:layout_margin="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpPageBanner">
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-
-                    app:cardCornerRadius="100dp">
-
-                    <ImageView
-                        android:id="@+id/createProfileImageView"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-
-                        android:adjustViewBounds="false"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@mipmap/ic_launcher_round" />
-
-                </androidx.cardview.widget.CardView>
-
-                <ImageButton
-                    android:id="@+id/createProfilePicButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-
-                    android:layout_marginEnd="42dp"
-                    android:layout_marginBottom="0dp"
-
-                    app:srcCompat="@drawable/ic_baseline_add_24" />
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/profileUserNameEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:ems="10"
-                android:hint="Username"
-                android:inputType="textPersonName"
-                android:textAlignment="center"
-                android:textSize="20sp" />
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/addfirstNameEditText"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+
+                        app:cardCornerRadius="100dp">
+
+                        <ImageView
+                            android:id="@+id/createProfileImageView"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+
+                            android:adjustViewBounds="false"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@mipmap/ic_launcher_round" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <ImageButton
+                        android:id="@+id/createProfilePicButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+
+                        android:layout_marginEnd="42dp"
+                        android:layout_marginBottom="0dp"
+
+                        app:srcCompat="@drawable/ic_baseline_add_24" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/profileUserNameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:ems="10"
+                    android:hint="Username"
+                    android:inputType="textPersonName"
+                    android:textAlignment="center"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/addfirstNameEditText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="First Name"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/addLastNameEditText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="Last Name"
+                        android:inputType="textPersonName" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/addInstrumentTextView"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="First Name"
-                    android:inputType="textPersonName" />
+                    android:background="@android:drawable/editbox_background"
+                    android:drawableEnd="@android:drawable/arrow_down_float"
+                    android:hint="Select Intrument(s)"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
 
-                <EditText
-                    android:id="@+id/addLastNameEditText"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/addgenreTextView"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:layout_weight="1"
+                    android:background="@android:drawable/editbox_background"
+                    android:drawableEnd="@android:drawable/arrow_down_float"
+                    android:hint="Select Genre(s)"
+                    android:textAlignment="center"
+                    android:textSize="20dp" />
+
+                <Switch
+                    android:id="@+id/signupAddVocalist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="8dp"
+                    android:checked="false"
+                    android:text="Vocalist?              "
+                    android:textAlignment="center"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/signupBioTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="8dp"
                     android:ems="10"
-                    android:hint="Last Name"
-                    android:inputType="textPersonName" />
+                    android:gravity="start|top"
+                    android:hint="Add a short bio about yourself"
+                    android:inputType="textMultiLine"
+                    android:textSize="18dp" />
+
+                <Button
+                    android:id="@+id/signupSubmitButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_marginBottom="30dp"
+                    android:text="Finish"
+                    android:textSize="20dp" />
 
             </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/addInstrumentTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@android:drawable/editbox_background"
-                android:drawableEnd="@android:drawable/arrow_down_float"
-                android:hint="Select Intrument(s)"
-                android:textAlignment="center"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/addgenreTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@android:drawable/editbox_background"
-                android:drawableEnd="@android:drawable/arrow_down_float"
-                android:hint="Select Genre(s)"
-                android:textAlignment="center"
-                android:textSize="16sp" />
-
-            <Switch
-                android:id="@+id/signupAddVocalist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="8dp"
-                android:checked="false"
-                android:text="Vocalist?              "
-                android:textAlignment="center" />
-
-            <EditText
-                android:id="@+id/signupBioTextView"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_margin="8dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="Add a short bio about yourself"
-                android:inputType="textMultiLine" />
-
-            <Button
-                android:id="@+id/signupSubmitButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginBottom="30dp"
-                android:text="Finish" />
-
-        </LinearLayout>
-    </ScrollView>
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:alpha="0.6"
+        android:scaleType="centerCrop"
+        android:src="@drawable/brick_wall" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

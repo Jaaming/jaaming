@@ -8,44 +8,33 @@
     tools:context=".activities.MyFavoritesPage">
 
     <ImageView
+        android:id="@+id/background"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/background"
-        android:src="@drawable/brick_wall"
+        android:alpha="0.6"
         android:scaleType="centerCrop"
-        android:alpha="0.6"/>
-
-    <ImageView
-        android:id="@+id/myFavoritesBanner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/bottom_bar" />
+        android:src="@drawable/brick_wall" />
 
     <TextView
         android:id="@+id/myFavoritesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
         android:text="My Favorites"
+        android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myFavoritesBanner" />
+        tools:layout_editor_absoluteY="62dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favoriteMusicianRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="519dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="#9C9B9B"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="592dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
