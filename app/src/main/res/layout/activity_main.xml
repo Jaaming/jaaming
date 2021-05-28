@@ -72,58 +72,63 @@
             android:id="@+id/tempConfrimButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/button_shape"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:alpha="0.8"
             android:layout_weight="1"
+            android:alpha="0.8"
+            android:background="@drawable/button_shape"
             android:text="Confirm"
             android:textSize="8sp"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/tempProfilePageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/button_shape"
             android:layout_marginRight="8dp"
-            android:alpha="0.8"
             android:layout_weight="1"
+            android:alpha="0.8"
+            android:background="@drawable/button_shape"
             android:text="mProfile"
-            android:textSize="8sp" />
+            android:textSize="8sp"
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/tempbandProfileButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/button_shape"
             android:layout_marginRight="8dp"
-            android:alpha="0.8"
             android:layout_weight="1"
+            android:alpha="0.8"
+            android:background="@drawable/button_shape"
             android:text="bProfile"
-            android:textSize="8sp" />
+            android:textSize="8sp"
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/tempFavesButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/button_shape"
-            android:alpha="0.8"
             android:layout_weight="1"
+            android:alpha="0.8"
+            android:background="@drawable/button_shape"
             android:text="faves"
-            android:textSize="8sp" />
+            android:textSize="8sp"
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/tempDiscoverButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/button_shape"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:alpha="0.8"
             android:layout_weight="1"
+            android:alpha="0.8"
+            android:background="@drawable/button_shape"
             android:text="discover"
-            android:textSize="8sp" />
+            android:textSize="8sp"
+            android:visibility="invisible" />
 
     </LinearLayout>
 
@@ -139,20 +144,22 @@
             android:id="@+id/mPublicProfilePage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_shape"
-            android:alpha="0.8"
             android:layout_weight="1"
+            android:alpha="0.8"
+            android:background="@drawable/button_shape"
             android:text="mPubProfile"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <Button
             android:id="@+id/createProfilePageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_shape"
-            android:alpha="0.8"
             android:layout_weight="1"
-            android:text="create Profile" />
+            android:alpha="0.8"
+            android:background="@drawable/button_shape"
+            android:text="create Profile"
+            android:visibility="invisible" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
