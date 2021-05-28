@@ -2,6 +2,7 @@ package com.andyagulue.github.jammin.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
@@ -10,8 +11,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.FileUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,6 +36,10 @@ import com.andyagulue.github.jammin.R;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -43,9 +50,10 @@ public class CreateProfilePage extends AppCompatActivity {
     String TAG = "signupPage";
 
     //=========variables to create form=============
-
+    AuthUser authUser;
     ImageView profileImage;
     ImageButton addProfileImageButton;
+    File imageToUpload;
 
     private static final int IMAG_REQ_CODE = 1989;
     private static final int PERMISSION_CODE = 1986;
@@ -56,7 +64,7 @@ public class CreateProfilePage extends AppCompatActivity {
     boolean[] selectedGenres;
     ArrayList<Integer> instrumentList = new ArrayList<>();
     ArrayList<Integer> genreList = new ArrayList<>();
-    String[] instrumentsArray = {"Standup Bass","Acoustic Guitar", "Electric Guitar", "Bass Guitar", "Drums","Violen","Fiddle","Chello", "Keyboard","Saxophone","Clarinet","Flute","Oboe","Triangle","Washboard","Harp"};
+    String[] instrumentsArray = {"Acoustic Guitar", "Electric Guitar", "Bass Guitar", "Drums","Keyboard"};
     String[] genresArray = {"Pop", "Rock", "Acoustic", "Jazz", "Reggae", "Folk", "Punk", "Americana", "Indie","Synth Pop","Trap","New World","Country"};
 
     //===========end of variable to create form============
@@ -77,7 +85,7 @@ public class CreateProfilePage extends AppCompatActivity {
         setContentView(R.layout.activity_create_profile_page);
         Log.i(TAG, "onCreate: Made it to the signup page");
 
-        AuthUser authUser = Amplify.Auth.getCurrentUser();
+       authUser = Amplify.Auth.getCurrentUser();
         if(authUser != null) {
             ((TextView) findViewById(R.id.profileUserNameEditText)).setText(authUser.getUsername());
             Log.i(TAG, "user is authenticated!");
@@ -284,6 +292,7 @@ public class CreateProfilePage extends AppCompatActivity {
                         );
                     }
             );
+            uploadImage();
 
         });
 
@@ -337,13 +346,35 @@ public class CreateProfilePage extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
        if (resultCode == RESULT_OK && requestCode == IMAG_REQ_CODE) {
+           imageToUpload = new File(getApplicationContext().getFilesDir(), "new Profile Image");
+           try {
+               assert data != null;
+               InputStream inputStream = getContentResolver().openInputStream(data.getData());
+               FileUtils.copy(inputStream, new FileOutputStream(imageToUpload));
+               profileImage.setImageBitmap(BitmapFactory.decodeFile(imageToUpload.getPath()));
+           }catch (IOException e) {
+               e.printStackTrace();
+           }
 
-           profileImage.setImageURI(data.getData());
        }
+    }
+
+    private void uploadImage(){
+        Amplify.Storage.uploadFile(
+                authUser.getUsername(),
+                imageToUpload,
+                r -> {
+                    Log.i(TAG, "uploadImage: successful");
+                },
+                e ->{
+                    Log.i(TAG, "uploadImage: unsuccessful");
+                }
+        );
     }
 
     @Override
