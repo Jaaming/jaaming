@@ -113,11 +113,13 @@ public class PublicMusicianProfilePage extends AppCompatActivity {
             }
         };
 
-
-
-
+        addToFavorites.setOnClickListener(v -> {
+            Toast.makeText(this, "User has been added to your favorites!", Toast.LENGTH_LONG).show();
+        });
 
     }
+
+
     void downloadImageFromS3(String key) {
         Amplify.Storage.downloadFile(
                 key,
