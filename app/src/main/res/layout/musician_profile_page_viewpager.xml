@@ -18,28 +18,43 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    app:cardCornerRadius="100dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <ImageView
                         android:id="@+id/discoverPageImageView"
                         android:layout_width="149dp"
                         android:layout_height="146dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
                         android:layout_gravity="center"
+                        android:layout_marginStart="84dp"
+                        android:layout_marginEnd="84dp"
+                        android:layout_marginBottom="0dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_launcher_foreground" />
-                </androidx.cardview.widget.CardView>
+
+                    <ImageView
+                        android:id="@+id/viewPagerVocalistIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="83dp"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="108dp"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/mic" />
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/discoverPageUsernameTextView"
@@ -96,6 +111,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
                     android:text="View Profile" />
+
             </LinearLayout>
         </ScrollView>
 

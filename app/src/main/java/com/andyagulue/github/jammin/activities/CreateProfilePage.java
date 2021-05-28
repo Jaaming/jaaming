@@ -262,7 +262,7 @@ public class CreateProfilePage extends AppCompatActivity {
                                 .id(existingMusician.getId())
                                 .build();
 
-                        Log.i(TAG, "onCreate: updated musician: " + updatedMusician.firstName);
+                       Log.i(TAG, "onCreate: updated musician: " + updatedMusician.firstName);
 
                         Amplify.API.mutate(
                                 ModelMutation.create(updatedMusician),

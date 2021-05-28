@@ -25,7 +25,7 @@
             android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.DiscoverPage"
-            android:parentActivityName=".activities.MainActivity" />
+            />
         <activity
             android:name=".activities.MyBandPage"
             android:parentActivityName=".activities.MainActivity" />
