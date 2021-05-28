@@ -54,20 +54,20 @@ public class MyFavoritesPage extends AppCompatActivity {
     public void createFavoriteMusicianList(){
         favoriteMusicians = new ArrayList<>();
 
-        favoriteMusicians.add(new FavoriteMusician(R.drawable.acoustic_guitar, R.drawable.ic_baseline_account_circle_24,
-                "Test Username", "Test City, Test State"));
-        favoriteMusicians.add(new FavoriteMusician(R.drawable.electric_guitar, R.drawable.ic_baseline_account_circle_24,
-                "Test Username1", "Test City, Test State"));
-        favoriteMusicians.add(new FavoriteMusician(R.drawable.bass_guitar, R.drawable.ic_baseline_account_circle_24,
-                "Test Username2", "Test City, Test State"));
-        favoriteMusicians.add(new FavoriteMusician(R.drawable.drummer, R.drawable.ic_baseline_account_circle_24,
-                "Test Username3", "Test City, Test State"));
-        favoriteMusicians.add(new FavoriteMusician(R.drawable.keyboard, R.drawable.ic_baseline_account_circle_24,
-                "Test Username4", "Test City, Test State"));
-        favoriteMusicians.add(new FavoriteMusician(R.drawable.mic, R.drawable.ic_baseline_account_circle_24,
-                "Test Username5", "Test City, Test State"));
-        favoriteMusicians.add(new FavoriteMusician(R.drawable.mic, R.drawable.ic_baseline_account_circle_24,
-                "Test Username6", "Test City, Test State"));
+        favoriteMusicians.add(new FavoriteMusician(R.drawable.electric_guitar, R.drawable.michelle_holder,
+                "Michelle Holder", "Seattle, WA"));
+        favoriteMusicians.add(new FavoriteMusician(R.drawable.electric_guitar, R.drawable.joey_shmoey,
+                "Joey Shmoey", "Little Rock, AR"));
+        favoriteMusicians.add(new FavoriteMusician(R.drawable.bass_guitar, R.drawable.mila_kunis,
+                "Mila Kunis", "Los Angeles, CA"));
+        favoriteMusicians.add(new FavoriteMusician(R.drawable.drummer, R.drawable.mon_day,
+                "Mon Day", "Chicago, IL"));
+        favoriteMusicians.add(new FavoriteMusician(R.drawable.keyboard, R.drawable.quinn_grover,
+                "Quinn Grover", "Seattle, WA"));
+        favoriteMusicians.add(new FavoriteMusician(R.drawable.mic, R.drawable.lady_love,
+                "Lady Love", "Chicago, IL"));
+        favoriteMusicians.add(new FavoriteMusician(R.drawable.mic, R.drawable.andy_lopez,
+                "Andy Lopez", "San Antonio, TX"));
     }
 
     public void buildRecyclerView(){
@@ -115,6 +115,7 @@ public class MyFavoritesPage extends AppCompatActivity {
             case R.id.item1:
                 Toast.makeText(this, "clicked profile", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), PublicMusicianProfilePage.class );
+                intent.putExtra("username", userName);
                 startActivity(intent);
                 return true;
             case R.id.item2:
