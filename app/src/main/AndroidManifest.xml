@@ -12,11 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Jammin">
-        <activity android:name=".activities.SignUpPage"
-            android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.SignUpPage"/>
         <activity
             android:name=".activities.MyFavoritesPage"
-            android:parentActivityName=".activities.MainActivity" />
+            android:parentActivityName=".activities.DiscoverPage" />
         <activity
             android:name=".activities.PublicBandProfilePage"
             android:parentActivityName=".activities.MainActivity" />
@@ -24,8 +23,9 @@
             android:name=".activities.PublicMusicianProfilePage"
             android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".activities.DiscoverPage"
-            />
+
+            android:name=".activities.DiscoverPage"/>
+
         <activity
             android:name=".activities.MyBandPage"
             android:parentActivityName=".activities.MainActivity" />
@@ -36,14 +36,12 @@
             android:name=".activities.MyMusicianProfilePage"
             android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".activities.LogInPage"
-            android:parentActivityName=".activities.MainActivity" />
+            android:name=".activities.LogInPage"/>
         <activity
-            android:name=".activities.ConfirmationPage"
-            android:parentActivityName=".activities.MainActivity" />
+            android:name=".activities.ConfirmationPage" />
         <activity
             android:name=".activities.CreateProfilePage"
-            android:parentActivityName=".activities.MainActivity" />
+            android:parentActivityName=".activities.DiscoverPage" />
         <activity android:name=".activities.SplashPage" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>

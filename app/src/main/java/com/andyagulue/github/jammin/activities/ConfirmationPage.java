@@ -20,6 +20,8 @@ public class ConfirmationPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation_page);
 
+        Toast.makeText(getApplicationContext(), "Confirmation code sent! Check your email!", Toast.LENGTH_SHORT).show();
+
         String username = getIntent().getStringExtra("username");
         ((TextView)findViewById(R.id.confirmPageUserNameTextView)).setText(username);
 
