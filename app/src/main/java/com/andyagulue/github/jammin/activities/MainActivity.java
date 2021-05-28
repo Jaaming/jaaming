@@ -2,6 +2,7 @@ package com.andyagulue.github.jammin.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ShareCompat;
 
 import android.content.Intent;
 import android.graphics.ColorSpace;
@@ -30,6 +31,34 @@ import com.andyagulue.github.jammin.R;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+
+/*============todo's==========
+1 [x] Generate users
+2 [x] Pull user info down with R.getData()
+3 [x] Change the musician hard coded musician class to reflect what's in the database
+4 [x] Populate the discover page with dynamic info from database
+5 [] find user's public facing profile page based on the user that's signed in
+6 [x] Get S3 working for images
+7 [x] download images to phone
+8 [x] populate picture from phone to profile & save to S3
+9 [x] Connect what's saved to S3 with each musician
+10[x] pull data from S3
+11 [] Format app for looks
+12 [x] Change instruments and genres from text views to recycler views
+13 [x] work on public facing profile
+14 [x] access by pushing view profile button
+15 add to faves
+16 [x] back button from discover page needs to go and adjust layout to be centered
+17 add mike icon to discover page
+18 take out buttons from splash page
+19 back button refactoring
+20 add card view to log in page
+21 add card view to confirmation page
+22 add card view to create profile page
+23 create users with pictures
+
+
+ */
 
 public class MainActivity extends AppCompatActivity {
     String TAG = "mainActivity";
@@ -61,10 +90,13 @@ public class MainActivity extends AppCompatActivity {
         AuthUser authUser = Amplify.Auth.getCurrentUser();
 
 
+
         if (authUser != null){
             Log.i(TAG, "onCreate: authUsername" + userName);
             userName = authUser.getUsername();
         }
+
+
 
         uploadFile();
 

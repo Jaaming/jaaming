@@ -23,7 +23,9 @@
             android:name=".activities.PublicMusicianProfilePage"
             android:parentActivityName=".activities.MainActivity" />
         <activity
+
             android:name=".activities.DiscoverPage"/>
+
         <activity
             android:name=".activities.MyBandPage"
             android:parentActivityName=".activities.MainActivity" />

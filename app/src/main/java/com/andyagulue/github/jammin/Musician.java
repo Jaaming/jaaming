@@ -3,6 +3,7 @@ package com.andyagulue.github.jammin;
 import java.util.ArrayList;
 
 public class Musician {
+    public boolean vocalist;
     private String MusicianFistName;
     private String MusicianLastName;
     private String Instruments;

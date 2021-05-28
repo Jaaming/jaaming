@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,8 @@ import java.util.Collections;
 public class DiscoverPage extends AppCompatActivity {
     String TAG = "discover Page";
     String userName;
+    ImageView vocalistImage;
+    Musician musician;
 
     private ViewPager2 viewpager2;
     private ViewPagerAdapter adapter;
@@ -48,6 +51,9 @@ public class DiscoverPage extends AppCompatActivity {
         buildViewPager();
         AuthUser authUser = Amplify.Auth.getCurrentUser();
         userName = authUser.getUsername();
+
+        vocalistImage = findViewById(R.id.viewPagerVocalistIcon);
+
 
 
 
@@ -102,6 +108,7 @@ public class DiscoverPage extends AppCompatActivity {
                 super.handleMessage(msg);
                 if(msg.what == 123){
                     viewpager2.getAdapter().notifyDataSetChanged();
+
                 }
             }
         };
