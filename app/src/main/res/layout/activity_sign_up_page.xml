@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".activities.LogInPage">
 
     <ImageView
@@ -22,10 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
         android:alpha="0.8"
         app:layout_constraintBottom_toTopOf="@+id/background"
         app:layout_constraintEnd_toStartOf="@+id/background"
@@ -34,16 +30,17 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="569dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/newUsername_text_input_layout"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="207dp"
+                android:layout_below="@+id/textView"
+                android:layout_alignParentEnd="false"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="61dp"
                 android:layout_marginEnd="0dp"
                 android:hint="Username">
 
@@ -51,35 +48,19 @@
                     android:id="@+id/newUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="84dp"
                     android:layout_marginTop="223dp"
                     android:ems="10"
                     android:inputType="textPersonName" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/usernameExistsError"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="center"
-                android:layout_marginStart="104dp"
-                android:layout_marginTop="255dp"
-                android:layout_weight="1"
-                android:text="Username already exists!"
-                android:textColor="#E30808"
-                android:visibility="invisible"
-                tools:visibility="invisible" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/newUserEmail_text_input_layout"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="273dp"
-                android:layout_marginEnd="0dp"
+                android:layout_below="@+id/newUsername_text_input_layout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
                 android:hint="Email">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -92,29 +73,15 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/userEmailError"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="center|center_horizontal"
-                android:layout_marginStart="104dp"
-                android:layout_marginTop="321dp"
-                android:layout_weight="1"
-                android:text="Invalid Email address format!"
-                android:textColor="#E30808"
-                android:visibility="invisible"
-                tools:visibility="invisible" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/newUserPassword_text_input_layout"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="342dp"
-                android:layout_marginEnd="0dp"
-                android:hint="Password">
+                android:layout_below="@+id/newUserEmail_text_input_layout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:hint="Password"
+                app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/newUserPassword"
@@ -128,13 +95,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/newUserPassword2_text_input_layout"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="408dp"
-                android:layout_marginEnd="-2dp"
-                android:hint="Confirm Password">
+                android:layout_below="@+id/newUserPassword_text_input_layout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:hint="Confirm Password"
+                app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/newUserPassword2"
@@ -150,10 +117,10 @@
                 android:id="@+id/newUserSignUpButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginEnd="78dp"
-                android:layout_marginBottom="35dp"
+                android:layout_below="@+id/newUserPassword2_text_input_layout"
+                android:layout_alignEnd="@+id/newUserPassword2_text_input_layout"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="1dp"
                 android:text="Signup" />
 
             <TextView
