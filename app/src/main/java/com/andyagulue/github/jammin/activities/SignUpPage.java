@@ -29,6 +29,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
+import java.util.Objects;
 
 public class SignUpPage extends AppCompatActivity {
     String TAG = "SignupPage";
@@ -37,8 +38,15 @@ public class SignUpPage extends AppCompatActivity {
     String newUsername;
     String newUserEmail;
     String newUserPassword;
-    TextView usernameError;
-    TextView emailError;
+    String newUserPassword2;
+    Button submitButton;
+    TextInputLayout emailLayout;
+    TextInputLayout usernameLayout;
+    TextInputEditText userNameEditText;
+    TextInputEditText userEmailEditText;
+    TextInputLayout userPasswordLayout;
+    TextInputLayout userPassword2Layout;
+
 
 
     @Override
@@ -46,8 +54,14 @@ public class SignUpPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_page);
 
-        usernameError = findViewById(R.id.usernameExistsError);
-        emailError = findViewById(R.id.userEmailError);
+
+        submitButton = findViewById(R.id.newUserSignUpButton);
+        emailLayout = findViewById(R.id.newUserEmail_text_input_layout);
+        usernameLayout = findViewById(R.id.newUsername_text_input_layout);
+        userNameEditText = findViewById(R.id.newUsername);
+        userEmailEditText = findViewById(R.id.newUserEmail);
+        userPasswordLayout = findViewById(R.id.newUserPassword_text_input_layout);
+        userPassword2Layout = findViewById(R.id.newUserPassword2_text_input_layout);
 
 //        log out of amplify
 //        Amplify.Auth.signOut(
@@ -56,34 +70,39 @@ public class SignUpPage extends AppCompatActivity {
 //
 //        );
 
-        Button signUpButton = findViewById(R.id.newUserSignUpButton);
-        signUpButton.setOnClickListener(v -> {
-           newUsername = ((TextView) findViewById(R.id.newUsername)).getText().toString();
-           newUserEmail = ((TextView) findViewById(R.id.newUserEmail)).getText().toString();
-           newUserPassword = ((TextView) findViewById(R.id.newUserPassword)).getText().toString();
+
+        submitButton.setOnClickListener(v -> {
+           newUsername = Objects.requireNonNull(userNameEditText.getText()).toString();
+           newUserEmail = Objects.requireNonNull(userEmailEditText.getText()).toString();
+           newUserPassword = Objects.requireNonNull(userPasswordLayout.getEditText()).getText().toString();
+           newUserPassword2 = Objects.requireNonNull(userPassword2Layout.getEditText()).getText().toString();
 
             AuthSignUpOptions options = AuthSignUpOptions.builder()
                     .userAttribute(AuthUserAttributeKey.email(), newUserEmail)
                     .build();
-            Amplify.Auth.signUp(newUsername, newUserPassword, options,
-                    result -> {
-                        Log.i("AuthQuickStart", "Result: " + result.toString());
 
-                        signupHandler.sendEmptyMessage(125);
-                    },
-                    error -> {
+            if(!newUsername.isEmpty() && !newUserEmail.isEmpty() &&
+                    !userPasswordLayout.isErrorEnabled() && !userPassword2Layout.isErrorEnabled()) {
+                Amplify.Auth.signUp(newUsername, newUserPassword, options,
+                        result -> {
+                            Log.i("AuthQuickStart", "Result: " + result.toString());
+
+                            signupHandler.sendEmptyMessage(125);
+                        },
+                        error -> {
 
 
-                        Log.i("AuthQuickStart", "Sign up failed", error);
-                        Log.i(TAG, "error handling***" + error.getCause().getMessage());
+                            Log.i("AuthQuickStart", "Sign up failed", error);
+                            Log.i(TAG, "error handling***" + error.getCause().getMessage());
 
 //                        signupHandler.sendEmptyMessage(126);
-                        Message message = new Message();
-                        message.obj = error.getCause().getMessage().substring(0, error.getCause().getMessage().indexOf('(') -1);
-                        signupHandler.sendMessage(message);
-                    }
+                            Message message = new Message();
+                            message.obj = error.getCause().getMessage().substring(0, error.getCause().getMessage().indexOf('(') - 1);
+                            signupHandler.sendMessage(message);
+                        }
 
-            );
+                );
+            }
         });
 
         signupHandler = new Handler(this.getMainLooper()) {
@@ -99,81 +118,126 @@ public class SignUpPage extends AppCompatActivity {
 
                 } else {
                     Log.i(TAG, "handleMessage:" + msg.obj + "*");
-                    if (msg.obj.toString().contains("User already exists")) {
-                        Toast.makeText(getApplicationContext(), "There was an error signing up, try a different username", Toast.LENGTH_LONG).show();
-                        TextView usernameError = findViewById(R.id.usernameExistsError);
-                        usernameError.setVisibility(View.VISIBLE);
-                    }
-                    if (msg.obj.toString().contains("Invalid email address format.")) {
-                        Toast.makeText(getApplicationContext(), msg.obj.toString(), Toast.LENGTH_LONG).show();
-                        TextView emailError = findViewById(R.id.userEmailError);
-                        emailError.setVisibility(View.VISIBLE);
-                        Log.i(TAG, "handleMessage: email " + msg);
+                    if (msg.obj != null) {
+                        if (msg.obj.toString().contains("User already exists")) {
+                            Toast.makeText(getApplicationContext(), "There was an error signing up, try a different username", Toast.LENGTH_LONG).show();
+//                        TextView usernameError = findViewById(R.id.usernameExistsError);
+//                        usernameError.setVisibility(View.VISIBLE);
+                            usernameLayout.setError("User already exists");
+                            usernameLayout.setErrorEnabled(true);
 
+                        }
+                        if (msg.obj.toString().contains("Invalid email address format.")) {
+                            Toast.makeText(getApplicationContext(), msg.obj.toString(), Toast.LENGTH_LONG).show();
+//                        TextView emailError = findViewById(R.id.userEmailError);
+//                        emailError.setVisibility(View.VISIBLE);
+                            emailLayout.setError("Invalid email address format");
+                            emailLayout.setErrorEnabled(true);
+                            Log.i(TAG, "handleMessage: email " + msg);
+
+                        }
+                        Log.i(TAG, "handleMessage: everything else " + msg);
                     }
-                    Log.i(TAG, "handleMessage: everything else " + msg);
                 }
             }
 
 
         };
-        setupFloatingUsernameError();
+        setupTextWatchers();
     }
 
-    private void setupFloatingUsernameError(){
-        final TextInputLayout floatingUsernameErrorLabel = (TextInputLayout) findViewById(R.id.newUsername_text_input_layout);
-//        floatingUsernameErrorLabel.getEditText().addTextChangedListener(new TextWatcher() {
-        final TextInputEditText userNameEditText = (TextInputEditText) findViewById(R.id.newUsername);
-        userNameEditText.addTextChangedListener(new TextWatcher() {
+    private void setupTextWatchers(){
+        Objects.requireNonNull(usernameLayout.getEditText()).addTextChangedListener(new TextWatcher() {
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 Log.i(TAG, "beforeTextChanged: ");
-
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Log.i(TAG, "onTextChanged: ");
-               usernameError.setVisibility(View.INVISIBLE);
-
+                usernameLayout.setErrorEnabled(false);
             }
-
             @Override
             public void afterTextChanged(Editable s) {
                 if(s.length() > 0){
+
                     Log.i(TAG, "afterTextChanged: the user has typed their username" );
                     Amplify.Auth.fetchUserAttributes(
                             attributes -> Log.i("AuthDemo", "User attributes = " + attributes.toString()),
                             error -> Log.e("AuthDemo", "Failed to fetch user attributes.", error)
                     );
-
                 }
-
             }
         });
-        final TextInputLayout floatingEmailErrorLabel = (TextInputLayout) findViewById(R.id.newUserEmail_text_input_layout);
-//        floatingEmailErrorLabel.getEditText().addTextChangedListener(new TextWatcher() {
-        final TextInputEditText userEmailEditText = (TextInputEditText) findViewById(R.id.newUserEmail);
-        userEmailEditText.addTextChangedListener(new TextWatcher() {
+
+
+        Objects.requireNonNull(emailLayout.getEditText()).addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 Log.i(TAG, "beforeTextChanged: ");
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.i(TAG, "onTextChanged: ");
+                emailLayout.setErrorEnabled(false);
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length() > 0){
+
+                    Log.i(TAG, "afterTextChanged: the user has typed their username" );
+                }
+            }
+        });
+
+        Objects.requireNonNull(userPasswordLayout.getEditText()).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
 
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.i(TAG, "onTextChanged: ");
-                emailError.setVisibility(View.INVISIBLE);
+                if(s.length() > 0 && s.length() < 6){
+                    userPasswordLayout.setError("Password length must be at least 6!");
+                    userPasswordLayout.setErrorEnabled(true);
+                }else{
+                    userPasswordLayout.setErrorEnabled(false);
+
+
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+        Objects.requireNonNull(userPassword2Layout.getEditText()).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.i(TAG, "password1" + userPasswordLayout.getEditText().getText());
+                if(!s.toString().equals(userPasswordLayout.getEditText().getText().toString())){
+                    userPassword2Layout.setError("Password must match!");
+                    userPassword2Layout.setErrorEnabled(true);
+                }else{
+                    userPassword2Layout.setErrorEnabled(false);
+
+                }
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length() > 0){
-                    Log.i(TAG, "afterTextChanged: the user has typed their username" );
-
-                }
 
             }
         });
