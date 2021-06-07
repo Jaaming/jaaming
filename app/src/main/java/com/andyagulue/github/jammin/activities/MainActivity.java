@@ -96,14 +96,16 @@ public class MainActivity extends AppCompatActivity {
         if (authUser != null){
             Log.i(TAG, "onCreate: authUsername" + userName);
             userName = authUser.getUsername();
+            Intent intent = new Intent(MainActivity.this, DiscoverPage.class);
+            startActivity(intent);
         }
 
 //        log out of amplify
-        Amplify.Auth.signOut(
-                () -> Log.i(TAG, "The user was signed out"),
-                error -> Log.i(TAG, "the user was not signed out")
-
-        );
+//        Amplify.Auth.signOut(
+//                () -> Log.i(TAG, "The user was signed out"),
+//                error -> Log.i(TAG, "the user was not signed out")
+//
+//        );
 
 
 

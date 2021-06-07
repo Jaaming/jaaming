@@ -85,8 +85,11 @@ public class DiscoverPage extends AppCompatActivity {
                     Log.i(TAG, "populateDiscoverMusicians: ");
                     for(com.amplifyframework.datastore.generated.model.Musician musician: r.getData()) {
                         Log.i(TAG, "populateDiscoverMusicians: " + r.getData().getItems() + 1);
-                        musicianArrayList.add(musician);
+                        if(!musician.getUsername().equals(userName)) {
+                            musicianArrayList.add(musician);
+                        }
                     }
+                    Collections.shuffle(musicianArrayList);
                     discoverPageHandler.sendEmptyMessage(123);
                 },
                 e -> {
@@ -113,18 +116,15 @@ public class DiscoverPage extends AppCompatActivity {
             }
         };
 
-        adapter.setOnProfileClickListener(new ViewPagerAdapter.OnProfileClickListener() {
-            @Override
-            public void onViewClick(int position) {
-                Toast.makeText(DiscoverPage.this, "You want to view this profile " + position + musicianArrayList.get(position).getUsername(),
-                        Toast.LENGTH_SHORT).show();
-                String username = musicianArrayList.get(position).getUsername();
-                Intent intent = new Intent(DiscoverPage.this, PublicMusicianProfilePage.class);
-                intent.putExtra("username", username);
-                startActivity(intent);
+        adapter.setOnProfileClickListener(position -> {
+            Toast.makeText(DiscoverPage.this, "You want to view this profile " + position + musicianArrayList.get(position).getUsername(),
+                    Toast.LENGTH_SHORT).show();
+            String username = musicianArrayList.get(position).getUsername();
+            Intent intent = new Intent(DiscoverPage.this, PublicMusicianProfilePage.class);
+            intent.putExtra("username", username);
+            startActivity(intent);
 
 
-            }
         });
     }
 
@@ -154,6 +154,16 @@ public class DiscoverPage extends AppCompatActivity {
                 Intent intent3 = new Intent(getApplicationContext(), MyFavoritesPage.class );
                 startActivity(intent3);
                 return true;
+            case R.id.item4:
+                Amplify.Auth.signOut(
+                () -> {
+                    Log.i(TAG, "The user was signed out");
+                    Intent intent4 = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent4);
+                },
+                error -> Log.i(TAG, "the user was not signed out")
+        );
+
             default:
                 return super.onOptionsItemSelected(item);
         }
