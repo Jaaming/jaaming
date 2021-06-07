@@ -200,8 +200,8 @@ public class SignUpPage extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length() > 0 && s.length() < 6){
-                    userPasswordLayout.setError("Password length must be at least 6!");
+                if(s.length() > 0 && s.length() < 8){
+                    userPasswordLayout.setError("Password length must be at least 8!");
                     userPasswordLayout.setErrorEnabled(true);
                 }else{
                     userPasswordLayout.setErrorEnabled(false);

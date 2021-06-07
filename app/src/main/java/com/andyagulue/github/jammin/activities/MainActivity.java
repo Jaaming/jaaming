@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         try{
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
@@ -95,6 +97,13 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG, "onCreate: authUsername" + userName);
             userName = authUser.getUsername();
         }
+
+//        log out of amplify
+        Amplify.Auth.signOut(
+                () -> Log.i(TAG, "The user was signed out"),
+                error -> Log.i(TAG, "the user was not signed out")
+
+        );
 
 
 
