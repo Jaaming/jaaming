@@ -41,6 +41,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import javax.security.auth.login.LoginException;
@@ -101,108 +102,87 @@ public class CreateProfilePage extends AppCompatActivity {
         selectedGenres = new boolean[genresArray.length];
 
         tvInstruments.setOnClickListener(v -> {
+            Log.i(TAG, "instrumentList" + instrumentList.toString());
             AlertDialog.Builder instrumentBuilder = new AlertDialog.Builder(
                     CreateProfilePage.this
             );
             instrumentBuilder.setTitle("Select Instrument(s)");
             instrumentBuilder.setCancelable(false);
-            instrumentBuilder.setMultiChoiceItems(instrumentsArray, selectedInstruments, new DialogInterface.OnMultiChoiceClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+            instrumentBuilder.setMultiChoiceItems(instrumentsArray, selectedInstruments, (dialog, which, isChecked) -> {
 
-                    if(isChecked){
-                        instrumentList.add(which);
-                        Collections.sort(instrumentList);
-                    }else{
-                        int j = instrumentList.indexOf(which);
-                        instrumentList.remove(j);
-                    }
+
+                if(isChecked){
+                    Log.i(TAG, "isChecked" + which);
+                    instrumentList.add(which);
+                    Collections.sort(instrumentList);
+                }else{
+                    Log.i(TAG, "unchecked" + which);
+                    int j = instrumentList.indexOf(which);
+                    instrumentList.remove(j);
                 }
             });
 
-            instrumentBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            instrumentBuilder.setPositiveButton("Ok", (dialog, which) -> {
+                Log.i(TAG, "instrumentList" + instrumentList.toString());
 
-                    StringBuilder sb = new StringBuilder();
-                    for(int i = 0; i< instrumentList.size(); i++){
-                        sb.append(instrumentsArray[instrumentList.get(i)]);
-                        if(i != instrumentList.size()-1){
-                            sb.append(", ");
-                        }
-                    }
-                    tvInstruments.setText(sb.toString());
-                }
-            });
-            instrumentBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            instrumentBuilder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    for(int i = 0; i< selectedInstruments.length; i++){
-                        selectedInstruments[i] = false;
-                        instrumentList.clear();
-                        tvInstruments.setText("");
+                StringBuilder sb = new StringBuilder();
+                for(int i = 0; i< instrumentList.size(); i++){
+                    sb.append(instrumentsArray[instrumentList.get(i)]);
+                    if(i != instrumentList.size()-1){
+                        sb.append(", ");
                     }
                 }
+                tvInstruments.setText(sb.toString());
+            });
+            instrumentBuilder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+            instrumentBuilder.setNeutralButton("Clear All", (dialog, which) -> {
+
+                Arrays.fill(selectedInstruments, false);
+                instrumentList.clear();
+                tvInstruments.setText("");
             });
 
             instrumentBuilder.show();
         });
 
         tvGenres.setOnClickListener(v -> {
+            Log.i(TAG, "genreList" + genreList.toString());
+            Log.i(TAG, "selectedGenres" + Arrays.toString(selectedGenres));
+
             AlertDialog.Builder genreBuilder = new AlertDialog.Builder(
                     CreateProfilePage.this
             );
             genreBuilder.setTitle("Select Genre(s)");
             genreBuilder.setCancelable(false);
-            genreBuilder.setMultiChoiceItems(genresArray, selectedGenres, new DialogInterface.OnMultiChoiceClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+            genreBuilder.setMultiChoiceItems(genresArray, selectedGenres, (dialog, which, isChecked) -> {
 
-                    if(isChecked){
-                        genreList.add(which);
-                        Collections.sort(genreList);
-                    }else{
-                        int k = genreList.indexOf(which);
-                        genreList.remove(k);
-                    }
+                if(isChecked){
+                    Log.i(TAG, "isChecked" + which);
+                    genreList.add(which);
+                    Collections.sort(genreList);
+                }else{
+                    Log.i(TAG, "unchecked" + which);
+                    genreList.remove((Integer) which);
                 }
             });
-            genreBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    StringBuilder gsb = new StringBuilder();
-                    for(int l = 0; l <genreList.size(); l++){
-                        gsb.append(genresArray[genreList.get(l)]);
+            genreBuilder.setPositiveButton("Ok", (dialog, which) -> {
+                Log.i(TAG, "genreList" + genreList.toString());
+                Log.i(TAG, "selectedGenres" + Arrays.toString(selectedGenres));
+                StringBuilder gsb = new StringBuilder();
+                for(int l = 0; l <genreList.size(); l++){
+                    gsb.append(genresArray[genreList.get(l)]);
 
-                        if(l != genreList.size() -1){
-                            gsb.append(", ");
-                        }
-                        tvGenres.setText(gsb.toString());
+                    if(l != genreList.size() -1){
+                        gsb.append(", ");
                     }
+                    tvGenres.setText(gsb.toString());
                 }
             });
-            genreBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            genreBuilder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    for(int l = 0; l < genreList.size(); l++){
-                        selectedGenres[l] = false;
-                        genreList.clear();
-                        tvGenres.setText("");
-                    }
-                }
+            genreBuilder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+            genreBuilder.setNeutralButton("Clear All", (dialog, which) -> {
+                Arrays.fill(selectedGenres, false);
+                genreList.clear();
+                tvGenres.setText("");
             });
             genreBuilder.show();
 

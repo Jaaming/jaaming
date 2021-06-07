@@ -61,6 +61,7 @@
 
                         android:layout_marginEnd="42dp"
                         android:layout_marginBottom="0dp"
+                        android:tooltipText="Choose a profile picture"
 
                         app:srcCompat="@drawable/ic_baseline_add_24" />
                 </RelativeLayout>
@@ -88,25 +89,40 @@
                     android:layout_marginBottom="20dp"
                     android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/addfirstNameEditText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:hint="First Name"
-                        android:inputType="textPersonName" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/firstNameInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
-                    <EditText
-                        android:id="@+id/addLastNameEditText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:hint="Last Name"
-                        android:inputType="textPersonName" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/addfirstNameEditText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="First Name"
+                            android:inputType="textPersonName" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/lastNameInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/addLastNameEditText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="Last Name"
+                            android:inputType="textPersonName" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 
