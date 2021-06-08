@@ -2,4 +2,9 @@
     <string name="app_name">Jammin</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="instruments_string_array">
+        <item>Acoustic Guitar</item>
+        <item>Electric Guitar</item>
+        <item>Bass Guitar</item>
+    </string-array>
 </resources>
