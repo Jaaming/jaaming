@@ -24,47 +24,42 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
 
-import com.andyagulue.github.jammin.Musician;
+
+import com.amplifyframework.datastore.generated.model.Musician;
 import com.andyagulue.github.jammin.R;
 import com.andyagulue.github.jammin.adapters.ViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Objects;
 
 public class DiscoverPage extends AppCompatActivity {
     String TAG = "discover Page";
-    String userName;
-    ImageView vocalistImage;
-    Musician musician;
 
-    TextView filterInstruments;
-    TextView filterGenres;
-    boolean[] selectedInstruments;
-    boolean[] selectedGenres;
-    ArrayList<Integer> instrumentList = new ArrayList<>();
-    ArrayList<Integer> genreList = new ArrayList<>();
-    String[] instrumentsArray = {"Acoustic Guitar", "Electric Guitar", "Bass Guitar", "Drums","Keyboard"};
-    String[] genresArray = {"Pop", "Rock", "Acoustic", "Jazz", "Reggae", "Folk", "Punk", "Americana", "Indie","Synth Pop","Trap","New World","Country"};
+    private String userName;
+    private ImageView vocalistImage;
+    public Musician musician;
+
+    private TextView filterInstruments;
+    private TextView filterGenres;
+    private boolean[] selectedInstruments;
+    private boolean[] selectedGenres;
+    private final ArrayList<Integer> instrumentList = new ArrayList<>();
+    private final ArrayList<Integer> genreList = new ArrayList<>();
+    private final String[] instrumentsArray = {"Acoustic Guitar", "Electric Guitar", "Bass Guitar", "Drums","Keyboard"};
+    private final String[] genresArray = {"Pop", "Rock", "Acoustic", "Jazz", "Reggae", "Folk", "Punk", "Americana", "Indie","Synth Pop","Trap","New World","Country"};
 
     private ViewPager2 viewpager2;
-    private ViewPagerAdapter adapter;
-    ArrayList<com.amplifyframework.datastore.generated.model.Musician> musicianArrayList;
-    ArrayList<Musician> displayMusiciansArrayList;
-    Handler discoverPageHandler;
-    private Spinner filterInstrumentSpinner;
-    private Spinner filterGenreSpinner;
-    Button filterButton;
+    public ArrayList<Musician> musicianArrayList;
+
+    private Handler discoverPageHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discover_page);
 
-
-
-//        createMusicianList();
-//        createSpinners();
 
         populateDiscoverMusicians();
         buildViewPager();
@@ -74,58 +69,18 @@ public class DiscoverPage extends AppCompatActivity {
         buildGenreAlertDialog();
         filterButtonFunction();
 
-        discoverPageHandler = new Handler(this.getMainLooper()){
-            @Override
-            public void handleMessage(@NonNull Message msg) {
-                super.handleMessage(msg);
-                if(msg.what == 123){
-                    viewpager2.getAdapter().notifyDataSetChanged();
-
-                }
-            }
-        };
-
-//        vocalistImage = findViewById(R.id.viewPagerVocalistIcon);
-
-
-
-
 
     }
 
-//    public void createSpinners(){
-//        filterInstrumentSpinner = findViewById(R.id.filterInstrumentsTextView);
-//        filterGenreSpinner = findViewById(R.id.filterGenresTextView);
-//        ArrayAdapter<CharSequence> instAdapter = ArrayAdapter.createFromResource(this, R.array.instruments_string_array, R.layout.support_simple_spinner_dropdown_item);
-//        instAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-//        filterInstrumentSpinner.setAdapter(instAdapter);
-//    }
-
-
-    public void createMusicianList(){
-        musicianArrayList = new ArrayList<>();
-
-//        musicianArrayList.add(new Musician( "Test Firstname", "Test Last Name", "Acoustic Guitar",
-//                "Folk", false, "I love to rock"));
-//        musicianArrayList.add(new Musician( "Test Firstname2", "Test Last Name2", "Acoustic Guitar",
-//                "Folk", false, "I love to rock"));
-//        musicianArrayList.add(new Musician( "Test Firstname3", "Test Last Name3", "Acoustic Guitar",
-//                "Folk", false, "I love to rock"));
-//        musicianArrayList.add(new Musician( "Test Firstname4", "Test Last Name4", "Acoustic Guitar",
-//                "Folk", false, "I love to rock"));
-//        musicianArrayList.add(new Musician( "Test Firstname5", "Test Last Name5", "Acoustic Guitar",
-//                "Folk", false, "I love to rock"));
-
-    }
 
     public void populateDiscoverMusicians(){
         musicianArrayList = new ArrayList<>();
         Amplify.API.query(
-                ModelQuery.list(com.amplifyframework.datastore.generated.model.Musician.class),
+                ModelQuery.list(Musician.class),
                 r -> {
                     Log.i(TAG, "populateDiscoverMusicians: ");
-                    for(com.amplifyframework.datastore.generated.model.Musician musician: r.getData()) {
-                        Log.i(TAG, "populateDiscoverMusicians: " + r.getData().getItems() + 1);
+                    for(Musician musician: r.getData()) {
+//                        Log.i(TAG, "populateDiscoverMusicians: " + r.getData().getItems() + 1);
                         if(instrumentList.isEmpty() && genreList.isEmpty()){
                             if(!musician.getUsername().equals(userName)) {
                                 musicianArrayList.add(musician);
@@ -139,7 +94,7 @@ public class DiscoverPage extends AppCompatActivity {
                                     musicianArrayList.add(musician);
                                 }
                             }
-                        }else if(instrumentList.isEmpty() && !genreList.isEmpty()){
+                        }else if(instrumentList.isEmpty()){
                             for(int genre : genreList){
                                 Log.i(TAG, "populateDiscoverMusicians: this should filter " + genreList);
                                 Log.i(TAG, "populateDiscoverMusicians: this should filter  " + genre);
@@ -176,10 +131,18 @@ public class DiscoverPage extends AppCompatActivity {
 
     public void buildViewPager(){
         viewpager2 = findViewById(R.id.viewPager);
-        adapter = new ViewPagerAdapter(musicianArrayList);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(musicianArrayList);
         viewpager2.setAdapter(adapter);
 
-
+        discoverPageHandler = new Handler(this.getMainLooper()){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                if(msg.what == 123){
+                    Objects.requireNonNull(viewpager2.getAdapter()).notifyDataSetChanged();
+                }
+            }
+        };
 
         adapter.setOnProfileClickListener(position -> {
             Toast.makeText(DiscoverPage.this, "You want to view this profile " + position + musicianArrayList.get(position).getUsername(),
@@ -288,7 +251,7 @@ public class DiscoverPage extends AppCompatActivity {
         });
     }
     public void filterButtonFunction(){
-        filterButton = findViewById(R.id.filterButton);
+        Button filterButton = findViewById(R.id.filterButton);
         filterButton.setOnClickListener(v -> {
             populateDiscoverMusicians();
             buildViewPager();

@@ -1,4 +1,50 @@
 # this is an auto generated file. This will be overwritten
+query SyncMusicians(
+  $filter: ModelMusicianFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncMusicians(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      bandId
+      firstName
+      lastName
+      vocalist
+      instruments
+      genres
+      bio
+      username
+      favorites
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      band {
+        id
+        name
+        instruments
+        genres
+        bio
+        vocalist
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+    }
+    nextToken
+    startedAt
+  }
+}
 query GetMusician($id: ID!) {
   getMusician(id: $id) {
     id
@@ -8,6 +54,14 @@ query GetMusician($id: ID!) {
     vocalist
     instruments
     genres
+    bio
+    username
+    favorites
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
     band {
       id
       name
@@ -15,16 +69,16 @@ query GetMusician($id: ID!) {
       genres
       musicians {
         nextToken
+        startedAt
       }
       bio
       vocalist
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
-    bio
-    username
-    createdAt
-    updatedAt
   }
 }
 query ListMusicians(
@@ -41,6 +95,14 @@ query ListMusicians(
       vocalist
       instruments
       genres
+      bio
+      username
+      favorites
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
       band {
         id
         name
@@ -48,15 +110,42 @@ query ListMusicians(
         genres
         bio
         vocalist
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
+    }
+    nextToken
+    startedAt
+  }
+}
+query ListBands(
+  $filter: ModelBandFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listBands(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      instruments
+      genres
+      musicians {
+        nextToken
+        startedAt
+      }
       bio
-      username
+      vocalist
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
+    startedAt
   }
 }
 query GetBand($id: ID!) {
@@ -76,23 +165,37 @@ query GetBand($id: ID!) {
         genres
         bio
         username
+        favorites
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
+      startedAt
     }
     bio
     vocalist
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
 }
-query ListBands(
+query SyncBands(
   $filter: ModelBandFilterInput
   $limit: Int
   $nextToken: String
+  $lastSync: AWSTimestamp
 ) {
-  listBands(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  syncBands(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
     items {
       id
       name
@@ -100,12 +203,17 @@ query ListBands(
       genres
       musicians {
         nextToken
+        startedAt
       }
       bio
       vocalist
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
+    startedAt
   }
 }

@@ -22,7 +22,7 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the Musician type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "Musicians", authRules = {
-  @AuthRule(allow = AuthStrategy.PUBLIC, operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ })
+  @AuthRule(allow = AuthStrategy.PUBLIC, operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE })
 })
 @Index(name = "band", fields = {"bandId"})
 public final class Musician implements Model {
@@ -35,15 +35,17 @@ public final class Musician implements Model {
   public static final QueryField BAND = field("Musician", "bandId");
   public static final QueryField BIO = field("Musician", "bio");
   public static final QueryField USERNAME = field("Musician", "username");
+  public static final QueryField FAVORITES = field("Musician", "favorites");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  public final @ModelField(targetType="String", isRequired = true) String firstName;
-  public final @ModelField(targetType="String", isRequired = true) String lastName;
-  public final @ModelField(targetType="Boolean", isRequired = true) Boolean vocalist;
-  public final @ModelField(targetType="String", isRequired = true) String instruments;
-  public final @ModelField(targetType="String", isRequired = true) String genres;
-  public final @ModelField(targetType="Band") @BelongsTo(targetName = "bandId", type = Band.class) Band band;
-  public final @ModelField(targetType="String", isRequired = true) String bio;
-  private final @ModelField(targetType="String", isRequired = true) String username;
+  public @ModelField(targetType="String", isRequired = true) String firstName;
+    public @ModelField(targetType="String", isRequired = true) String lastName;
+    public @ModelField(targetType="Boolean", isRequired = true) Boolean vocalist;
+    public @ModelField(targetType="String", isRequired = true) String instruments;
+    public @ModelField(targetType="String", isRequired = true) String genres;
+    public @ModelField(targetType="Band") @BelongsTo(targetName = "bandId", type = Band.class) Band band;
+    public @ModelField(targetType="String", isRequired = true) String bio;
+    public @ModelField(targetType="String", isRequired = true) String username;
+    public @ModelField(targetType="String") String favorites;
   public String getId() {
       return id;
   }
@@ -80,7 +82,15 @@ public final class Musician implements Model {
       return username;
   }
   
-  private Musician(String id, String firstName, String lastName, Boolean vocalist, String instruments, String genres, Band band, String bio, String username) {
+  public String getFavorites() {
+      return favorites;
+  }
+
+    public void setFavorites(String favorites) {
+        this.favorites = favorites;
+    }
+
+    private Musician(String id, String firstName, String lastName, Boolean vocalist, String instruments, String genres, Band band, String bio, String username, String favorites) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -90,6 +100,7 @@ public final class Musician implements Model {
     this.band = band;
     this.bio = bio;
     this.username = username;
+    this.favorites = favorites;
   }
   
   @Override
@@ -108,7 +119,8 @@ public final class Musician implements Model {
               ObjectsCompat.equals(getGenres(), musician.getGenres()) &&
               ObjectsCompat.equals(getBand(), musician.getBand()) &&
               ObjectsCompat.equals(getBio(), musician.getBio()) &&
-              ObjectsCompat.equals(getUsername(), musician.getUsername());
+              ObjectsCompat.equals(getUsername(), musician.getUsername()) &&
+              ObjectsCompat.equals(getFavorites(), musician.getFavorites());
       }
   }
   
@@ -124,6 +136,7 @@ public final class Musician implements Model {
       .append(getBand())
       .append(getBio())
       .append(getUsername())
+      .append(getFavorites())
       .toString()
       .hashCode();
   }
@@ -140,7 +153,8 @@ public final class Musician implements Model {
       .append("genres=" + String.valueOf(getGenres()) + ", ")
       .append("band=" + String.valueOf(getBand()) + ", ")
       .append("bio=" + String.valueOf(getBio()) + ", ")
-      .append("username=" + String.valueOf(getUsername()))
+      .append("username=" + String.valueOf(getUsername()) + ", ")
+      .append("favorites=" + String.valueOf(getFavorites()))
       .append("}")
       .toString();
   }
@@ -177,6 +191,7 @@ public final class Musician implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -190,7 +205,8 @@ public final class Musician implements Model {
       genres,
       band,
       bio,
-      username);
+      username,
+      favorites);
   }
   public interface FirstNameStep {
     LastNameStep firstName(String firstName);
@@ -231,6 +247,7 @@ public final class Musician implements Model {
     Musician build();
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep band(Band band);
+    BuildStep favorites(String favorites);
   }
   
 
@@ -244,6 +261,7 @@ public final class Musician implements Model {
     private String bio;
     private String username;
     private Band band;
+    private String favorites;
     @Override
      public Musician build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -257,7 +275,8 @@ public final class Musician implements Model {
           genres,
           band,
           bio,
-          username);
+          username,
+          favorites);
     }
     
     @Override
@@ -315,6 +334,12 @@ public final class Musician implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep favorites(String favorites) {
+        this.favorites = favorites;
+        return this;
+    }
+    
     /** 
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
@@ -338,7 +363,7 @@ public final class Musician implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String firstName, String lastName, Boolean vocalist, String instruments, String genres, Band band, String bio, String username) {
+    private CopyOfBuilder(String id, String firstName, String lastName, Boolean vocalist, String instruments, String genres, Band band, String bio, String username, String favorites) {
       super.id(id);
       super.firstName(firstName)
         .lastName(lastName)
@@ -347,7 +372,8 @@ public final class Musician implements Model {
         .genres(genres)
         .bio(bio)
         .username(username)
-        .band(band);
+        .band(band)
+        .favorites(favorites);
     }
     
     @Override
@@ -388,6 +414,11 @@ public final class Musician implements Model {
     @Override
      public CopyOfBuilder band(Band band) {
       return (CopyOfBuilder) super.band(band);
+    }
+    
+    @Override
+     public CopyOfBuilder favorites(String favorites) {
+      return (CopyOfBuilder) super.favorites(favorites);
     }
   }
   
