@@ -8,6 +8,14 @@ subscription OnCreateMusician {
     vocalist
     instruments
     genres
+    bio
+    username
+    favorites
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
     band {
       id
       name
@@ -15,16 +23,16 @@ subscription OnCreateMusician {
       genres
       musicians {
         nextToken
+        startedAt
       }
       bio
       vocalist
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
-    bio
-    username
-    createdAt
-    updatedAt
   }
 }
 subscription OnUpdateMusician {
@@ -36,6 +44,14 @@ subscription OnUpdateMusician {
     vocalist
     instruments
     genres
+    bio
+    username
+    favorites
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
     band {
       id
       name
@@ -43,16 +59,16 @@ subscription OnUpdateMusician {
       genres
       musicians {
         nextToken
+        startedAt
       }
       bio
       vocalist
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
-    bio
-    username
-    createdAt
-    updatedAt
   }
 }
 subscription OnDeleteMusician {
@@ -64,6 +80,14 @@ subscription OnDeleteMusician {
     vocalist
     instruments
     genres
+    bio
+    username
+    favorites
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
     band {
       id
       name
@@ -71,16 +95,16 @@ subscription OnDeleteMusician {
       genres
       musicians {
         nextToken
+        startedAt
       }
       bio
       vocalist
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
-    bio
-    username
-    createdAt
-    updatedAt
   }
 }
 subscription OnCreateBand {
@@ -100,13 +124,21 @@ subscription OnCreateBand {
         genres
         bio
         username
+        favorites
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
+      startedAt
     }
     bio
     vocalist
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -128,13 +160,21 @@ subscription OnUpdateBand {
         genres
         bio
         username
+        favorites
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
+      startedAt
     }
     bio
     vocalist
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -156,13 +196,21 @@ subscription OnDeleteBand {
         genres
         bio
         username
+        favorites
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
+      startedAt
     }
     bio
     vocalist
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }

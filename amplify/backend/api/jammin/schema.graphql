@@ -1,4 +1,4 @@
-type Musician @model @key(name: "band", fields: ["bandId"]) @auth(rules: [{allow: public}]) {
+type Musician @model @key(name: "band", fields: ["bandId"]) @auth(rules: [{allow: public, operations: [create, update, delete] }]) {
   id: ID!
   bandId: ID
   firstName: String!
@@ -9,6 +9,7 @@ type Musician @model @key(name: "band", fields: ["bandId"]) @auth(rules: [{allow
   band: Band @connection(fields: ["bandId"])
   bio: String!
   username: String!
+  favorites: String
 }
 
 type Band @model @auth(rules: [{allow: public}]) {

@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,13 +17,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amplifyframework.api.graphql.GraphQLOperation;
+import com.amplifyframework.api.graphql.MutationType;
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Band;
 import com.amplifyframework.datastore.generated.model.Musician;
 import com.andyagulue.github.jammin.R;
 
 import java.io.File;
+
+import static com.amplifyframework.api.graphql.model.ModelMutation.update;
 
 public class PublicMusicianProfilePage extends AppCompatActivity {
 
@@ -43,6 +50,7 @@ public class PublicMusicianProfilePage extends AppCompatActivity {
     TextView bio;
     TextView addToFavorites;
     Musician musician;
+    Musician currentUser;
     Handler publicProfilePageHandler;
 
     @Override
@@ -67,6 +75,15 @@ public class PublicMusicianProfilePage extends AppCompatActivity {
         drummerIcon = findViewById(R.id.drummerIcon);
 
 
+        Band defaultBand = Band.builder()
+                .name("The Rockers")
+                .instruments("Default")
+                .genres("String")
+                .bio("Default")
+                .vocalist(true)
+                .build();
+
+
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
 
@@ -81,6 +98,14 @@ public class PublicMusicianProfilePage extends AppCompatActivity {
                     },
                     error ->{}
             );
+        Amplify.API.query(
+                ModelQuery.list(Musician.class, Musician.USERNAME.eq(userName)),
+                response -> {
+                    currentUser = response.getData().iterator().next();
+                    Log.i(TAG, "this is the currentUser" + currentUser);
+                },
+                error ->{}
+        );
 //        }else{
 //            Amplify.API.query(
 //                    ModelQuery.list(Musician.class, Musician.USERNAME.eq(authUser.getUsername())),
@@ -114,8 +139,39 @@ public class PublicMusicianProfilePage extends AppCompatActivity {
         };
 
         addToFavorites.setOnClickListener(v -> {
-            Toast.makeText(this, "User has been added to your favorites!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), username + "has been added to your favorites!", Toast.LENGTH_LONG).show();
+            Log.i(TAG, "this is me" + currentUser.getFirstName() + " " + currentUser.getLastName());
+            String favorites = currentUser.getFavorites();
+            String newFav = currentUser.favorites.replace('o', 'x');
+            currentUser.favorites = newFav;
+            Log.i(TAG, "this is my favorites" + favorites);
+
+            currentUser.band = defaultBand;
+            Log.i(TAG, "currentUser band = " + currentUser.favorites);
+
+            Amplify.API.mutate(
+                    ModelMutation.update(currentUser),
+                    re -> {
+                        Log.i(TAG, "successful update of user");
+                        Log.i(TAG, "response" + re.getData());
+                    },
+                    er-> {
+                        Log.i(TAG, "unsuccessful update" + er);
+                    }
+            );
+
+            Amplify.API.query(
+                    ModelQuery.list(Musician.class, Musician.USERNAME.eq(userName)),
+                    response -> {
+                        currentUser = response.getData().iterator().next();
+                        Log.i(TAG, "this is the currentUser" + currentUser);
+                    },
+                    error ->{}
+            );
+
+
         });
+
 
     }
 

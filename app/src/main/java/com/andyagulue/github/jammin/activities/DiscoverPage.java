@@ -1,5 +1,6 @@
 package com.andyagulue.github.jammin.activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,85 +9,113 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
 
-import com.andyagulue.github.jammin.Musician;
+
+import com.amplifyframework.datastore.generated.model.Musician;
 import com.andyagulue.github.jammin.R;
 import com.andyagulue.github.jammin.adapters.ViewPagerAdapter;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Objects;
 
 public class DiscoverPage extends AppCompatActivity {
     String TAG = "discover Page";
-    String userName;
-    ImageView vocalistImage;
-    Musician musician;
+
+    private String userName;
+    private ImageView vocalistImage;
+    public Musician musician;
+
+    private TextView filterInstruments;
+    private TextView filterGenres;
+    private boolean[] selectedInstruments;
+    private boolean[] selectedGenres;
+    private final ArrayList<Integer> instrumentList = new ArrayList<>();
+    private final ArrayList<Integer> genreList = new ArrayList<>();
+    private final String[] instrumentsArray = {"Acoustic Guitar", "Electric Guitar", "Bass Guitar", "Drums","Keyboard"};
+    private final String[] genresArray = {"Pop", "Rock", "Acoustic", "Jazz", "Reggae", "Folk", "Punk", "Americana", "Indie","Synth Pop","Trap","New World","Country"};
 
     private ViewPager2 viewpager2;
-    private ViewPagerAdapter adapter;
-    ArrayList<com.amplifyframework.datastore.generated.model.Musician> musicianArrayList;
-    ArrayList<Musician> displayMusiciansArrayList;
-    Handler discoverPageHandler;
+    public ArrayList<Musician> musicianArrayList;
+
+    private Handler discoverPageHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discover_page);
-//        createMusicianList();
+
+
         populateDiscoverMusicians();
         buildViewPager();
         AuthUser authUser = Amplify.Auth.getCurrentUser();
         userName = authUser.getUsername();
-
-//        vocalistImage = findViewById(R.id.viewPagerVocalistIcon);
-
-
-
+        buildInstrumentAlertDialog();
+        buildGenreAlertDialog();
+        filterButtonFunction();
 
 
     }
 
-
-    public void createMusicianList(){
-        musicianArrayList = new ArrayList<>();
-
-//        musicianArrayList.add(new Musician( "Test Firstname", "Test Last Name", "Acoustic Guitar",
-//                "Folk", false, "I love to rock"));
-//        musicianArrayList.add(new Musician( "Test Firstname2", "Test Last Name2", "Acoustic Guitar",
-//                "Folk", false, "I love to rock"));
-//        musicianArrayList.add(new Musician( "Test Firstname3", "Test Last Name3", "Acoustic Guitar",
-//                "Folk", false, "I love to rock"));
-//        musicianArrayList.add(new Musician( "Test Firstname4", "Test Last Name4", "Acoustic Guitar",
-//                "Folk", false, "I love to rock"));
-//        musicianArrayList.add(new Musician( "Test Firstname5", "Test Last Name5", "Acoustic Guitar",
-//                "Folk", false, "I love to rock"));
-
-    }
 
     public void populateDiscoverMusicians(){
         musicianArrayList = new ArrayList<>();
         Amplify.API.query(
-                ModelQuery.list(com.amplifyframework.datastore.generated.model.Musician.class),
+                ModelQuery.list(Musician.class),
                 r -> {
                     Log.i(TAG, "populateDiscoverMusicians: ");
-                    for(com.amplifyframework.datastore.generated.model.Musician musician: r.getData()) {
-                        Log.i(TAG, "populateDiscoverMusicians: " + r.getData().getItems() + 1);
-                        if(!musician.getUsername().equals(userName)) {
-                            musicianArrayList.add(musician);
+                    for(Musician musician: r.getData()) {
+//                        Log.i(TAG, "populateDiscoverMusicians: " + r.getData().getItems() + 1);
+                        if(instrumentList.isEmpty() && genreList.isEmpty()){
+                            if(!musician.getUsername().equals(userName)) {
+                                musicianArrayList.add(musician);
+                            }
+                        }else if(!instrumentList.isEmpty() && genreList.isEmpty()){
+                            for(int instrument : instrumentList){
+                                Log.i(TAG, "populateDiscoverMusicians: this should filter " + instrumentList);
+                                Log.i(TAG, "populateDiscoverMusicians: this should filter  " + instrument);
+                                Log.i(TAG, "populateDiscoverMusicians: this should filter " + instrumentsArray[instrument]);
+                                if(musician.getInstruments().contains(instrumentsArray[instrument]) && !musician.getUsername().equals(userName)){
+                                    musicianArrayList.add(musician);
+                                }
+                            }
+                        }else if(instrumentList.isEmpty()){
+                            for(int genre : genreList){
+                                Log.i(TAG, "populateDiscoverMusicians: this should filter " + genreList);
+                                Log.i(TAG, "populateDiscoverMusicians: this should filter  " + genre);
+                                Log.i(TAG, "populateDiscoverMusicians: this should filter " + genresArray[genre]);
+                                if(musician.getGenres().contains(genresArray[genre]) && !musician.getUsername().equals(userName)){
+                                    musicianArrayList.add(musician);
+                                }
+                            }
+                        }else{
+                            for(int instrument : instrumentList){
+                                for(int genre : genreList){
+                                    Log.i(TAG, "populateDiscoverMusicians: this should filter " + genreList);
+                                    Log.i(TAG, "populateDiscoverMusicians: this should filter  " + genre);
+                                    Log.i(TAG, "populateDiscoverMusicians: this should filter " + genresArray[genre]);
+                                    if(musician.getGenres().contains(genresArray[genre])
+                                            && musician.getInstruments().contains(instrumentsArray[instrument])
+                                            && !musician.getUsername().equals(userName)){
+                                        musicianArrayList.add(musician);
+                                    }
+                                }
+                            }
                         }
                     }
                     Collections.shuffle(musicianArrayList);
@@ -102,7 +131,7 @@ public class DiscoverPage extends AppCompatActivity {
 
     public void buildViewPager(){
         viewpager2 = findViewById(R.id.viewPager);
-        adapter = new ViewPagerAdapter(musicianArrayList);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(musicianArrayList);
         viewpager2.setAdapter(adapter);
 
         discoverPageHandler = new Handler(this.getMainLooper()){
@@ -110,8 +139,7 @@ public class DiscoverPage extends AppCompatActivity {
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
                 if(msg.what == 123){
-                    viewpager2.getAdapter().notifyDataSetChanged();
-
+                    Objects.requireNonNull(viewpager2.getAdapter()).notifyDataSetChanged();
                 }
             }
         };
@@ -125,6 +153,108 @@ public class DiscoverPage extends AppCompatActivity {
             startActivity(intent);
 
 
+        });
+    }
+
+    public void buildInstrumentAlertDialog(){
+        filterInstruments = findViewById(R.id.filterInstrumentsTextView);
+        selectedInstruments = new boolean[instrumentsArray.length];
+        filterInstruments.setOnClickListener(v -> {
+            Log.i(TAG, "instrumentList" + instrumentList.toString());
+            AlertDialog.Builder instrumentBuilder = new AlertDialog.Builder(
+                    DiscoverPage.this
+            );
+            instrumentBuilder.setTitle("Select Instrument(s)");
+            instrumentBuilder.setCancelable(false);
+            instrumentBuilder.setMultiChoiceItems(instrumentsArray, selectedInstruments, (dialog, which, isChecked) -> {
+
+
+                if(isChecked){
+                    Log.i(TAG, "isChecked" + which);
+                    instrumentList.add(which);
+                    Collections.sort(instrumentList);
+                }else{
+                    Log.i(TAG, "unchecked" + which);
+                    int j = instrumentList.indexOf(which);
+                    instrumentList.remove(j);
+                }
+            });
+
+            instrumentBuilder.setPositiveButton("Ok", (dialog, which) -> {
+                Log.i(TAG, "instrumentList" + instrumentList.toString());
+
+                StringBuilder sb = new StringBuilder();
+                for(int i = 0; i< instrumentList.size(); i++){
+                    sb.append(instrumentsArray[instrumentList.get(i)]);
+                    if(i != instrumentList.size()-1){
+                        sb.append(", ");
+                    }
+                }
+                filterInstruments.setText(sb.toString());
+            });
+            instrumentBuilder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+            instrumentBuilder.setNeutralButton("Clear All", (dialog, which) -> {
+
+                Arrays.fill(selectedInstruments, false);
+                instrumentList.clear();
+                filterInstruments.setText("");
+            });
+
+            instrumentBuilder.show();
+        });
+    }
+
+    public void buildGenreAlertDialog(){
+        filterGenres = findViewById(R.id.filterGenresTextView);
+        selectedGenres = new boolean[genresArray.length];
+        filterGenres.setOnClickListener(v -> {
+            Log.i(TAG, "genreList" + genreList.toString());
+            Log.i(TAG, "selectedGenres" + Arrays.toString(selectedGenres));
+
+            AlertDialog.Builder genreBuilder = new AlertDialog.Builder(
+                    DiscoverPage.this
+            );
+            genreBuilder.setTitle("Select Genre(s)");
+            genreBuilder.setCancelable(false);
+            genreBuilder.setMultiChoiceItems(genresArray, selectedGenres, (dialog, which, isChecked) -> {
+
+                if(isChecked){
+                    Log.i(TAG, "isChecked" + which);
+                    genreList.add(which);
+                    Collections.sort(genreList);
+                }else{
+                    Log.i(TAG, "unchecked" + which);
+                    genreList.remove((Integer) which);
+                }
+            });
+            genreBuilder.setPositiveButton("Ok", (dialog, which) -> {
+                Log.i(TAG, "genreList" + genreList.toString());
+                Log.i(TAG, "selectedGenres" + Arrays.toString(selectedGenres));
+                StringBuilder gsb = new StringBuilder();
+                for(int l = 0; l <genreList.size(); l++){
+                    gsb.append(genresArray[genreList.get(l)]);
+
+                    if(l != genreList.size() -1){
+                        gsb.append(", ");
+                    }
+                    filterGenres.setText(gsb.toString());
+                }
+            });
+            genreBuilder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+            genreBuilder.setNeutralButton("Clear All", (dialog, which) -> {
+                Arrays.fill(selectedGenres, false);
+                genreList.clear();
+                filterGenres.setText("");
+            });
+            genreBuilder.show();
+
+        });
+    }
+    public void filterButtonFunction(){
+        Button filterButton = findViewById(R.id.filterButton);
+        filterButton.setOnClickListener(v -> {
+            populateDiscoverMusicians();
+            buildViewPager();
         });
     }
 

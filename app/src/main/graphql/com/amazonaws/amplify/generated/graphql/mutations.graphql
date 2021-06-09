@@ -11,6 +11,14 @@ mutation CreateMusician(
     vocalist
     instruments
     genres
+    bio
+    username
+    favorites
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
     band {
       id
       name
@@ -18,16 +26,16 @@ mutation CreateMusician(
       genres
       musicians {
         nextToken
+        startedAt
       }
       bio
       vocalist
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
-    bio
-    username
-    createdAt
-    updatedAt
   }
 }
 mutation UpdateMusician(
@@ -42,6 +50,14 @@ mutation UpdateMusician(
     vocalist
     instruments
     genres
+    bio
+    username
+    favorites
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
     band {
       id
       name
@@ -49,16 +65,16 @@ mutation UpdateMusician(
       genres
       musicians {
         nextToken
+        startedAt
       }
       bio
       vocalist
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
-    bio
-    username
-    createdAt
-    updatedAt
   }
 }
 mutation DeleteMusician(
@@ -73,6 +89,14 @@ mutation DeleteMusician(
     vocalist
     instruments
     genres
+    bio
+    username
+    favorites
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
     band {
       id
       name
@@ -80,16 +104,16 @@ mutation DeleteMusician(
       genres
       musicians {
         nextToken
+        startedAt
       }
       bio
       vocalist
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
-    bio
-    username
-    createdAt
-    updatedAt
   }
 }
 mutation CreateBand(
@@ -112,13 +136,21 @@ mutation CreateBand(
         genres
         bio
         username
+        favorites
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
+      startedAt
     }
     bio
     vocalist
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -143,13 +175,21 @@ mutation UpdateBand(
         genres
         bio
         username
+        favorites
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
+      startedAt
     }
     bio
     vocalist
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -174,13 +214,21 @@ mutation DeleteBand(
         genres
         bio
         username
+        favorites
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
+      startedAt
     }
     bio
     vocalist
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
