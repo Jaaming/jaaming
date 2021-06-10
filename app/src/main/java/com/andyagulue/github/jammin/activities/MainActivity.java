@@ -22,7 +22,9 @@ import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
+import com.amplifyframework.core.Action;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.Musician;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.andyagulue.github.jammin.FavoriteMusician;
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         try{
             Amplify.addPlugin(new AWSApiPlugin());
+//            Amplify.addPlugin(new AWSDataStorePlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.configure(getApplicationContext());
@@ -105,6 +108,15 @@ public class MainActivity extends AppCompatActivity {
 //                () -> Log.i(TAG, "The user was signed out"),
 //                error -> Log.i(TAG, "the user was not signed out")
 //
+//        );
+
+
+//        Amplify.DataStore.clear(
+//                () -> Amplify.DataStore.start(
+//                        () -> Log.i("MyAmplifyApp", "DataStore started"),
+//                        error -> Log.e("MyAmplifyApp", "Error starting DataStore: ", error)
+//                ),
+//                error -> Log.e("MyAmplifyApp", "Error clearing DataStore: ", error)
 //        );
 
 

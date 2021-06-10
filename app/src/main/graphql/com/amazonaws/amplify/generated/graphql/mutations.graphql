@@ -14,6 +14,7 @@ mutation CreateMusician(
     bio
     username
     favorites
+    isPresent
     _version
     _deleted
     _lastChangedAt
@@ -53,6 +54,7 @@ mutation UpdateMusician(
     bio
     username
     favorites
+    isPresent
     _version
     _deleted
     _lastChangedAt
@@ -92,6 +94,7 @@ mutation DeleteMusician(
     bio
     username
     favorites
+    isPresent
     _version
     _deleted
     _lastChangedAt
@@ -137,6 +140,7 @@ mutation CreateBand(
         bio
         username
         favorites
+        isPresent
         _version
         _deleted
         _lastChangedAt
@@ -176,6 +180,7 @@ mutation UpdateBand(
         bio
         username
         favorites
+        isPresent
         _version
         _deleted
         _lastChangedAt
@@ -215,6 +220,7 @@ mutation DeleteBand(
         bio
         username
         favorites
+        isPresent
         _version
         _deleted
         _lastChangedAt

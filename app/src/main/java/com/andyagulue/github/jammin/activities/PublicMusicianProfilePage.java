@@ -18,16 +18,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.GraphQLOperation;
+import com.amplifyframework.api.graphql.GraphQLRequest;
 import com.amplifyframework.api.graphql.MutationType;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.core.model.Model;
+import com.amplifyframework.core.model.query.Where;
 import com.amplifyframework.datastore.generated.model.Band;
 import com.amplifyframework.datastore.generated.model.Musician;
 import com.andyagulue.github.jammin.R;
 
 import java.io.File;
+
+import javax.security.auth.login.LoginException;
 
 import static com.amplifyframework.api.graphql.model.ModelMutation.update;
 
@@ -141,33 +146,52 @@ public class PublicMusicianProfilePage extends AppCompatActivity {
         addToFavorites.setOnClickListener(v -> {
             Toast.makeText(getApplicationContext(), username + "has been added to your favorites!", Toast.LENGTH_LONG).show();
             Log.i(TAG, "this is me" + currentUser.getFirstName() + " " + currentUser.getLastName());
-            String favorites = currentUser.getFavorites();
-            String newFav = currentUser.favorites.replace('o', 'x');
-            currentUser.favorites = newFav;
-            Log.i(TAG, "this is my favorites" + favorites);
+            Log.i(TAG, "currentUser favorites" + currentUser.favorites);
+            currentUser.favorites = username;
+            currentUser.bio = "Test";
+            Log.i(TAG, "currentUser favorites" + currentUser.favorites);
 
             currentUser.band = defaultBand;
-            Log.i(TAG, "currentUser band = " + currentUser.favorites);
-
-            Amplify.API.mutate(
-                    ModelMutation.update(currentUser),
-                    re -> {
-                        Log.i(TAG, "successful update of user");
-                        Log.i(TAG, "response" + re.getData());
-                    },
-                    er-> {
-                        Log.i(TAG, "unsuccessful update" + er);
-                    }
-            );
-
             Amplify.API.query(
-                    ModelQuery.list(Musician.class, Musician.USERNAME.eq(userName)),
-                    response -> {
-                        currentUser = response.getData().iterator().next();
-                        Log.i(TAG, "this is the currentUser" + currentUser);
-                    },
-                    error ->{}
+                    ModelMutation.update(currentUser),
+                            r ->{
+                                Log.i(TAG, "successful update of user" + r.getData());
+                            },
+                            e ->{}
             );
+
+
+//            Musician item = Musician.builder()
+//                    .firstName("Lorem ipsum dolor sit amet")
+//                    .lastName("Lorem ipsum dolor sit amet")
+//                    .vocalist(true)
+//                    .instruments("Lorem ipsum dolor sit amet")
+//                    .genres("Lorem ipsum dolor sit amet")
+//                    .bio("Lorem ipsum dolor sit amet")
+//                    .username("Lorem ipsum dolor sit amet")
+//                    .favorites("Lorem ipsum dolor sit amet")
+//                    .build();
+
+//            Amplify.DataStore.save(
+//                    item,
+//                    success -> Log.i("Amplify", "Saved item: " + success.item().getId()),
+//                    error -> Log.e("Amplify", "Could not save item to DataStore", error)
+//            );
+
+
+//            Amplify.DataStore.query(
+//                    Musician.class,
+////                    Where.id(currentUser.getId()),
+//                    items -> {
+//                        while (items.hasNext()) {
+//                            Musician item = items.next();
+//                            Log.i("Amplify", "Id " + item.getId());
+//                        }
+//                    },
+//                    failure -> Log.e("Amplify", "Could not query DataStore", failure)
+//            );
+
+
 
 
         });
