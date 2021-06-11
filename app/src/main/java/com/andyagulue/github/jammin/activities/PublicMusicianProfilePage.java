@@ -1,22 +1,30 @@
 package com.andyagulue.github.jammin.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.RoomDatabase.Favorite;
+import com.RoomDatabase.FavoriteDatabase;
 import com.amplifyframework.api.graphql.GraphQLOperation;
 import com.amplifyframework.api.graphql.GraphQLRequest;
 import com.amplifyframework.api.graphql.MutationType;
@@ -31,6 +39,9 @@ import com.amplifyframework.datastore.generated.model.Musician;
 import com.andyagulue.github.jammin.R;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.security.auth.login.LoginException;
 
@@ -53,15 +64,24 @@ public class PublicMusicianProfilePage extends AppCompatActivity {
     TextView instruments;
     TextView genres;
     TextView bio;
-    TextView addToFavorites;
+    ImageButton addToFavorites;
     Musician musician;
     Musician currentUser;
     Handler publicProfilePageHandler;
+    FavoriteDatabase favoriteDatabase;
+    List<String> favorites;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_public_musician_profile_page);
+
+        favoriteDatabase = Room.databaseBuilder(getApplicationContext(),FavoriteDatabase.class, "My_Favorites")
+                .allowMainThreadQueries()
+                .build();
+
+
 
         AuthUser authUser = Amplify.Auth.getCurrentUser();
         userName = authUser.getUsername();
@@ -78,6 +98,8 @@ public class PublicMusicianProfilePage extends AppCompatActivity {
         electricGuitarIcon = findViewById(R.id.electricGuitarIcon);
         bassGuitarIcon = findViewById(R.id.bassIcon);
         drummerIcon = findViewById(R.id.drummerIcon);
+
+
 
 
         Band defaultBand = Band.builder()
@@ -142,23 +164,37 @@ public class PublicMusicianProfilePage extends AppCompatActivity {
                 }
             }
         };
+        favorites = favoriteDatabase.favoriteDAO().findAll();
+        if(favorites.toString().contains(username))addToFavorites.setColorFilter(getResources().getColor(R.color.greenPigment, getTheme()));
+        if(username.equals(userName)) addToFavorites.setVisibility(View.INVISIBLE);
+
+
 
         addToFavorites.setOnClickListener(v -> {
+            addToFavorites.setColorFilter(getResources().getColor(R.color.greenPigment, getTheme()));
             Toast.makeText(getApplicationContext(), username + "has been added to your favorites!", Toast.LENGTH_LONG).show();
             Log.i(TAG, "this is me" + currentUser.getFirstName() + " " + currentUser.getLastName());
             Log.i(TAG, "currentUser favorites" + currentUser.favorites);
-            currentUser.favorites = username;
-            currentUser.bio = "Test";
-            Log.i(TAG, "currentUser favorites" + currentUser.favorites);
 
-            currentUser.band = defaultBand;
-            Amplify.API.query(
-                    ModelMutation.update(currentUser),
-                            r ->{
-                                Log.i(TAG, "successful update of user" + r.getData());
-                            },
-                            e ->{}
-            );
+            Favorite favorite = new Favorite(username);
+            favoriteDatabase.favoriteDAO().insert(favorite);
+
+
+            for(String f : favorites){
+                Log.i(TAG, "this is one of my favorites:  " + f);
+            }
+//            currentUser.favorites = username;
+//            currentUser.bio = "Test";
+//            Log.i(TAG, "currentUser favorites" + currentUser.favorites);
+//
+//            currentUser.band = defaultBand;
+//            Amplify.API.query(
+//                    ModelMutation.update(currentUser),
+//                            r ->{
+//                                Log.i(TAG, "successful update of user" + r.getData());
+//                            },
+//                            e ->{}
+//            );
 
 
 //            Musician item = Musician.builder()

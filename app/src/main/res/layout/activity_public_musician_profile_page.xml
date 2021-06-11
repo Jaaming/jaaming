@@ -51,20 +51,22 @@
                         android:layout_marginStart="32dp"
                         android:layout_marginBottom="4dp"
                         android:visibility="invisible"
-                        app:srcCompat="@drawable/mic" />
+                        app:srcCompat="@drawable/mic"
+                        tools:visibility="visible" />
 
-                    <TextView
+                    <ImageButton
                         android:id="@+id/addToFavoritesClickable"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="35dp"
+                        android:layout_height="34dp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="0dp"
-                        android:text="Add to Favorites"
-                        android:textAlignment="center"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
+                        android:layout_marginEnd="40dp"
+                        android:layout_marginBottom="2dp"
+                        android:background="#05E91E63"
+                        android:backgroundTint="#D51414"
+                        android:padding="0dp"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/heart_note" />
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
@@ -145,40 +147,45 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="left"
-                        android:visibility="invisible"
-                        app:srcCompat="@drawable/acoustic_guitar" />
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/acoustic_guitar"
+                        tools:visibility="visible" />
 
                     <ImageView
                         android:id="@+id/electricGuitarIcon"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="left"
-                        android:visibility="invisible"
-                        app:srcCompat="@drawable/electric_guitar" />
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/electric_guitar"
+                        tools:visibility="visible" />
 
                     <ImageView
                         android:id="@+id/bassIcon"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="left"
-                        android:visibility="invisible"
-                        app:srcCompat="@drawable/bass_guitar" />
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/bass_guitar"
+                        tools:visibility="visible" />
 
                     <ImageView
                         android:id="@+id/keyboardIcon"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="left"
-                        android:visibility="invisible"
-                        app:srcCompat="@drawable/keyboard" />
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/keyboard"
+                        tools:visibility="visible" />
 
                     <ImageView
                         android:id="@+id/drummerIcon"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="left"
-                        android:visibility="invisible"
-                        app:srcCompat="@drawable/drummer" />
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/drummer"
+                        tools:visibility="visible" />
                 </LinearLayout>
 
                 <TextView
