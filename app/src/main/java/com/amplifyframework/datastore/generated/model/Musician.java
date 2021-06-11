@@ -36,16 +36,18 @@ public final class Musician implements Model {
   public static final QueryField BIO = field("Musician", "bio");
   public static final QueryField USERNAME = field("Musician", "username");
   public static final QueryField FAVORITES = field("Musician", "favorites");
+  public static final QueryField IS_PRESENT = field("Musician", "isPresent");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   public @ModelField(targetType="String", isRequired = true) String firstName;
-    public @ModelField(targetType="String", isRequired = true) String lastName;
-    public @ModelField(targetType="Boolean", isRequired = true) Boolean vocalist;
-    public @ModelField(targetType="String", isRequired = true) String instruments;
-    public @ModelField(targetType="String", isRequired = true) String genres;
-    public @ModelField(targetType="Band") @BelongsTo(targetName = "bandId", type = Band.class) Band band;
-    public @ModelField(targetType="String", isRequired = true) String bio;
-    public @ModelField(targetType="String", isRequired = true) String username;
-    public @ModelField(targetType="String") String favorites;
+  public @ModelField(targetType="String", isRequired = true) String lastName;
+  public @ModelField(targetType="Boolean", isRequired = true) Boolean vocalist;
+  public @ModelField(targetType="String", isRequired = true) String instruments;
+  public @ModelField(targetType="String", isRequired = true) String genres;
+  public @ModelField(targetType="Band") @BelongsTo(targetName = "bandId", type = Band.class) Band band;
+  public @ModelField(targetType="String", isRequired = true) String bio;
+  public @ModelField(targetType="String", isRequired = true) String username;
+  public @ModelField(targetType="String") String favorites;
+  public @ModelField(targetType="Boolean") Boolean isPresent;
   public String getId() {
       return id;
   }
@@ -85,12 +87,12 @@ public final class Musician implements Model {
   public String getFavorites() {
       return favorites;
   }
-
-    public void setFavorites(String favorites) {
-        this.favorites = favorites;
-    }
-
-    private Musician(String id, String firstName, String lastName, Boolean vocalist, String instruments, String genres, Band band, String bio, String username, String favorites) {
+  
+  public Boolean getIsPresent() {
+      return isPresent;
+  }
+  
+  private Musician(String id, String firstName, String lastName, Boolean vocalist, String instruments, String genres, Band band, String bio, String username, String favorites, Boolean isPresent) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -101,6 +103,7 @@ public final class Musician implements Model {
     this.bio = bio;
     this.username = username;
     this.favorites = favorites;
+    this.isPresent = isPresent;
   }
   
   @Override
@@ -120,7 +123,8 @@ public final class Musician implements Model {
               ObjectsCompat.equals(getBand(), musician.getBand()) &&
               ObjectsCompat.equals(getBio(), musician.getBio()) &&
               ObjectsCompat.equals(getUsername(), musician.getUsername()) &&
-              ObjectsCompat.equals(getFavorites(), musician.getFavorites());
+              ObjectsCompat.equals(getFavorites(), musician.getFavorites()) &&
+              ObjectsCompat.equals(getIsPresent(), musician.getIsPresent());
       }
   }
   
@@ -137,6 +141,7 @@ public final class Musician implements Model {
       .append(getBio())
       .append(getUsername())
       .append(getFavorites())
+      .append(getIsPresent())
       .toString()
       .hashCode();
   }
@@ -154,7 +159,8 @@ public final class Musician implements Model {
       .append("band=" + String.valueOf(getBand()) + ", ")
       .append("bio=" + String.valueOf(getBio()) + ", ")
       .append("username=" + String.valueOf(getUsername()) + ", ")
-      .append("favorites=" + String.valueOf(getFavorites()))
+      .append("favorites=" + String.valueOf(getFavorites()) + ", ")
+      .append("isPresent=" + String.valueOf(getIsPresent()))
       .append("}")
       .toString();
   }
@@ -192,6 +198,7 @@ public final class Musician implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -206,7 +213,8 @@ public final class Musician implements Model {
       band,
       bio,
       username,
-      favorites);
+      favorites,
+      isPresent);
   }
   public interface FirstNameStep {
     LastNameStep firstName(String firstName);
@@ -248,6 +256,7 @@ public final class Musician implements Model {
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep band(Band band);
     BuildStep favorites(String favorites);
+    BuildStep isPresent(Boolean isPresent);
   }
   
 
@@ -262,6 +271,7 @@ public final class Musician implements Model {
     private String username;
     private Band band;
     private String favorites;
+    private Boolean isPresent;
     @Override
      public Musician build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -276,7 +286,8 @@ public final class Musician implements Model {
           band,
           bio,
           username,
-          favorites);
+          favorites,
+          isPresent);
     }
     
     @Override
@@ -340,6 +351,12 @@ public final class Musician implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep isPresent(Boolean isPresent) {
+        this.isPresent = isPresent;
+        return this;
+    }
+    
     /** 
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
@@ -363,7 +380,7 @@ public final class Musician implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String firstName, String lastName, Boolean vocalist, String instruments, String genres, Band band, String bio, String username, String favorites) {
+    private CopyOfBuilder(String id, String firstName, String lastName, Boolean vocalist, String instruments, String genres, Band band, String bio, String username, String favorites, Boolean isPresent) {
       super.id(id);
       super.firstName(firstName)
         .lastName(lastName)
@@ -373,7 +390,8 @@ public final class Musician implements Model {
         .bio(bio)
         .username(username)
         .band(band)
-        .favorites(favorites);
+        .favorites(favorites)
+        .isPresent(isPresent);
     }
     
     @Override
@@ -419,6 +437,11 @@ public final class Musician implements Model {
     @Override
      public CopyOfBuilder favorites(String favorites) {
       return (CopyOfBuilder) super.favorites(favorites);
+    }
+    
+    @Override
+     public CopyOfBuilder isPresent(Boolean isPresent) {
+      return (CopyOfBuilder) super.isPresent(isPresent);
     }
   }
   

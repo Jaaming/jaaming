@@ -11,6 +11,7 @@ subscription OnCreateMusician {
     bio
     username
     favorites
+    isPresent
     _version
     _deleted
     _lastChangedAt
@@ -47,6 +48,7 @@ subscription OnUpdateMusician {
     bio
     username
     favorites
+    isPresent
     _version
     _deleted
     _lastChangedAt
@@ -83,6 +85,7 @@ subscription OnDeleteMusician {
     bio
     username
     favorites
+    isPresent
     _version
     _deleted
     _lastChangedAt
@@ -125,6 +128,7 @@ subscription OnCreateBand {
         bio
         username
         favorites
+        isPresent
         _version
         _deleted
         _lastChangedAt
@@ -161,6 +165,7 @@ subscription OnUpdateBand {
         bio
         username
         favorites
+        isPresent
         _version
         _deleted
         _lastChangedAt
@@ -197,6 +202,7 @@ subscription OnDeleteBand {
         bio
         username
         favorites
+        isPresent
         _version
         _deleted
         _lastChangedAt
