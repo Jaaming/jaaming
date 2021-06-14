@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "952614039427",
+    "project_id": "jammin-87567",
+    "storage_bucket": "jammin-87567.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:952614039427:android:9546a57aef6a7de13050b6",
+        "android_client_info": {
+          "package_name": "com.andyagulue.github.jammin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "952614039427-9dpm2rh6dfsgrvheci9pd4c3c2t4b9nc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTMtuFqyNucpzO69vS8DIEU36ngKAE6vA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "952614039427-9dpm2rh6dfsgrvheci9pd4c3c2t4b9nc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

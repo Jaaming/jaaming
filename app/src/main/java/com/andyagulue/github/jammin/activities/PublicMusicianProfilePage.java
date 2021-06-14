@@ -37,6 +37,7 @@ import com.amplifyframework.core.model.query.Where;
 import com.amplifyframework.datastore.generated.model.Band;
 import com.amplifyframework.datastore.generated.model.Musician;
 import com.andyagulue.github.jammin.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.util.List;
@@ -70,6 +71,7 @@ public class PublicMusicianProfilePage extends AppCompatActivity {
     Handler publicProfilePageHandler;
     FavoriteDatabase favoriteDatabase;
     List<String> favorites;
+    View publicMusicianProfilePage;
 
 
     @Override
@@ -98,6 +100,7 @@ public class PublicMusicianProfilePage extends AppCompatActivity {
         electricGuitarIcon = findViewById(R.id.electricGuitarIcon);
         bassGuitarIcon = findViewById(R.id.bassIcon);
         drummerIcon = findViewById(R.id.drummerIcon);
+        publicMusicianProfilePage = findViewById(R.id.publicMusicianProfilePage);
 
 
 
@@ -172,7 +175,12 @@ public class PublicMusicianProfilePage extends AppCompatActivity {
 
         addToFavorites.setOnClickListener(v -> {
             addToFavorites.setColorFilter(getResources().getColor(R.color.greenPigment, getTheme()));
-            Toast.makeText(getApplicationContext(), username + "has been added to your favorites!", Toast.LENGTH_LONG).show();
+            Snackbar addedSnackbar = Snackbar.make(publicMusicianProfilePage, username + " has been added to your favorites!", Snackbar.LENGTH_SHORT);
+            addedSnackbar.setAction("View Favorites", v1 -> {
+                Intent intent1 = new Intent(PublicMusicianProfilePage.this, MyFavoritesPage.class);
+                startActivity(intent1);
+            });
+            addedSnackbar.show();
             Log.i(TAG, "this is me" + currentUser.getFirstName() + " " + currentUser.getLastName());
             Log.i(TAG, "currentUser favorites" + currentUser.favorites);
 
