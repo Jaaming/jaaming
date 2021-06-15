@@ -1,6 +1,5 @@
 package com.amplifyframework.datastore.generated.model;
 
-import com.amplifyframework.core.model.annotations.HasMany;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,7 +34,6 @@ public final class Band implements Model {
   private final @ModelField(targetType="String", isRequired = true) String name;
   private final @ModelField(targetType="String", isRequired = true) String instruments;
   private final @ModelField(targetType="String", isRequired = true) String genres;
-  private final @ModelField(targetType="Musician") @HasMany(associatedWith = "band", type = Musician.class) List<Musician> musicians = null;
   private final @ModelField(targetType="String", isRequired = true) String bio;
   private final @ModelField(targetType="Boolean", isRequired = true) Boolean vocalist;
   public String getId() {
@@ -52,10 +50,6 @@ public final class Band implements Model {
   
   public String getGenres() {
       return genres;
-  }
-  
-  public List<Musician> getMusicians() {
-      return musicians;
   }
   
   public String getBio() {

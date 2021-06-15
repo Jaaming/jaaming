@@ -22,25 +22,15 @@ query SyncMusicians(
       bio
       username
       favorites
-      isPresent
+      message {
+        nextToken
+        startedAt
+      }
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      band {
-        id
-        name
-        instruments
-        genres
-        bio
-        vocalist
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
     }
     nextToken
     startedAt
@@ -58,29 +48,26 @@ query GetMusician($id: ID!) {
     bio
     username
     favorites
-    isPresent
+    message {
+      items {
+        id
+        recipient
+        content
+        date
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
     _version
     _deleted
     _lastChangedAt
     createdAt
     updatedAt
-    band {
-      id
-      name
-      instruments
-      genres
-      musicians {
-        nextToken
-        startedAt
-      }
-      bio
-      vocalist
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
   }
 }
 query ListMusicians(
@@ -100,47 +87,126 @@ query ListMusicians(
       bio
       username
       favorites
-      isPresent
+      message {
+        nextToken
+        startedAt
+      }
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      band {
+    }
+    nextToken
+    startedAt
+  }
+}
+query SyncMessages(
+  $filter: ModelMessageFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncMessages(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      recipient
+      content
+      date
+      musician {
         id
-        name
+        bandId
+        firstName
+        lastName
+        vocalist
         instruments
         genres
         bio
-        vocalist
+        username
+        favorites
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
     nextToken
     startedAt
   }
 }
-query ListBands(
-  $filter: ModelBandFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listBands(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
+query GetMessage($id: ID!) {
+  getMessage(id: $id) {
+    id
+    recipient
+    content
+    date
+    musician {
       id
-      name
+      bandId
+      firstName
+      lastName
+      vocalist
       instruments
       genres
-      musicians {
+      bio
+      username
+      favorites
+      message {
         nextToken
         startedAt
       }
-      bio
-      vocalist
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+query ListMessages(
+  $filter: ModelMessageFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      recipient
+      content
+      date
+      musician {
+        id
+        bandId
+        firstName
+        lastName
+        vocalist
+        instruments
+        genres
+        bio
+        username
+        favorites
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
       _version
       _deleted
       _lastChangedAt
@@ -157,28 +223,6 @@ query GetBand($id: ID!) {
     name
     instruments
     genres
-    musicians {
-      items {
-        id
-        bandId
-        firstName
-        lastName
-        vocalist
-        instruments
-        genres
-        bio
-        username
-        favorites
-        isPresent
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
     bio
     vocalist
     _version
@@ -186,6 +230,29 @@ query GetBand($id: ID!) {
     _lastChangedAt
     createdAt
     updatedAt
+  }
+}
+query ListBands(
+  $filter: ModelBandFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listBands(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      instruments
+      genres
+      bio
+      vocalist
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
   }
 }
 query SyncBands(
@@ -205,10 +272,6 @@ query SyncBands(
       name
       instruments
       genres
-      musicians {
-        nextToken
-        startedAt
-      }
       bio
       vocalist
       _version

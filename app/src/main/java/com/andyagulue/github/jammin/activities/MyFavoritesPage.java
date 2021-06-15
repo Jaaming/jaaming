@@ -62,7 +62,7 @@ public class MyFavoritesPage extends AppCompatActivity {
 
     public void createFavoriteMusicianList(){
         favoriteMusicians = new ArrayList<>();
-        favoriteDatabase = Room.databaseBuilder(getApplicationContext(), FavoriteDatabase.class, "My_Favorites")
+        favoriteDatabase = Room.databaseBuilder(getApplicationContext(), FavoriteDatabase.class, userName + "'s Favorites")
                 .allowMainThreadQueries()
                 .build();
         favorites = favoriteDatabase.favoriteDAO().findAll();

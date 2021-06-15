@@ -79,14 +79,19 @@ public class PublicMusicianProfilePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_public_musician_profile_page);
 
-        favoriteDatabase = Room.databaseBuilder(getApplicationContext(),FavoriteDatabase.class, "My_Favorites")
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
+
+        AuthUser authUser = Amplify.Auth.getCurrentUser();
+        userName = authUser.getUsername();
+
+        favoriteDatabase = Room.databaseBuilder(getApplicationContext(),FavoriteDatabase.class, userName + "'s Favorites")
                 .allowMainThreadQueries()
                 .build();
 
 
 
-        AuthUser authUser = Amplify.Auth.getCurrentUser();
-        userName = authUser.getUsername();
+
 
         profileImage = findViewById(R.id.publicMusicianProfileImage);
         vocalistImage = findViewById(R.id.isVocalistIcon);
@@ -114,8 +119,7 @@ public class PublicMusicianProfilePage extends AppCompatActivity {
                 .build();
 
 
-        Intent intent = getIntent();
-        String username = intent.getStringExtra("username");
+
 
 //        if(username != null) {
 
