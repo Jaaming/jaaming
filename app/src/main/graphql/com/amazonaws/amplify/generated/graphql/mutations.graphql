@@ -10,7 +10,6 @@ mutation CreateMessage(
     date
     musician {
       id
-      bandId
       firstName
       lastName
       vocalist
@@ -47,7 +46,6 @@ mutation UpdateMessage(
     date
     musician {
       id
-      bandId
       firstName
       lastName
       vocalist
@@ -84,7 +82,6 @@ mutation DeleteMessage(
     date
     musician {
       id
-      bandId
       firstName
       lastName
       vocalist
@@ -116,7 +113,6 @@ mutation CreateMusician(
 ) {
   createMusician(input: $input, condition: $condition) {
     id
-    bandId
     firstName
     lastName
     vocalist
@@ -153,7 +149,6 @@ mutation UpdateMusician(
 ) {
   updateMusician(input: $input, condition: $condition) {
     id
-    bandId
     firstName
     lastName
     vocalist
@@ -190,7 +185,6 @@ mutation DeleteMusician(
 ) {
   deleteMusician(input: $input, condition: $condition) {
     id
-    bandId
     firstName
     lastName
     vocalist

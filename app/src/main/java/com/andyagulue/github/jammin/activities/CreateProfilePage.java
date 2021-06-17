@@ -208,7 +208,7 @@ public class CreateProfilePage extends AppCompatActivity {
                     .genres(genres)
                     .bio(bio)
                     .username(userName)
-                    .band(defaultBand) //TODO: Musician may not be a part of a band.
+//                    .band(defaultBand) //TODO: Musician may not be a part of a band.
                     .build();
 
             Log.i(TAG, "onCreate: Made it to 220");

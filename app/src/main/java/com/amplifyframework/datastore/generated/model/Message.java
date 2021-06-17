@@ -27,7 +27,7 @@ public final class Message implements Model {
   public static final QueryField DATE = field("Message", "date");
   public static final QueryField MUSICIAN = field("Message", "messageMusicianId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="String", isRequired = true) String recipient;
+  private final @ModelField(targetType="String") String recipient;
   private final @ModelField(targetType="String") String content;
   private final @ModelField(targetType="AWSDateTime") Temporal.DateTime date;
   private final @ModelField(targetType="Musician") @BelongsTo(targetName = "messageMusicianId", type = Musician.class) Musician musician;
@@ -100,7 +100,7 @@ public final class Message implements Model {
       .toString();
   }
   
-  public static RecipientStep builder() {
+  public static BuildStep builder() {
       return new Builder();
   }
   
@@ -139,21 +139,17 @@ public final class Message implements Model {
       date,
       musician);
   }
-  public interface RecipientStep {
-    BuildStep recipient(String recipient);
-  }
-  
-
   public interface BuildStep {
     Message build();
     BuildStep id(String id) throws IllegalArgumentException;
+    BuildStep recipient(String recipient);
     BuildStep content(String content);
     BuildStep date(Temporal.DateTime date);
     BuildStep musician(Musician musician);
   }
   
 
-  public static class Builder implements RecipientStep, BuildStep {
+  public static class Builder implements BuildStep {
     private String id;
     private String recipient;
     private String content;
@@ -173,7 +169,6 @@ public final class Message implements Model {
     
     @Override
      public BuildStep recipient(String recipient) {
-        Objects.requireNonNull(recipient);
         this.recipient = recipient;
         return this;
     }

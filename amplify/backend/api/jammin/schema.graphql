@@ -1,6 +1,5 @@
 type Musician @model @auth(rules: [{allow: public, operations: [create, update, delete] }]) {
   id: ID!
-  bandId: ID
   firstName: String!
   lastName: String!
   vocalist: Boolean!
@@ -24,7 +23,7 @@ type Band @model @auth(rules: [{allow: public}]) {
 }
  type Message @model {
     id: ID!
-    recipient: String!
+    recipient: String
     content: String
     date: AWSDateTime
     musician: Musician @connection(name:"MusicianMessages")

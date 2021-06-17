@@ -13,7 +13,6 @@ query SyncMusicians(
   ) {
     items {
       id
-      bandId
       firstName
       lastName
       vocalist
@@ -39,7 +38,6 @@ query SyncMusicians(
 query GetMusician($id: ID!) {
   getMusician(id: $id) {
     id
-    bandId
     firstName
     lastName
     vocalist
@@ -78,7 +76,6 @@ query ListMusicians(
   listMusicians(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      bandId
       firstName
       lastName
       vocalist
@@ -120,7 +117,6 @@ query SyncMessages(
       date
       musician {
         id
-        bandId
         firstName
         lastName
         vocalist
@@ -153,7 +149,6 @@ query GetMessage($id: ID!) {
     date
     musician {
       id
-      bandId
       firstName
       lastName
       vocalist
@@ -192,7 +187,6 @@ query ListMessages(
       date
       musician {
         id
-        bandId
         firstName
         lastName
         vocalist

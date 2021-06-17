@@ -26,6 +26,8 @@ import com.amplifyframework.core.Action;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.Musician;
+import com.amplifyframework.logging.AndroidLoggingPlugin;
+import com.amplifyframework.logging.LogLevel;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.andyagulue.github.jammin.FavoriteMusician;
 import com.andyagulue.github.jammin.R;
@@ -76,9 +78,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
         try{
+            Amplify.addPlugin(new AndroidLoggingPlugin(LogLevel.VERBOSE));
             Amplify.addPlugin(new AWSApiPlugin());
-//            Amplify.addPlugin(new AWSDataStorePlugin());
+            Amplify.addPlugin(new AWSDataStorePlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.configure(getApplicationContext());
@@ -86,6 +91,15 @@ public class MainActivity extends AppCompatActivity {
         }catch(AmplifyException error){
             Log.e("JammingApp", "onCreate: Could not create");
         }
+
+//        Amplify.DataStore.clear(
+//                ()->{
+//                    Log.i(TAG, "onCreate: successful clear of datastore");
+//                },
+//                e->{
+//                    Log.i(TAG, "onCreate: unsuccessful clear of datastore" + e);
+//                }
+//        );
 
         Amplify.Auth.fetchAuthSession(
                 result -> Log.i("AmplifyQuickStart", "Success" + result.toString()),

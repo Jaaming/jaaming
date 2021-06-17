@@ -2,7 +2,6 @@
 subscription OnCreateMusician {
   onCreateMusician {
     id
-    bandId
     firstName
     lastName
     vocalist
@@ -36,7 +35,6 @@ subscription OnCreateMusician {
 subscription OnUpdateMusician {
   onUpdateMusician {
     id
-    bandId
     firstName
     lastName
     vocalist
@@ -70,7 +68,6 @@ subscription OnUpdateMusician {
 subscription OnDeleteMusician {
   onDeleteMusician {
     id
-    bandId
     firstName
     lastName
     vocalist
@@ -109,7 +106,6 @@ subscription OnCreateMessage {
     date
     musician {
       id
-      bandId
       firstName
       lastName
       vocalist
@@ -143,7 +139,6 @@ subscription OnUpdateMessage {
     date
     musician {
       id
-      bandId
       firstName
       lastName
       vocalist
@@ -177,7 +172,6 @@ subscription OnDeleteMessage {
     date
     musician {
       id
-      bandId
       firstName
       lastName
       vocalist

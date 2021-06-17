@@ -407,16 +407,6 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "bandId",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelIDInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
                         "name": "firstName",
                         "description": null,
                         "type": {
@@ -1159,18 +1149,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "bandId",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "ID",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "firstName",
                         "description": null,
                         "args": [],
@@ -1618,13 +1596,9 @@
                         "description": null,
                         "args": [],
                         "type": {
-                            "kind": "NON_NULL",
-                            "name": null,
-                            "ofType": {
-                                "kind": "SCALAR",
-                                "name": "String",
-                                "ofType": null
-                            }
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -2464,13 +2438,9 @@
                         "name": "recipient",
                         "description": null,
                         "type": {
-                            "kind": "NON_NULL",
-                            "name": null,
-                            "ofType": {
-                                "kind": "SCALAR",
-                                "name": "String",
-                                "ofType": null
-                            }
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
                         },
                         "defaultValue": null
                     },
@@ -2721,16 +2691,6 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "bandId",
-                        "description": null,
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "ID",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
                         "name": "firstName",
                         "description": null,
                         "type": {
@@ -2859,16 +2819,6 @@
                 "description": null,
                 "fields": null,
                 "inputFields": [
-                    {
-                        "name": "bandId",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelIDInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
                     {
                         "name": "firstName",
                         "description": null,
@@ -3009,16 +2959,6 @@
                                 "name": "ID",
                                 "ofType": null
                             }
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "bandId",
-                        "description": null,
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "ID",
-                            "ofType": null
                         },
                         "defaultValue": null
                     },

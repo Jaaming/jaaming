@@ -136,6 +136,9 @@ public class MyFavoritesPage extends AppCompatActivity {
             public void onConnectClick(int position) {
                 Toast.makeText(MyFavoritesPage.this, "You want to connect with this user " + position, Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "onMusicianClick: " + favoriteMusicians.get(position).getUsername());
+                Intent intent = new Intent(MyFavoritesPage.this, ChatPage.class);
+                intent.putExtra("username", favoriteMusicians.get(position).getUsername());
+                startActivity(intent);
             }
         });
 
