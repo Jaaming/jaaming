@@ -62,7 +62,7 @@ public class MyFavoritesPage extends AppCompatActivity {
 
     public void createFavoriteMusicianList(){
         favoriteMusicians = new ArrayList<>();
-        favoriteDatabase = Room.databaseBuilder(getApplicationContext(), FavoriteDatabase.class, "My_Favorites")
+        favoriteDatabase = Room.databaseBuilder(getApplicationContext(), FavoriteDatabase.class, userName + "'s Favorites")
                 .allowMainThreadQueries()
                 .build();
         favorites = favoriteDatabase.favoriteDAO().findAll();
@@ -136,6 +136,9 @@ public class MyFavoritesPage extends AppCompatActivity {
             public void onConnectClick(int position) {
                 Toast.makeText(MyFavoritesPage.this, "You want to connect with this user " + position, Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "onMusicianClick: " + favoriteMusicians.get(position).getUsername());
+                Intent intent = new Intent(MyFavoritesPage.this, ChatPage.class);
+                intent.putExtra("username", favoriteMusicians.get(position).getUsername());
+                startActivity(intent);
             }
         });
 

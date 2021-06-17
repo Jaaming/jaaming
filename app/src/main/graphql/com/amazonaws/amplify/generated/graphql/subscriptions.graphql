@@ -2,7 +2,6 @@
 subscription OnCreateMusician {
   onCreateMusician {
     id
-    bandId
     firstName
     lastName
     vocalist
@@ -11,124 +10,12 @@ subscription OnCreateMusician {
     bio
     username
     favorites
-    isPresent
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
-    band {
-      id
-      name
-      instruments
-      genres
-      musicians {
-        nextToken
-        startedAt
-      }
-      bio
-      vocalist
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-}
-subscription OnUpdateMusician {
-  onUpdateMusician {
-    id
-    bandId
-    firstName
-    lastName
-    vocalist
-    instruments
-    genres
-    bio
-    username
-    favorites
-    isPresent
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
-    band {
-      id
-      name
-      instruments
-      genres
-      musicians {
-        nextToken
-        startedAt
-      }
-      bio
-      vocalist
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-}
-subscription OnDeleteMusician {
-  onDeleteMusician {
-    id
-    bandId
-    firstName
-    lastName
-    vocalist
-    instruments
-    genres
-    bio
-    username
-    favorites
-    isPresent
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
-    band {
-      id
-      name
-      instruments
-      genres
-      musicians {
-        nextToken
-        startedAt
-      }
-      bio
-      vocalist
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-}
-subscription OnCreateBand {
-  onCreateBand {
-    id
-    name
-    instruments
-    genres
-    musicians {
+    message {
       items {
         id
-        bandId
-        firstName
-        lastName
-        vocalist
-        instruments
-        genres
-        bio
-        username
-        favorites
-        isPresent
+        recipient
+        content
+        date
         _version
         _deleted
         _lastChangedAt
@@ -138,6 +25,184 @@ subscription OnCreateBand {
       nextToken
       startedAt
     }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateMusician {
+  onUpdateMusician {
+    id
+    firstName
+    lastName
+    vocalist
+    instruments
+    genres
+    bio
+    username
+    favorites
+    message {
+      items {
+        id
+        recipient
+        content
+        date
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteMusician {
+  onDeleteMusician {
+    id
+    firstName
+    lastName
+    vocalist
+    instruments
+    genres
+    bio
+    username
+    favorites
+    message {
+      items {
+        id
+        recipient
+        content
+        date
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateMessage {
+  onCreateMessage {
+    id
+    recipient
+    content
+    date
+    musician {
+      id
+      firstName
+      lastName
+      vocalist
+      instruments
+      genres
+      bio
+      username
+      favorites
+      message {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateMessage {
+  onUpdateMessage {
+    id
+    recipient
+    content
+    date
+    musician {
+      id
+      firstName
+      lastName
+      vocalist
+      instruments
+      genres
+      bio
+      username
+      favorites
+      message {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteMessage {
+  onDeleteMessage {
+    id
+    recipient
+    content
+    date
+    musician {
+      id
+      firstName
+      lastName
+      vocalist
+      instruments
+      genres
+      bio
+      username
+      favorites
+      message {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateBand {
+  onCreateBand {
+    id
+    name
+    instruments
+    genres
     bio
     vocalist
     _version
@@ -153,28 +218,6 @@ subscription OnUpdateBand {
     name
     instruments
     genres
-    musicians {
-      items {
-        id
-        bandId
-        firstName
-        lastName
-        vocalist
-        instruments
-        genres
-        bio
-        username
-        favorites
-        isPresent
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
     bio
     vocalist
     _version
@@ -190,28 +233,6 @@ subscription OnDeleteBand {
     name
     instruments
     genres
-    musicians {
-      items {
-        id
-        bandId
-        firstName
-        lastName
-        vocalist
-        instruments
-        genres
-        bio
-        username
-        favorites
-        isPresent
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
     bio
     vocalist
     _version

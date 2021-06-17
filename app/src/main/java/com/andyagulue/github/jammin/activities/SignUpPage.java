@@ -163,10 +163,10 @@ public class SignUpPage extends AppCompatActivity {
                 if(s.length() > 0){
 
                     Log.i(TAG, "afterTextChanged: the user has typed their username" );
-                    Amplify.Auth.fetchUserAttributes(
-                            attributes -> Log.i("AuthDemo", "User attributes = " + attributes.toString()),
-                            error -> Log.e("AuthDemo", "Failed to fetch user attributes.", error)
-                    );
+//                    Amplify.Auth.fetchUserAttributes(
+//                            attributes -> Log.i("AuthDemo", "User attributes = " + attributes.toString()),
+//                            error -> Log.e("AuthDemo", "Failed to fetch user attributes.", error)
+//                    );
                 }
             }
         });

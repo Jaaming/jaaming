@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -59,6 +62,8 @@ public class DiscoverPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discover_page);
+
+
 
 
         populateDiscoverMusicians();
@@ -145,8 +150,6 @@ public class DiscoverPage extends AppCompatActivity {
         };
 
         adapter.setOnProfileClickListener(position -> {
-            Toast.makeText(DiscoverPage.this, "You want to view this profile " + position + musicianArrayList.get(position).getUsername(),
-                    Toast.LENGTH_SHORT).show();
             String username = musicianArrayList.get(position).getUsername();
             Intent intent = new Intent(DiscoverPage.this, PublicMusicianProfilePage.class);
             intent.putExtra("username", username);
@@ -251,12 +254,25 @@ public class DiscoverPage extends AppCompatActivity {
         });
     }
     public void filterButtonFunction(){
-        Button filterButton = findViewById(R.id.filterButton);
+        CardView filterCardView = findViewById(R.id.filterCardView);
+        ImageButton filterImageButton = findViewById(R.id.filterImageButton);
+        ImageButton cancelImageButton = findViewById(R.id.cancelButton);
+        ImageButton filterButton = findViewById(R.id.filterButton);
+        filterImageButton.setOnClickListener(v -> {
+            filterCardView.setVisibility(View.VISIBLE);
+            filterImageButton.setVisibility(View.INVISIBLE);
+        });
+        cancelImageButton.setOnClickListener(v -> {
+            filterCardView.setVisibility(View.INVISIBLE);
+            filterImageButton.setVisibility(View.VISIBLE);
+        });
         filterButton.setOnClickListener(v -> {
             populateDiscoverMusicians();
             buildViewPager();
         });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

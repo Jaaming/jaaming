@@ -1,11 +1,118 @@
 # this is an auto generated file. This will be overwritten
+mutation CreateMessage(
+  $input: CreateMessageInput!
+  $condition: ModelMessageConditionInput
+) {
+  createMessage(input: $input, condition: $condition) {
+    id
+    recipient
+    content
+    date
+    musician {
+      id
+      firstName
+      lastName
+      vocalist
+      instruments
+      genres
+      bio
+      username
+      favorites
+      message {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateMessage(
+  $input: UpdateMessageInput!
+  $condition: ModelMessageConditionInput
+) {
+  updateMessage(input: $input, condition: $condition) {
+    id
+    recipient
+    content
+    date
+    musician {
+      id
+      firstName
+      lastName
+      vocalist
+      instruments
+      genres
+      bio
+      username
+      favorites
+      message {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteMessage(
+  $input: DeleteMessageInput!
+  $condition: ModelMessageConditionInput
+) {
+  deleteMessage(input: $input, condition: $condition) {
+    id
+    recipient
+    content
+    date
+    musician {
+      id
+      firstName
+      lastName
+      vocalist
+      instruments
+      genres
+      bio
+      username
+      favorites
+      message {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
 mutation CreateMusician(
   $input: CreateMusicianInput!
   $condition: ModelMusicianConditionInput
 ) {
   createMusician(input: $input, condition: $condition) {
     id
-    bandId
     firstName
     lastName
     vocalist
@@ -14,29 +121,26 @@ mutation CreateMusician(
     bio
     username
     favorites
-    isPresent
+    message {
+      items {
+        id
+        recipient
+        content
+        date
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
     _version
     _deleted
     _lastChangedAt
     createdAt
     updatedAt
-    band {
-      id
-      name
-      instruments
-      genres
-      musicians {
-        nextToken
-        startedAt
-      }
-      bio
-      vocalist
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
   }
 }
 mutation UpdateMusician(
@@ -45,7 +149,6 @@ mutation UpdateMusician(
 ) {
   updateMusician(input: $input, condition: $condition) {
     id
-    bandId
     firstName
     lastName
     vocalist
@@ -54,29 +157,26 @@ mutation UpdateMusician(
     bio
     username
     favorites
-    isPresent
+    message {
+      items {
+        id
+        recipient
+        content
+        date
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
     _version
     _deleted
     _lastChangedAt
     createdAt
     updatedAt
-    band {
-      id
-      name
-      instruments
-      genres
-      musicians {
-        nextToken
-        startedAt
-      }
-      bio
-      vocalist
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
   }
 }
 mutation DeleteMusician(
@@ -85,7 +185,6 @@ mutation DeleteMusician(
 ) {
   deleteMusician(input: $input, condition: $condition) {
     id
-    bandId
     firstName
     lastName
     vocalist
@@ -94,29 +193,26 @@ mutation DeleteMusician(
     bio
     username
     favorites
-    isPresent
+    message {
+      items {
+        id
+        recipient
+        content
+        date
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
     _version
     _deleted
     _lastChangedAt
     createdAt
     updatedAt
-    band {
-      id
-      name
-      instruments
-      genres
-      musicians {
-        nextToken
-        startedAt
-      }
-      bio
-      vocalist
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
   }
 }
 mutation CreateBand(
@@ -128,28 +224,6 @@ mutation CreateBand(
     name
     instruments
     genres
-    musicians {
-      items {
-        id
-        bandId
-        firstName
-        lastName
-        vocalist
-        instruments
-        genres
-        bio
-        username
-        favorites
-        isPresent
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
     bio
     vocalist
     _version
@@ -168,28 +242,6 @@ mutation UpdateBand(
     name
     instruments
     genres
-    musicians {
-      items {
-        id
-        bandId
-        firstName
-        lastName
-        vocalist
-        instruments
-        genres
-        bio
-        username
-        favorites
-        isPresent
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
     bio
     vocalist
     _version
@@ -208,28 +260,6 @@ mutation DeleteBand(
     name
     instruments
     genres
-    musicians {
-      items {
-        id
-        bandId
-        firstName
-        lastName
-        vocalist
-        instruments
-        genres
-        bio
-        username
-        favorites
-        isPresent
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
     bio
     vocalist
     _version

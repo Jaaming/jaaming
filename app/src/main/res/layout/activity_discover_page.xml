@@ -20,48 +20,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageButton
+        android:id="@+id/filterImageButton"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#00FFFFFF"
+        android:scaleType="centerCrop"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:alpha="0.9">
-
-    </androidx.viewpager2.widget.ViewPager2>
+        app:srcCompat="@drawable/filter_icon"
+        tools:visibility="visible" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/filterCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
+            <ImageButton
                 android:id="@+id/filterButton"
-                android:layout_width="83dp"
-                android:layout_height="31dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
+                android:layout_width="41dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="28dp"
+                android:background="#00FFFFFF"
                 android:padding="0dp"
-                android:text="Filter"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/filterByTextView"
-                app:layout_constraintTop_toBottomOf="@+id/filterByTextView" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_baseline_check_circle_24"
+                android:tint="#716D6D"
+                app:layout_constraintBottom_toBottomOf="@+id/filterGenresTextView"
+                app:layout_constraintStart_toEndOf="@+id/filterInstrumentsTextView"
+                app:layout_constraintTop_toBottomOf="@+id/filterByTextView"
+                app:layout_constraintVertical_bias="0.444" />
 
             <TextView
                 android:id="@+id/filterByTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginStart="140dp"
+                android:layout_marginTop="4dp"
                 android:text="Filter Results:"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -70,33 +77,56 @@
 
             <TextView
                 android:id="@+id/filterInstrumentsTextView"
-                android:layout_width="236dp"
+                android:layout_width="199dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="36dp"
+                android:drawableRight="@android:drawable/arrow_down_float"
                 android:hint="Select Intrument(s)"
                 android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.489"
-                app:layout_constraintStart_toEndOf="@+id/filterByTextView"
+                app:layout_constraintEnd_toEndOf="@+id/filterByTextView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/filterGenresTextView"
-                android:layout_width="236dp"
+                android:layout_width="197dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
+                android:drawableRight="@android:drawable/arrow_down_float"
                 android:hint="Select Genre(s)"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.489"
-                app:layout_constraintStart_toEndOf="@+id/filterByTextView"
+                app:layout_constraintEnd_toEndOf="@+id/filterInstrumentsTextView"
+                app:layout_constraintStart_toStartOf="@+id/filterInstrumentsTextView"
                 app:layout_constraintTop_toBottomOf="@+id/filterInstrumentsTextView"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageButton
+                android:id="@+id/cancelButton"
+                android:layout_width="27dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="4dp"
+                android:background="#02FFFFFF"
+                android:padding="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_baseline_expand_less_24" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0.9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filterCardView">
+
+    </androidx.viewpager2.widget.ViewPager2>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
