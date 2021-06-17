@@ -209,67 +209,80 @@ public class CreateProfilePage extends AppCompatActivity {
                     .bio(bio)
                     .username(userName)
 //                    .band(defaultBand) //TODO: Musician may not be a part of a band.
+                    .id(authUser.getUserId())
                     .build();
 
             Log.i(TAG, "onCreate: Made it to 220");
-            Amplify.API.query(
-                    ModelQuery.list(Musician.class, Musician.USERNAME.eq(userName)),
-                    response-> {
-                        if(!response.getData().getItems().iterator().hasNext()){
-                            Amplify.API.mutate(
-                                    ModelMutation.create(newMusician),
-                                    r ->{
-                                        Log.i(TAG, "onCreate: Created a new musician" );
-                                        Intent intent = new Intent(CreateProfilePage.this, DiscoverPage.class);
-                                        startActivity(intent);
-                                    },
-                                    err ->{
-                                        Log.e(TAG, "onCreate: Unable to create musician -->",err );
-                                    }
-                            );
-                            return;
-                        }
-                        Musician existingMusician = response.getData().getItems().iterator().next();
-                        Log.i(TAG, "musician" + existingMusician);
-                        Musician updatedMusician = Musician.builder()
-                                .firstName(firstName)
-                                .lastName(lastName)
-                                .vocalist(isVocalist)
-                                .instruments(instruments)
-                                .genres(genres)
-                                .bio(bio)
-                                .username(existingMusician.getUsername())
-                                .id(existingMusician.getId())
-                                .build();
+//            Amplify.API.query(
+//                    ModelQuery.list(Musician.class, Musician.USERNAME.eq(userName)),
+//                    response-> {
+//                        if(!response.getData().getItems().iterator().hasNext()){
+//                            Amplify.API.mutate(
+//                                    ModelMutation.create(newMusician),
+//                                    r ->{
+//                                        Log.i(TAG, "onCreate: Created a new musician" );
+//                                        Intent intent = new Intent(CreateProfilePage.this, DiscoverPage.class);
+//                                        startActivity(intent);
+//                                    },
+//                                    err ->{
+//                                        Log.e(TAG, "onCreate: Unable to create musician -->",err );
+//                                    }
+//                            );
+//                            return;
+//                        }
+//                        Musician existingMusician = response.getData().getItems().iterator().next();
+//                        Log.i(TAG, "musician" + existingMusician);
+//                        Musician updatedMusician = Musician.builder()
+//                                .firstName(firstName)
+//                                .lastName(lastName)
+//                                .vocalist(isVocalist)
+//                                .instruments(instruments)
+//                                .genres(genres)
+//                                .bio(bio)
+//                                .username(existingMusician.getUsername())
+//                                .id(existingMusician.getId())
+//                                .build();
+//
+//                       Log.i(TAG, "onCreate: updated musician: " + updatedMusician.firstName);
+//
+//                        Amplify.API.mutate(
+//                                ModelMutation.create(updatedMusician),
+//                                res-> {
+//                                    Log.i(TAG, "updated musician" + res);
+//                                    Intent intent = new Intent(CreateProfilePage.this, DiscoverPage.class);
+//                                    startActivity(intent);
+//                                },
+//                                err -> {
+//                                    Log.i(TAG, "did not update musician" + err);
+//                                }
+//                        );
+//                    },
+//
+//                    error ->{
+//                        Log.i(TAG, "musician is not in the database");
+//                        Amplify.API.mutate(
+//                                ModelMutation.create(newMusician),
+//                                response ->{
+//                                    Log.i(TAG, "onCreate: Created a new musician" );
+//                                    Intent intent = new Intent(CreateProfilePage.this, DiscoverPage.class);
+//                                    startActivity(intent);
+//                                },
+//                                err ->{
+//                                    Log.e(TAG, "onCreate: Unable to create musician -->",error );
+//                                }
+//                        );
+//                    }
+//            );
 
-                       Log.i(TAG, "onCreate: updated musician: " + updatedMusician.firstName);
-
-                        Amplify.API.mutate(
-                                ModelMutation.create(updatedMusician),
-                                res-> {
-                                    Log.i(TAG, "updated musician" + res);
-                                    Intent intent = new Intent(CreateProfilePage.this, DiscoverPage.class);
-                                    startActivity(intent);
-                                },
-                                err -> {
-                                    Log.i(TAG, "did not update musician" + err);
-                                }
-                        );
+            Amplify.DataStore.save(
+                    newMusician,
+                    r -> {
+                        Log.i(TAG, "onCreate: Created new Musician" + r.item());
+                        Intent intent = new Intent(CreateProfilePage.this, DiscoverPage.class);
+                        startActivity(intent);
                     },
-
-                    error ->{
-                        Log.i(TAG, "musician is not in the database");
-                        Amplify.API.mutate(
-                                ModelMutation.create(newMusician),
-                                response ->{
-                                    Log.i(TAG, "onCreate: Created a new musician" );
-                                    Intent intent = new Intent(CreateProfilePage.this, DiscoverPage.class);
-                                    startActivity(intent);
-                                },
-                                err ->{
-                                    Log.e(TAG, "onCreate: Unable to create musician -->",error );
-                                }
-                        );
+                    e -> {
+                        Log.i(TAG, "onCreate: did not create new Musician" + e.getMessage());
                     }
             );
             uploadImage();

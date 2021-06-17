@@ -7,6 +7,55 @@
     android:padding="10dp"
     tools:context=".activities.ChatPage">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/chatHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/chatBackButton"
+                android:layout_width="39dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="?attr/homeAsUpIndicator" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="49dp"
+                android:layout_height="43dp"
+                app:cardCornerRadius="100dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/chatProfilePic"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/ic_baseline_account_circle_24" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/chatUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
     <EditText
         android:id="@+id/messageContentEditText"
         android:layout_width="338dp"
@@ -27,9 +76,9 @@
         android:layout_width="401dp"
         android:layout_height="653dp"
         android:layout_above="@+id/sendMessageButton"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/chatHeader"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="0dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
