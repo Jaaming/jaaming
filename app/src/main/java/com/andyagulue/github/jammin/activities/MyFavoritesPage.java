@@ -100,6 +100,7 @@ public class MyFavoritesPage extends AppCompatActivity {
     }
 
     public void buildRecyclerView(){
+        Log.i(TAG, "buildRecyclerView: ");
         RecyclerView favRecyclerView = findViewById(R.id.favoriteMusicianRecyclerView);
         favRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager rvLayoutManager = new LinearLayoutManager(this);
@@ -138,6 +139,8 @@ public class MyFavoritesPage extends AppCompatActivity {
                 Log.i(TAG, "onMusicianClick: " + favoriteMusicians.get(position).getUsername());
                 Intent intent = new Intent(MyFavoritesPage.this, ChatPage.class);
                 intent.putExtra("username", favoriteMusicians.get(position).getUsername());
+                intent.putExtra("fullName", favoriteMusicians.get(position).getFirstName()
+                        + " " + favoriteMusicians.get(position).getLastName());
                 startActivity(intent);
             }
         });

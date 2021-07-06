@@ -108,6 +108,14 @@ public class MainActivity extends AppCompatActivity {
 
         AuthUser authUser = Amplify.Auth.getCurrentUser();
 
+//        Amplify.DataStore.clear(
+//                () -> Amplify.DataStore.start(
+//                        () -> Log.i("MyAmplifyApp", "DataStore started"),
+//                        error -> Log.e("MyAmplifyApp", "Error starting DataStore: ", error)
+//                ),
+//                error -> Log.e("MyAmplifyApp", "Error clearing DataStore: ", error)
+//        );
+
 
 
         if (authUser != null){
@@ -125,13 +133,7 @@ public class MainActivity extends AppCompatActivity {
 //        );
 
 
-//        Amplify.DataStore.clear(
-//                () -> Amplify.DataStore.start(
-//                        () -> Log.i("MyAmplifyApp", "DataStore started"),
-//                        error -> Log.e("MyAmplifyApp", "Error starting DataStore: ", error)
-//                ),
-//                error -> Log.e("MyAmplifyApp", "Error clearing DataStore: ", error)
-//        );
+
 
 
 

@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Jammin">
-        <activity android:name=".activities.ChatPage"></activity>
+        <activity android:name=".activities.MessagingActivity"></activity>
+        <activity android:name=".activities.ChatPage" />
         <activity android:name=".activities.SignUpPage" />
         <activity
             android:name=".activities.MyFavoritesPage"

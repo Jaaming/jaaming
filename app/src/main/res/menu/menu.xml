@@ -18,4 +18,10 @@
         android:id="@+id/item4"
         android:title="Logout"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/item5"
+        android:title="messaging"
+        android:icon="@drawable/ic_baseline_message_24"
+        app:showAsAction="ifRoom" />
 </menu>

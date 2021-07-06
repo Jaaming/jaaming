@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Message;
+import com.amplifyframework.datastore.generated.model.Musician;
 import com.andyagulue.github.jammin.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -30,15 +31,13 @@ public class ChatAdapter extends ArrayAdapter<Message> {
         Message message = getItem(position);
         boolean isCurrentUserMessage;
         Log.i("chatAdapter**", "getView: " + message);
-        String userName = Amplify.Auth.getCurrentUser().getUsername();
-        Log.i("chatAdapter**", "getView: " + userName);
+        String userId = Amplify.Auth.getCurrentUser().getUserId();
+        Log.i("chatAdapter**", "getView: " + userId);
         Log.i("chatAdapter**", "getView: " + message.getMusician());
 
-        if(message.getMusician() != null){
-            isCurrentUserMessage = message.getMusician().getUsername().equals(userName);
-        }else{
-            isCurrentUserMessage = false;
-        }
+        isCurrentUserMessage = message.getMusician().getId().equals(userId);
+
+
         LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view;
         if(isCurrentUserMessage){
