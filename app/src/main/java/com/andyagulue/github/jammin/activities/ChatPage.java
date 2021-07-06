@@ -13,7 +13,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -48,6 +50,7 @@ public class ChatPage extends AppCompatActivity {
     Handler chatPageHandler;
     Musician[] musicianList;
     Musician currentMusician;
+    ImageButton chatBackButton;
 
 
 
@@ -58,6 +61,12 @@ public class ChatPage extends AppCompatActivity {
 
         musicianList = new Musician[1];
         getCurrentUser();
+
+        chatBackButton = findViewById(R.id.chatBackButton);
+        chatBackButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ChatPage.this, MessagingActivity.class);
+            startActivity(intent);
+        });
 
 
 
@@ -86,6 +95,8 @@ public class ChatPage extends AppCompatActivity {
                 failure -> Log.i(TAG, "Observation failed"),
                 () -> Log.i(TAG, "Observation completed:")
         );
+
+
 
         chatPageHandler = new Handler(this.getMainLooper()){
             @Override

@@ -28,9 +28,12 @@ import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
 
 
+import com.amplifyframework.core.async.Cancelable;
+import com.amplifyframework.datastore.DataStoreItemChange;
 import com.amplifyframework.datastore.generated.model.Musician;
 import com.andyagulue.github.jammin.R;
 import com.andyagulue.github.jammin.adapters.ViewPagerAdapter;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +46,7 @@ public class DiscoverPage extends AppCompatActivity {
     private String userName;
     private ImageView vocalistImage;
     public Musician musician;
+
 
     private TextView filterInstruments;
     private TextView filterGenres;
@@ -57,11 +61,13 @@ public class DiscoverPage extends AppCompatActivity {
     public ArrayList<Musician> musicianArrayList;
 
     private Handler discoverPageHandler;
+    private View discoverPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discover_page);
+        discoverPage = findViewById(R.id.DiscoverPageLayout);
 
 
 
@@ -74,7 +80,27 @@ public class DiscoverPage extends AppCompatActivity {
         buildGenreAlertDialog();
         filterButtonFunction();
 
+        Amplify.DataStore.observe(
+                com.amplifyframework.datastore.generated.model.Message.class,
+                cancelable -> Log.i(TAG, "Amplify Observation began:"),
+                this::onNewMessageReceived,
+                failure -> Log.i(TAG, "Observation failed"),
+                () -> Log.i(TAG, "Observation completed:")
+        );
 
+
+    }
+
+    private void onNewMessageReceived(DataStoreItemChange<com.amplifyframework.datastore.generated.model.Message> messageChanged) {
+        if (messageChanged.type().equals(DataStoreItemChange.Type.CREATE)) {
+            Log.i(TAG, "onNewMessageReceived: " + messageChanged);
+            com.amplifyframework.datastore.generated.model.Message message = messageChanged.item();
+            if(message.getRecipient().equals(userName)){
+                Log.i(TAG, "onNewMessageReceived: " + message);
+                Snackbar newMessageSnackBar = Snackbar.make(discoverPage, "you got a new message", Snackbar.LENGTH_LONG);
+                newMessageSnackBar.show();
+            }
+        }
     }
 
 
@@ -308,7 +334,11 @@ public class DiscoverPage extends AppCompatActivity {
                     startActivity(intent4);
                 },
                 error -> Log.i(TAG, "the user was not signed out")
-        );
+                );
+            case R.id.item5:
+                Intent intent5 = new Intent(getApplicationContext(), MessagingActivity.class);
+                startActivity(intent5);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

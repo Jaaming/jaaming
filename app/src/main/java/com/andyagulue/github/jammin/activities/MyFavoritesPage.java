@@ -100,6 +100,7 @@ public class MyFavoritesPage extends AppCompatActivity {
     }
 
     public void buildRecyclerView(){
+        Log.i(TAG, "buildRecyclerView: ");
         RecyclerView favRecyclerView = findViewById(R.id.favoriteMusicianRecyclerView);
         favRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager rvLayoutManager = new LinearLayoutManager(this);
